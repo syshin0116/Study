@@ -12,3 +12,9 @@ Deep-Learning Computer-Vision Guide
 	b) TensorFlow Hub
 
 Colab, Kaggle Kernel 사용
+
+
+Object Detection과 Segmentation 이해
+
+Object Detection - Deep learning 기반으로 발전
+2012년에 AlexNet이 ImageNet 대회에서 DeepLearning 기반의 CNN으로 우승하면서 발전이 가속화됨
