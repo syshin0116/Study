@@ -18,3 +18,15 @@ Object Detection과 Segmentation 이해
 
 Object Detection - Deep learning 기반으로 발전
 2012년에 AlexNet이 PASCAL VOC 대회에서 DeepLearning 기반의 CNN으로 우승하면서 발전이 가속화됨
+
+Localization / Detection / Segmentation
+	- Classification > Localization > Detection > Segmentation
+
+Detect할 대상: Object
+
+하나의 Object가 하나의 Image에 있는 형태: Localization
+
+여러 Object를 bounding box로 Detect: Detection
+
+Bounding box 가 아닌 정밀하게 Pixel 단위로 detect: Segmentation
+
