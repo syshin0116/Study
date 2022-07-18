@@ -30,3 +30,15 @@ Detect할 대상: Object
 
 Bounding box 가 아닌 정밀하게 Pixel 단위로 detect: Segmentation
 
+2012년 기준으로:
+Traditional Detection Methods > 2012 > Deep LEarning based Detection Methods
+
+Deep Learning based Detection Methods:
+	One-stage detector
+		- YOLO(2015), SSD, Retina-Net, EfficientDet
+	Two-stage detector: object의 대략적인 위치를 잡고 시작
+		- RCNN
+		- 실시간 적용이 어려움 (video)
+
+
+
