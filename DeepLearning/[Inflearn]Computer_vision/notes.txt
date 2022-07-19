@@ -40,5 +40,28 @@ Deep Learning based Detection Methods:
 		- RCNN
 		- 실시간 적용이 어려움 (video)
 
+Object Detection의 주요 구성 요소:
+- Region Proposal 				- 영역추정
+- Feature Extraction & FPN & Network Prediction	- Detection을 위한 Deep Learning 네트웍 구성
+- IOU, NMS, mAP, Anchor box			- Detection을 구성하는 기타 요소
 
+일반적인 Object Detection 모델:
+- Backbone: ResNet
+- Neck: FPN(Feature Pyramid Network)
+- Head: classification, bbox regression
+
+Object Detection의 난제:
+- Classification + Regression을 동시에
+	- 이미지에서 여러 개의 물체를 classficiation함과 동시에 위치를 찾아야 함
+- 다양한 크기와 유형의 오브젝트가 섞여 있음
+	- 크기가 서로 다르고, 생김새가 다양한 오브젝트가 섞여 있는 이미지에서 이들을 Detect함
+- 중요한 Detect 시간
+	- Detect 시간이 중요한 실시간 영상 기반에서 Detectgodi gksms dyrntkgkd wmdeo
+- 명확하지 않은 이미지
+	- 오브젝트 이미지가 명확하지 않은 경우가 많음. 또한 ㅓㄴ체 이미지에서 Detect할 오브젝트가 차지하는 비중이 높지 않음(배경이 대부분을 차지하는 경우가 많음)
+- 데이터 세트의 부족
+	- 훈련 가능한 데이터 세트가 부족(Ms Coco dataset 80개, Google Open Image 500개) 하며 annotation을 만들어야 하므로 훈련 뎅터 세트를 생성하기가 상대적으로 어려움
+
+Object Localization 개요
+Object Localization: 하나의 이미지에 하나의 객체
 

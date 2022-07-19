@@ -1,0 +1,376 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2638
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww16540\viewh9100\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Deep-Learning Computer-Vision Guide\
+\
+1. Object Detection, Segmentation
+\f1 \'bf\'a1
+\f0  
+\f1 \'b4\'eb\'c7\'d1
+\f0  
+\f1 \'b1\'ed\'c0\'cc
+\f0  
+\f1 \'c0\'d6\'b4\'c2
+\f0  
+\f1 \'c0\'cc\'b7\'d0
+\f0  
+\f1 \'bc\'b3\'b8\'ed
+\f0 \
+2. 
+\f1 \'bd\'c7\'bd\'c0
+\f0 \
+	
+\f1 \'b1\'b8\'c7\'f6\'c6\'d0\'c5\'b0\'c1\'f6
+\f0 :\
+	a) MMDetection\
+	b) Ultralytics YOLO V3\
+	c) AutoML EfficientDet\
+	\
+	
+\f1 \'b9\'fc\'bf\'eb
+\f0  
+\f1 \'c0\'ce\'c5\'cd\'c6\'e4\'c0\'cc\'bd\'ba
+\f0  API:\
+	a) OpenCV\
+	b) TensorFlow Hub\
+\
+Colab, Kaggle Kernel 
+\f1 \'bb\'e7\'bf\'eb
+\f0 \
+\
+\
+Object Detection
+\f1 \'b0\'fa
+\f0  Segmentation 
+\f1 \'c0\'cc\'c7\'d8
+\f0 \
+\
+Object Detection - Deep learning 
+\f1 \'b1\'e2\'b9\'dd\'c0\'b8\'b7\'ce
+\f0  
+\f1 \'b9\'df\'c0\'fc
+\f0 \
+2012
+\f1 \'b3\'e2\'bf\'a1
+\f0  AlexNet
+\f1 \'c0\'cc
+\f0  PASCAL VOC 
+\f1 \'b4\'eb\'c8\'b8\'bf\'a1\'bc\'ad
+\f0  DeepLearning 
+\f1 \'b1\'e2\'b9\'dd\'c0\'c7
+\f0  CNN
+\f1 \'c0\'b8\'b7\'ce
+\f0  
+\f1 \'bf\'ec\'bd\'c2\'c7\'cf\'b8\'e9\'bc\'ad
+\f0  
+\f1 \'b9\'df\'c0\'fc\'c0\'cc
+\f0  
+\f1 \'b0\'a1\'bc\'d3\'c8\'ad\'b5\'ca
+\f0 \
+\
+Localization / Detection / Segmentation\
+	- Classification > Localization > Detection > Segmentation\
+\
+Detect
+\f1 \'c7\'d2
+\f0  
+\f1 \'b4\'eb\'bb\'f3
+\f0 : Object\
+\
+
+\f1 \'c7\'cf\'b3\'aa\'c0\'c7
+\f0  Object
+\f1 \'b0\'a1
+\f0  
+\f1 \'c7\'cf\'b3\'aa\'c0\'c7
+\f0  Image
+\f1 \'bf\'a1
+\f0  
+\f1 \'c0\'d6\'b4\'c2
+\f0  
+\f1 \'c7\'fc\'c5\'c2
+\f0 : Localization\
+\
+
+\f1 \'bf\'a9\'b7\'af
+\f0  Object
+\f1 \'b8\'a6
+\f0  bounding box
+\f1 \'b7\'ce
+\f0  Detect: Detection\
+\
+Bounding box 
+\f1 \'b0\'a1
+\f0  
+\f1 \'be\'c6\'b4\'d1
+\f0  
+\f1 \'c1\'a4\'b9\'d0\'c7\'cf\'b0\'d4
+\f0  Pixel 
+\f1 \'b4\'dc\'c0\'a7\'b7\'ce
+\f0  detect: Segmentation\
+\
+2012
+\f1 \'b3\'e2
+\f0  
+\f1 \'b1\'e2\'c1\'d8\'c0\'b8\'b7\'ce
+\f0 :\
+Traditional Detection Methods > 2012 > Deep LEarning based Detection Methods\
+\
+Deep Learning based Detection Methods:\
+	One-stage detector\
+		- YOLO(2015), SSD, Retina-Net, EfficientDet\
+	Two-stage detector: object
+\f1 \'c0\'c7
+\f0  
+\f1 \'b4\'eb\'b7\'ab\'c0\'fb\'c0\'ce
+\f0  
+\f1 \'c0\'a7\'c4\'a1\'b8\'a6
+\f0  
+\f1 \'c0\'e2\'b0\'ed
+\f0  
+\f1 \'bd\'c3\'c0\'db
+\f0 \
+		- RCNN\
+		- 
+\f1 \'bd\'c7\'bd\'c3\'b0\'a3
+\f0  
+\f1 \'c0\'fb\'bf\'eb\'c0\'cc
+\f0  
+\f1 \'be\'ee\'b7\'c1\'bf\'f2
+\f0  (video)\
+\
+Object Detection
+\f1 \'c0\'c7
+\f0  
+\f1 \'c1\'d6\'bf\'e4
+\f0  
+\f1 \'b1\'b8\'bc\'ba
+\f0  
+\f1 \'bf\'e4\'bc\'d2
+\f0 :\
+- Region Proposal 				- 
+\f1 \'bf\'b5\'bf\'aa\'c3\'df\'c1\'a4
+\f0 \
+- Feature Extraction & FPN & Network Prediction	- Detection
+\f1 \'c0\'bb
+\f0  
+\f1 \'c0\'a7\'c7\'d1
+\f0  Deep Learning 
+\f1 \'b3\'d7\'c6\'ae\'bf\'f7
+\f0  
+\f1 \'b1\'b8\'bc\'ba
+\f0 \
+- IOU, NMS, mAP, Anchor box			- Detection
+\f1 \'c0\'bb
+\f0  
+\f1 \'b1\'b8\'bc\'ba\'c7\'cf\'b4\'c2
+\f0  
+\f1 \'b1\'e2\'c5\'b8
+\f0  
+\f1 \'bf\'e4\'bc\'d2
+\f0 \
+\
+
+\f1 \'c0\'cf\'b9\'dd\'c0\'fb\'c0\'ce
+\f0  Object Detection 
+\f1 \'b8\'f0\'b5\'a8
+\f0 :\
+- Backbone: ResNet\
+- Neck: FPN(Feature Pyramid Network)\
+- Head: classification, bbox regression\
+\
+Object Detection
+\f1 \'c0\'c7
+\f0  
+\f1 \'b3\'ad\'c1\'a6
+\f0 :\
+- Classification + Regression
+\f1 \'c0\'bb
+\f0  
+\f1 \'b5\'bf\'bd\'c3\'bf\'a1
+\f0 \
+	- 
+\f1 \'c0\'cc\'b9\'cc\'c1\'f6\'bf\'a1\'bc\'ad
+\f0  
+\f1 \'bf\'a9\'b7\'af
+\f0  
+\f1 \'b0\'b3\'c0\'c7
+\f0  
+\f1 \'b9\'b0\'c3\'bc\'b8\'a6
+\f0  classficiation
+\f1 \'c7\'d4\'b0\'fa
+\f0  
+\f1 \'b5\'bf\'bd\'c3\'bf\'a1
+\f0  
+\f1 \'c0\'a7\'c4\'a1\'b8\'a6
+\f0  
+\f1 \'c3\'a3\'be\'c6\'be\'df
+\f0  
+\f1 \'c7\'d4
+\f0 \
+- 
+\f1 \'b4\'d9\'be\'e7\'c7\'d1
+\f0  
+\f1 \'c5\'a9\'b1\'e2\'bf\'cd
+\f0  
+\f1 \'c0\'af\'c7\'fc\'c0\'c7
+\f0  
+\f1 \'bf\'c0\'ba\'ea\'c1\'a7\'c6\'ae\'b0\'a1
+\f0  
+\f1 \'bc\'af\'bf\'a9
+\f0  
+\f1 \'c0\'d6\'c0\'bd
+\f0 \
+	- 
+\f1 \'c5\'a9\'b1\'e2\'b0\'a1
+\f0  
+\f1 \'bc\'ad\'b7\'ce
+\f0  
+\f1 \'b4\'d9\'b8\'a3\'b0\'ed
+\f0 , 
+\f1 \'bb\'fd\'b1\'e8\'bb\'f5\'b0\'a1
+\f0  
+\f1 \'b4\'d9\'be\'e7\'c7\'d1
+\f0  
+\f1 \'bf\'c0\'ba\'ea\'c1\'a7\'c6\'ae\'b0\'a1
+\f0  
+\f1 \'bc\'af\'bf\'a9
+\f0  
+\f1 \'c0\'d6\'b4\'c2
+\f0  
+\f1 \'c0\'cc\'b9\'cc\'c1\'f6\'bf\'a1\'bc\'ad
+\f0  
+\f1 \'c0\'cc\'b5\'e9\'c0\'bb
+\f0  Detect
+\f1 \'c7\'d4
+\f0 \
+- 
+\f1 \'c1\'df\'bf\'e4\'c7\'d1
+\f0  Detect 
+\f1 \'bd\'c3\'b0\'a3
+\f0 \
+	- Detect 
+\f1 \'bd\'c3\'b0\'a3\'c0\'cc
+\f0  
+\f1 \'c1\'df\'bf\'e4\'c7\'d1
+\f0  
+\f1 \'bd\'c7\'bd\'c3\'b0\'a3
+\f0  
+\f1 \'bf\'b5\'bb\'f3
+\f0  
+\f1 \'b1\'e2\'b9\'dd\'bf\'a1\'bc\'ad
+\f0  Detectgodi gksms dyrntkgkd wmdeo\
+- 
+\f1 \'b8\'ed\'c8\'ae\'c7\'cf\'c1\'f6
+\f0  
+\f1 \'be\'ca\'c0\'ba
+\f0  
+\f1 \'c0\'cc\'b9\'cc\'c1\'f6
+\f0 \
+	- 
+\f1 \'bf\'c0\'ba\'ea\'c1\'a7\'c6\'ae
+\f0  
+\f1 \'c0\'cc\'b9\'cc\'c1\'f6\'b0\'a1
+\f0  
+\f1 \'b8\'ed\'c8\'ae\'c7\'cf\'c1\'f6
+\f0  
+\f1 \'be\'ca\'c0\'ba
+\f0  
+\f1 \'b0\'e6\'bf\'ec\'b0\'a1
+\f0  
+\f1 \'b8\'b9\'c0\'bd
+\f0 . 
+\f1 \'b6\'c7\'c7\'d1
+\f0  
+\f1 \'a4\'c3\'a4\'a4\'c3\'bc
+\f0  
+\f1 \'c0\'cc\'b9\'cc\'c1\'f6\'bf\'a1\'bc\'ad
+\f0  Detect
+\f1 \'c7\'d2
+\f0  
+\f1 \'bf\'c0\'ba\'ea\'c1\'a7\'c6\'ae\'b0\'a1
+\f0  
+\f1 \'c2\'f7\'c1\'f6\'c7\'cf\'b4\'c2
+\f0  
+\f1 \'ba\'f1\'c1\'df\'c0\'cc
+\f0  
+\f1 \'b3\'f4\'c1\'f6
+\f0  
+\f1 \'be\'ca\'c0\'bd
+\f0 (
+\f1 \'b9\'e8\'b0\'e6\'c0\'cc
+\f0  
+\f1 \'b4\'eb\'ba\'ce\'ba\'d0\'c0\'bb
+\f0  
+\f1 \'c2\'f7\'c1\'f6\'c7\'cf\'b4\'c2
+\f0  
+\f1 \'b0\'e6\'bf\'ec\'b0\'a1
+\f0  
+\f1 \'b8\'b9\'c0\'bd
+\f0 )\
+- 
+\f1 \'b5\'a5\'c0\'cc\'c5\'cd
+\f0  
+\f1 \'bc\'bc\'c6\'ae\'c0\'c7
+\f0  
+\f1 \'ba\'ce\'c1\'b7
+\f0 \
+	- 
+\f1 \'c8\'c6\'b7\'c3
+\f0  
+\f1 \'b0\'a1\'b4\'c9\'c7\'d1
+\f0  
+\f1 \'b5\'a5\'c0\'cc\'c5\'cd
+\f0  
+\f1 \'bc\'bc\'c6\'ae\'b0\'a1
+\f0  
+\f1 \'ba\'ce\'c1\'b7
+\f0 (Ms Coco dataset 80
+\f1 \'b0\'b3
+\f0 , Google Open Image 500
+\f1 \'b0\'b3
+\f0 ) 
+\f1 \'c7\'cf\'b8\'e7
+\f0  annotation
+\f1 \'c0\'bb
+\f0  
+\f1 \'b8\'b8\'b5\'e9\'be\'ee\'be\'df
+\f0  
+\f1 \'c7\'cf\'b9\'c7\'b7\'ce
+\f0  
+\f1 \'c8\'c6\'b7\'c3
+\f0  
+\f1 \'b5\'ad\'c5\'cd
+\f0  
+\f1 \'bc\'bc\'c6\'ae\'b8\'a6
+\f0  
+\f1 \'bb\'fd\'bc\'ba\'c7\'cf\'b1\'e2\'b0\'a1
+\f0  
+\f1 \'bb\'f3\'b4\'eb\'c0\'fb\'c0\'b8\'b7\'ce
+\f0  
+\f1 \'be\'ee\'b7\'c1\'bf\'f2
+\f0 \
+\
+Object Localization 
+\f1 \'b0\'b3\'bf\'e4
+\f0 \
+Object Localization: 
+\f1 \'c7\'cf\'b3\'aa\'c0\'c7
+\f0  
+\f1 \'c0\'cc\'b9\'cc\'c1\'f6\'bf\'a1
+\f0  
+\f1 \'c7\'cf\'b3\'aa\'c0\'c7
+\f0  
+\f1 \'b0\'b4\'c3\'bc
+\f0 \
+\
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 {{\NeXTGraphic Pasted Graphic.png \width16240 \height8040 \appleattachmentpadding0 \appleembedtype0 \appleaqc
+}¬}\
+\
+}
