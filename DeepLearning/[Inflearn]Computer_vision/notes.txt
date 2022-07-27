@@ -65,3 +65,10 @@ Object Detection의 난제:
 Object Localization 개요
 Object Localization: 하나의 이미지에 하나의 객체
 
+
+Feature Extrator - Yolo는 화면 중앙에서 시작
+
+Object Localization - Bounding box 학습
+
+
+
