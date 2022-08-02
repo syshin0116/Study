@@ -1,0 +1,9 @@
+from collections import Counter
+
+def solution(participant, completion):
+    c1 = Counter(participant)
+    c2 = Counter(completion)
+    diff = c1-c2
+    
+    answer = str(list(diff.elements())[0])
+    return answer
