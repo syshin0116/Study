@@ -1,0 +1,51 @@
+def manhattan_distance(pt1, pt2):
+    distance = 0
+    for i in range(len(pt1)):
+        distance += abs(pt1[i] - pt2[i])
+    return distance
+
+# def checkP(room, P, check_P):
+#     close = []
+    
+#     for x in P:
+#         for check in check_P:
+#             i, j = tuple(map(sum, zip(x, check)))
+#             if (i, j) in P:
+#                 close.append((x,(i,j)))
+#     print(close)
+    
+#     # for tuples in close:
+#     #     for (p1, p2) in tuples:
+#     #         if (p2, p1) in P:
+#     #             close.remove(tuple((p2,p1)))
+#     return close
+
+def solution(places):
+    # 사람이 있는 좌표 리스트를 P에, 파티션이 있는 좌표를 X에 담아준다
+    P = []
+    X = []
+    for room in places:
+        for i in range(5):
+            for j in range(5):
+                if room[i][j] == "P":
+                    P.append((i,j))
+                elif room[i][j] == "X":
+                    X.append((i,j))
+    # print("P>>\n", P)
+    # print("X>>\n", X)
+    
+    # 거리상 2 이하에 사람이 있는지 확인용
+    check_P = []
+    for i in range(-2, 3):
+        for j in range(-2, 3):
+            if abs(i)+abs(j)<=2:
+                check_P.append((i,j))
+    check_P.remove((0,0))
+    
+    # print(check_P)
+    for room in places:
+        close = checkP(room, P, check_P)
+        # print(close)
+    
+    answer = []
+    return answer
