@@ -14,4 +14,4 @@ def solution(n, lost, reserve):
 
     # print(lost, reserve)
     answer = n - len(lost2)
-    return answer
+    return answer 
