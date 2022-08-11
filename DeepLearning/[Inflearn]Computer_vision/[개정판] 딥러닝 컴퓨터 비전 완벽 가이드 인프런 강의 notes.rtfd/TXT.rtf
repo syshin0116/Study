@@ -455,10 +455,29 @@ Slide in Window \'b9\'e6\'bd\'c4:\
 \f1 \
 \pard\tx566\tx1133\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
 \cf0 \
-## Selective Search - Region Proposal\'c0\'c7 \'b4\'eb\'c7\'a5 \'b9\'e6\'b9\'fd\
+### Selective Search - Region Proposal\'c0\'c7 \'b4\'eb\'c7\'a5 \'b9\'e6\'b9\'fd\
 \
 * \'ba\'fc\'b8\'a5 Detection\'b0\'fa \'b3\'f4\'c0\'ba Recall \'bf\'b9\'c3\'f8 \'bc\'ba\'b4\'c9\'c0\'bb \'b5\'bf\'bd\'c3\'bf\'a1 \'b8\'b8\'c1\'b7\'c7\'cf\'b4\'c2 \'be\'cb\'b0\'ed\'b8\'ae\'c1\'f2\
 * \'c4\'c3\'b7\'af(Color), \'b9\'ab\'b4\'cc(Texture), \'c5\'a9\'b1\'e2(Size), \'c7\'fc\'c5\'c2(Shape)\'bf\'a1 \'b4\'d9\'b6\'f3 \'c0\'af\'bb\'e7\'c7\'d1 Region\'c0\'bb \'b0\'e8\'c3\'fe\'c0\'fb \'b1\'d7\'b7\'e7\'c7\'ce \'b9\'e6\'b9\'fd\'c0\'b8\'b7\'ce \'b0\'e8\'bb\'ea\
 * Selective Search\'b4\'c2 \'c3\'d6\'c3\'ca\'bf\'a1\'b4\'c2 Pixel Intensity \'b1\'e2\'b9\'dd\'c6\'c7 graph-based segment \'b1\'e2\'b9\'fd\'bf\'a1 \'b5\'fb\'b6\'f3 Over Segmentation\'c0\'bb \'bc\'f6\'c7\'e0\
+\
+- pixel\'b4\'dc\'c0\'a7\'b7\'ce masking\'c0\'bb \'c7\'cf\'b4\'c2\'b5\'a5, \'ba\'f1\'bd\'c1\'c7\'d1 \'c6\'af\'bc\'ba\'c0\'bb \'b0\'a1\'c1\'f8 pixel\'b3\'a2\'b8\'ae masking \
+- Over Segmentation\'c0\'bb \'b8\'d5\'c0\'fa \'c7\'d1 \'b4\'d9\'c0\'bd \'c8\'c4\'ba\'b8 Segmentation\'c0\'b8\'b7\'ce \'c1\'d9\'bf\'a9\'b3\'aa\'b0\'a8\
+\
+### Selective Search\'c0\'c7 \'bc\'f6\'c7\'e0 \'c7\'c1\'b7\'ce\'bc\'bc\'bd\'ba\
+\
+1. \'b0\'b3\'ba\'b0 Segment\'b5\'c8 \'b8\'f0\'b5\'e7 \'ba\'ce\'ba\'ce\'88\'66\'a4\'a9\'c0\'bb Bounding Box\'b7\'ce \'b8\'b8\'b5\'e9\'be\'ee\'bc\'ad Region Proposal \'b8\'ae\'bd\'ba\'c6\'ae\'b7\'ce \'c3\'df\'b0\'a1\
+2. \'c4\'c3\'b7\'af, \'b9\'ab\'b4\'cc, \'c5\'a9\'b1\'e2, \'c7\'fc\'c5\'c2\'bf\'a1 \'b5\'fb\'b6\'f3 \'c0\'af\'a4\'bf\'b5\'b5\'b0\'a1 \'ba\'f1\'bd\'c1\'c7\'d1 Segment\'b5\'e9\'c0\'bb \'b1\'d7\'b7\'e7\'c7\'ce\'c7\'d4\
+3. \'b4\'d9\'bd\'c3 1\'b9\'f8 Step Region Proposal \'b8\'ae\'bd\'ba\'c6\'ae \'c3\'df\'b0\'a1, 2\'b9\'f8 Step \'c0\'af\'bb\'e7\'b5\'b5\'b0\'a1 \'ba\'f1\'bd\'c1\'c7\'d1 Segment\'b8\'a6 \'b1\'d7\'b7\'e7\'c7\'ce\'c0\'bb \'b0\'e8\'bc\'d3 \'b9\'dd\'ba\'b9 \'c7\'cf\'b8\'e9\'bc\'ad Region Proposal \'c0\'bb \'bc\'f6\'c7\'e0\
+\
+\'bc\'f6\'c7\'e0\'b0\'fa\'c1\'a4:\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0 \cf0 {{\NeXTGraphic 1__#$!@%!#__Pasted Graphic.png \width11540 \height4680 \appleattachmentpadding0 \appleembedtype0 \appleaqc
+}¬}\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f1 \cf0 \
 \
 }
