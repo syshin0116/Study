@@ -1,7 +1,11 @@
 from collections import deque
 
 def solution(queue1, queue2):
-    target_sum = (sum(queue1) + sum(queue2)) // 2
+    target_sum = (sum(queue1) + sum(queue2)) / 2
+
+    ## 두 리스트의 합이 홀수인 경우 -1
+    # if target_sum.is_integer() == False:
+    #     return -1
     left_sum = sum(queue1)
     queue1 = deque(queue1)
     queue2 = deque(queue2)
