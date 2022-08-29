@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+ 
+<mapper namespace="kr.co.board.dao.BoardDao">
+
+	<!-- 게시판목록 -->	
+    <select id="boardList" 	resultType="kr.co.board.vo.BoardVo">
+    
+		/*kr.co.board.dao.BoardDao.boardList*/
+        SELECT
+			TB_SEQ 					/*시퀀스, 프라이머리 키*/
+			, TB_TITLE 				/*제목 */
+			, TB_CONTENT 			/*내용 */
+			, TB_REG_DT				/*등록일 */
+			, TB_REG_ID      		/*작성자*/
+        FROM TEST_BBS
+        ORDER BY TB_SEQ DESC /*내림차순*/
+
+    </select>
+
+    <!-- 게시판 상세조회 -->
+    <select id="boardDetail" 	parameterType="kr.co.board.vo.BoardVo" resultType="kr.co.board.vo.BoardVo">
+		/*kr.co.board.dao.BoardDao.boardDetail*/
+        SELECT
+			TB_SEQ 					/*시퀀스, 프라이머리 키*/
+			, TB_TITLE 				/*제목 */
+			, TB_CONTENT 		/*내용 */
+			, TB_REG_DT			/*등록일 */
+			, TB_REG_ID      		/*작성자*/
+        FROM TEST_BBS
+        WHERE TB_SEQ = #{tbSeq}	/*게시물의 번호가 where조건이 된다. 그래서 1건만 조회됨*/
+    </select>
+    
+    <!-- 게시판 등록 -->
+    <insert id="boardInsert" 	parameterType="kr.co.board.vo.BoardVo">
+		/*kr.co.board.dao.BoardDao.boardInsert*/
+	    <selectKey resultType="string" keyProperty="tbSeq" order="BEFORE">
+			SELECT NVL(MAX(TB_SEQ), 0) + 1 FROM TEST_BBS        
+	    </selectKey> 
+	  	INSERT INTO TEST_BBS(
+	  		TB_SEQ
+	  		, TB_TITLE
+	  		, TB_CONTENT
+	  		, TB_REG_DT
+	  		, TB_REG_ID
+	  	)VALUES(
+	  		#{tbSeq}
+	  		, #{tbTitle}
+	  		, #{tbContent}
+	  		, TO_DATE(SYSDATE, 'YYYY-MM-DD')
+	  		, #{tbRegId}
+	  	)
+    </insert>
+
+    <!-- 게시판 수정 -->
+    <insert id="boardUpdate" 	parameterType="kr.co.board.vo.BoardVo">
+		/*kr.co.board.dao.BoardDao.boardUpdate*/
+		UPDATE TEST_BBS
+		SET 
+			TB_TITLE = #{tbTitle}
+			, TB_CONTENT = #{tbContent}
+			, TB_MOD_ID = 'user'
+			, TB_MOD_DT = TO_DATE(SYSDATE, 'YYYY-MM-DD')
+		WHERE TB_SEQ = #{tbSeq}
+    </insert>
+
+    <!-- 게시판 삭제 -->
+    <insert id="boardDelete" 	parameterType="kr.co.board.vo.BoardVo">
+		/*kr.co.board.dao.BoardDao.boardDelete*/
+		DELETE FROM TEST_BBS
+		WHERE TB_SEQ = #{tbSeq}
+    </insert>
+
+</mapper>
+

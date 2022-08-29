@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+ 
+<mapper namespace="kr.co.login.dao.LoginDao">
+
+	<!-- 로그인 정보 조회 -->
+    <select id="selectLogin" 	resultType="kr.co.login.vo.LoginVo">
+    
+		/*kr.co.login.dao.LoginDao.selectLogin*/
+       	SELECT
+       		USER_NO					/*유일키, 프라이머리 키*/
+			, USER_ID 				/*회원 아이디*/
+			, USER_PW 				/*회원 비밀번호 */
+			, USER_NM 				/*회원 이름 */
+			, USER_MAIL				/*회원 메일주소 */
+			, USER_REG_DT			/*회원 가입일 */
+        FROM TEST_USER			/*회원테이블*/
+        WHERE USER_ID = #{userId} 
+        AND USER_PW = #{userPw}
+
+    </select>
+
+</mapper>
+
