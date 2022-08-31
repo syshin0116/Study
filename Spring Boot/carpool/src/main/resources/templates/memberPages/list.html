@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <h2>list.html</h2>
+  세션값 확인: <p th:text="${session['loginId']}"> </p>
+  <table>
+    <tr>
+      <th>idx</th>
+      <th>id</th>
+      <th>name</th>
+      <th>email</th>
+      <th>license</th>
+      <th>birthDate</th>
+      <th>points</th>
+    </tr>
+    <tr th:each="member: ${memberList}">
+      <td th:text="${member.memberIdx}"></td>
+      <td th:text="${member.memberId}"></td>
+      <td th:text="${member.memberName}"></td>
+      <td th:text="${member.memberEmail}"></td>
+      <td th:text="${member.memberLicense}"></td>
+      <td th:text="${member.memberBirthDate}"></td>
+      <td th:text="${member.memberPoints}"></td>
+    </tr>
+  </table>
+</body>
+</html>

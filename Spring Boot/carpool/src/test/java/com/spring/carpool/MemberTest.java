@@ -12,14 +12,15 @@ import org.springframework.transaction.annotation.Transactional;
 import  static  org.assertj.core.api.Assertions.*;
 // 자바에서 제공하는 assert framework
 import java.sql.Date;
+import java.util.stream.IntStream;
 
 @SpringBootTest
 public class MemberTest {
     @Autowired
     private MemberService memberService;
 
-    public MemberDTO newMember(){
-        MemberDTO member = new MemberDTO("테스트용아이디", "테스트용비밀번호", "테스트용이름", "이메일", "면허번호", Date.valueOf("2022-08-22"), 0);
+    public MemberDTO newMember(int i){
+        MemberDTO member = new MemberDTO("테스트용아이디"+i, "테스트용비밀번호"+i, "테스트용이름"+i, "이메일"+i, "면허번호"+i, Date.valueOf("2022-08-22"), 0+i);
         return member;
     }
     @Test
@@ -28,9 +29,9 @@ public class MemberTest {
     @Rollback
     @DisplayName("회원가입 테스트")
     public void memberSaveTest(){
-        Long savedId = memberService.save(newMember());
+        Long savedId = memberService.save(newMember(1));
         MemberDTO memberDTO = memberService.findById(savedId);
-        assertThat(newMember().getMemberId()).isEqualTo(memberDTO.getMemberId());
+        assertThat(newMember(1).getMemberId()).isEqualTo(memberDTO.getMemberId());
     }
 
     @Test
@@ -38,8 +39,8 @@ public class MemberTest {
     @Rollback(value = true)
     @DisplayName("로그인 테스트")
     public void loginTest(){
-        final String memberId = "hyepark";
-        final String memberPassword = "hyepark";
+        final String memberId = "admin";
+        final String memberPassword = "admin";
         String memberName = "로그인 이름";
         String memberEmail = "로그인 이메일";
         String memberLicense = "로그인 면허번호";
@@ -47,7 +48,7 @@ public class MemberTest {
         Date memberBirthDate = date;
         int memberPoints = 200;
         MemberDTO memberDTO = new MemberDTO(memberId, memberPassword, memberName, memberEmail, memberLicense, memberBirthDate, memberPoints);
-        Long savedId = memberService.save(memberDTO);
+//        Long savedId = memberService.save(memberDTO);
 
         //로그인 샛체 생성 수 로그인
         MemberDTO loginMemberDTO = new MemberDTO();
@@ -61,7 +62,13 @@ public class MemberTest {
         MemberDTO loginResult = memberService.login((loginMemberDTO));
         // 로그인 결과가 not null 이면 테스트 통과
         assertThat(loginResult).isNotNull();
+    }
 
-
+    @Test
+    @DisplayName("회원 데이터 저장")
+    public void memberSave(){
+        IntStream.rangeClosed(2,20).forEach(i ->{
+            memberService.save(newMember(i));
+        });
     }
 }

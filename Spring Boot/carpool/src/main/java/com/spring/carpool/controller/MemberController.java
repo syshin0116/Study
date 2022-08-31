@@ -5,9 +5,11 @@ import com.spring.carpool.entity.MemberEntity;
 import com.spring.carpool.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -43,5 +45,10 @@ public class MemberController {
             return "memberPages/login";
         }
     }
-
+    @GetMapping("/memberList")
+    public String findAll(Model model){
+        List<MemberDTO> memberDTOList = memberService.findAll();
+        model.addAttribute("memberList", memberDTOList);
+        return "memberPages/list";
+    }
 }
