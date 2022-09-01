@@ -67,7 +67,7 @@ public class MemberTest {
     @Test
     @DisplayName("회원 데이터 저장")
     public void memberSave(){
-        IntStream.rangeClosed(2,20).forEach(i ->{
+        IntStream.rangeClosed(2,10).forEach(i ->{
             memberService.save(newMember(i));
         });
     }
