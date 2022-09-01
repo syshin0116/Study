@@ -4,6 +4,8 @@ import com.spring.carpool.dto.MemberDTO;
 import com.spring.carpool.entity.MemberEntity;
 import com.spring.carpool.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -45,7 +47,7 @@ public class MemberController {
             return "memberPages/login";
         }
     }
-    @GetMapping("/memberList")
+    @GetMapping("/")
     public String findAll(Model model){
         List<MemberDTO> memberDTOList = memberService.findAll();
         model.addAttribute("memberList", memberDTOList);
@@ -69,8 +71,17 @@ public class MemberController {
     @GetMapping("/delete/{memberId}")
     public String delete(@PathVariable String memberId){
         memberService.delete(memberId);
-        return "redirect:/member/memberList";
+        return "redirect:/member/";
         //return "memberPages/memberList";
     }
+    /**
+     * /member/3 : 조회(get), 저장(post), 수정(put), 삭제(delete)
+     */
+    // delete 요청 삭제
+    @DeleteMapping("/{memberId}")
+    public ResponseEntity deleteAjax(@PathVariable String memberId){
+        memberService.delete(memberId);
+        return new ResponseEntity<>(HttpStatus.OK); // ajax 호출한 부분에 리턴으로 200 응답을 줌
 
+    }
 }

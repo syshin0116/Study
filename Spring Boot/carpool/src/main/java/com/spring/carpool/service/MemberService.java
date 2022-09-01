@@ -78,6 +78,8 @@ public class MemberService {
     }
 
     public void delete(String memberId) {
-        memberRepository.deleteByMemberId(memberId);
+        MemberDTO memberDTO = findByMemberId(memberId);
+        long memberIdx = memberDTO.getMemberIdx();
+        memberRepository.deleteById(memberIdx);
     }
 }

@@ -37,7 +37,7 @@
       </td>
       <!--   삭제 요청을 ajax로. type을 post가 아닌 delete로 하고
          controller에서 @DeleteMapping을 사용함.(삭제하는 코드를 동일함)-->
-      <td><button th:onclick="delete([[${member.memberId}]])">삭제(ajax)</button> </td>
+      <td><button th:onclick="deleteByMemberId([[${member.memberId}]])">삭제(ajax)</button> </td>
     </tr>
   </table>
   <div id="member-detail">
@@ -46,41 +46,53 @@
   </div>
 </body>
 <script th:inline="javascript">
-    const detail = (memberId) =>{
-      $.ajax({
-        type: "post",
-        url: "/member/ajax/"+memberId,
-        dataType:"json",
-        success: function (result){
-          console.log(result);
-          let detailView = "<table>\n" +
-                  "        <tr>\n" +
-                  "            <th>idx</th>\n" +
-                  "            <th>id</th>\n" +
-                  "            <th>password</th>\n" +
-                  "            <th>name</th>\n" +
-                  "            <th>email</th>\n" +
-                  "            <th>license</th>\n" +
-                  "            <th>birthDate</th>\n" +
-                  "            <th>points</th>\n" +
-                  "            <th>상세조회</th>\n" +
-                  "        </tr>\n" +
-                  "        <tr>\n" +
-                  "            <td>"+result.memberIdx+"</td>\n" +
-                  "            <td>"+result.memberId+"</td>\n" +
-                  "            <td>"+result.memberPassword+"</td>\n" +
-                  "            <td>"+result.memberName+"</td>\n" +
-                  "            <td>"+result.memberLicense+"</td>\n" +
-                  "            <td>"+result.memberBirthDate+"</td>\n" +
-                  "            <td>"+result.memberPoints+"</td>\n" +
-                  "        </tr>\n" +
-                  "    </table>"
-          document.getElementById("member-detail").innerHTML = detailView;
-        },
-        error:function (){
-          alert("ajax 실페");
-        }
-      })
-    }
+  const deleteByMemberId = (memberId) => {
+    $.ajax({
+      type: "delete",
+      url: "/member/"+memberId,
+      dataType: "text",
+      success: function(result){ //status code = 200
+        location.href = "/member/";
+      }, error:function (){
+        alert("ajax 실패");
+      }
+    });
+  }
+  const detail = (memberId) =>{
+    $.ajax({
+      type: "post",
+      url: "/member/ajax/"+memberId,
+      dataType:"json",
+      success: function (result){
+        console.log(result);
+        let detailView = "<table>\n" +
+                "        <tr>\n" +
+                "            <th>idx</th>\n" +
+                "            <th>id</th>\n" +
+                "            <th>password</th>\n" +
+                "            <th>name</th>\n" +
+                "            <th>email</th>\n" +
+                "            <th>license</th>\n" +
+                "            <th>birthDate</th>\n" +
+                "            <th>points</th>\n" +
+                "            <th>상세조회</th>\n" +
+                "        </tr>\n" +
+                "        <tr>\n" +
+                "            <td>"+result.memberIdx+"</td>\n" +
+                "            <td>"+result.memberId+"</td>\n" +
+                "            <td>"+result.memberPassword+"</td>\n" +
+                "            <td>"+result.memberName+"</td>\n" +
+                "            <td>"+result.memberLicense+"</td>\n" +
+                "            <td>"+result.memberBirthDate+"</td>\n" +
+                "            <td>"+result.memberPoints+"</td>\n" +
+                "        </tr>\n" +
+                "    </table>"
+        document.getElementById("member-detail").innerHTML = detailView;
+      },
+      error:function (){
+        alert("ajax 실페");
+      }
+    })
+  }
 </script>
 </html>
