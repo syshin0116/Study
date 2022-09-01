@@ -27,10 +27,10 @@ public class MemberTest {
     @Transactional
     //Test에서는 @Transactional이 있으면 @Rollback 안써줘도 무관
     @Rollback
-    @DisplayName("회원가입 테스트")
+    @DisplayName("회원 가입 테스트")
     public void memberSaveTest(){
-        Long savedId = memberService.save(newMember(1));
-        MemberDTO memberDTO = memberService.findById(savedId);
+        String savedId = memberService.save(newMember(1));
+        MemberDTO memberDTO = memberService.findByMemberId(savedId);
         assertThat(newMember(1).getMemberId()).isEqualTo(memberDTO.getMemberId());
     }
 
@@ -70,5 +70,20 @@ public class MemberTest {
         IntStream.rangeClosed(2,10).forEach(i ->{
             memberService.save(newMember(i));
         });
+    }
+
+    @Test
+    @Transactional
+    @Rollback(value = true)
+    @DisplayName("회원 삭제 테스트")
+    public void memberDeleteTest(){
+        /**
+         * 신규 회원 등록
+         * 삭제 처리
+         * 해당 회원으로 조회시 Null 이면 통과
+         */
+        String savedId = memberService.save(newMember(999));
+        memberService.delete(savedId);
+        assertThat(memberService.findByMemberId(savedId)).isNull();
     }
 }

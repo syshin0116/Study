@@ -12,4 +12,5 @@ public interface MemberRepository extends JpaRepository<MemberEntity, Long> {
     // 리턴타입: MemberEntity
     // 매개변수: member_id(String)
     Optional<MemberEntity> findByMemberId(String memberId);
+    Optional<MemberEntity> deleteByMemberId(String memberId);
 }

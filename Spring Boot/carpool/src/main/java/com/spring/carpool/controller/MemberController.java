@@ -51,4 +51,26 @@ public class MemberController {
         model.addAttribute("memberList", memberDTOList);
         return "memberPages/list";
     }
+
+    // member/회원idx
+    @GetMapping("/{memberId}")
+    public String findByIdx(@PathVariable String memberId, Model model){
+        MemberDTO memberDTO = memberService.findByMemberId(memberId);
+        model.addAttribute("member", memberDTO);
+        return "memberPages/detail";
+    }
+    //ajax 상세조회
+    @PostMapping("/ajax/{memberId}")
+    public @ResponseBody MemberDTO findByIdAjax(@PathVariable String memberId){
+        MemberDTO memberDTO = memberService.findByMemberId(memberId);
+        return memberDTO;
+    }
+    // get 요청 삭제
+    @GetMapping("/delete/{memberId}")
+    public String delete(@PathVariable String memberId){
+        memberService.delete(memberId);
+        return "redirect:/member/memberList";
+        //return "memberPages/memberList";
+    }
+
 }

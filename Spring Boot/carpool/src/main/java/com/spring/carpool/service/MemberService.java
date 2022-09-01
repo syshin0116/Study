@@ -16,9 +16,9 @@ import java.util.Optional;
 public class MemberService {
     public final MemberRepository memberRepository;
 
-    public Long save(MemberDTO memberDTO) {
+    public String save(MemberDTO memberDTO) {
         MemberEntity memberEntity = memberRepository.save(MemberEntity.toSaveEntity(memberDTO));
-        Long savedId = memberRepository.save(memberEntity).getMemberIdx();
+        String savedId = memberRepository.save(memberEntity).getMemberId();
         return savedId;
     }
 
@@ -43,14 +43,25 @@ public class MemberService {
 
     }
 
-    public MemberDTO findById(Long member_idx) {
-        Optional<MemberEntity> optionalMemberEntity = memberRepository.findById(member_idx);
+    public MemberDTO findById(Long memberIdx) {
+        Optional<MemberEntity> optionalMemberEntity = memberRepository.findById(memberIdx);
         if (optionalMemberEntity.isPresent()) {
 //            return MemberDTO.toMemberDTO((optionalMemberEntity.get()));
             MemberEntity memberEntity = optionalMemberEntity.get();
             MemberDTO memberDTO = MemberDTO.toMemberDTO(memberEntity);
             return memberDTO;
         } else {
+            return null;
+        }
+    }
+
+    public MemberDTO findByMemberId(String memberId){
+        Optional<MemberEntity> optionalMemberEntity = memberRepository.findByMemberId(memberId);
+        if (optionalMemberEntity.isPresent()){
+            MemberEntity memberEntity = optionalMemberEntity.get();
+            MemberDTO memberDTO = MemberDTO.toMemberDTO(memberEntity);
+            return memberDTO;
+        }else{
             return null;
         }
     }
@@ -64,5 +75,9 @@ public class MemberService {
             memberDTOList.add(MemberDTO.toMemberDTO(member));
         }
         return memberDTOList;
+    }
+
+    public void delete(String memberId) {
+        memberRepository.deleteByMemberId(memberId);
     }
 }
