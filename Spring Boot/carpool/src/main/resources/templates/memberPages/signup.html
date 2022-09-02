@@ -74,8 +74,77 @@ layout:decorate="~{layout/layout}"  란?
         //아이디 중복체크 여부
         let IS_ID_CHK = false;
 
+        //아이디 중복체크, 입력 감지 이벤트
+        $("#userId").on("focus", function () {
+
+            let _id = $(this).attr('id')
+            $("#" + _id + "ErrMsg").hide();
+
+            if(_id == "userId"){
+                IS_ID_CHK = false;
+                $("#submitButton").addClass("disabled");
+            }
+
+        }).on("input", function () {
+
+
+            // alert("입력감지");
+            let _id = $(this).attr('id')
+            let _value = $(this).val();
+            $("#" + _id + "ErrMsg").hide();
+
+            if ($.trim(_value) == "") {
+                $("#userIdErrMsg").show();
+                $("#userIdCheck").hide();
+                chkSubmitBtn();
+                return false;
+            } else {
+                $.ajax({
+                    type: "post",
+                    url: "/member/idCheck",
+                    dataType: "text",
+                    data: {
+                        memberId: _value
+                    },
+                    success: function (result) {
+                        if (result == "ok") {
+                            IS_ID_CHK = true;
+                            $("#userIdCheck")[0].innerHTML = "사용 가능한 아이디 입니다.";
+                            $("#userIdCheck")[0].style.color = "green";
+                            $("#userIdCheck").show();
+                        } else {
+                            $("#userIdCheck")[0].innerHTML = "이미 사용중인 아이디 입니다.";
+                            $("#userIdCheck")[0].style.color = "red";
+                            $("#userIdCheck").show();
+                        }
+                    },
+                    error: function () {
+                        alert("ajax 실패");
+                    }
+                })
+                chkSubmitBtn();
+
+                // $.get(
+                //     "/js/id.json?" + _value
+                //     , function (data) {
+                //         if (data == "success") {
+                //             IS_ID_CHK = true;
+                //             console.log(data);
+                //         } else {
+                //             alert("사용할 수 없는 아이디 입니다.");
+                //             $("#userIdErrMsg").show();
+                //             $("#userId").val("");
+                //         }
+                //
+                //     }
+                // );
+            }
+
+
+        });
+
         //아이디,비밀번호,이름 입력 감지 이벤트
-        $("#userId, #userPw ,#userName").off().on("focus", function () {
+        $("#userPw ,#userName").off().on("focus", function () {
 
             let _id = $(this).attr('id')
             $("#" + _id + "ErrMsg").hide();
@@ -89,61 +158,10 @@ layout:decorate="~{layout/layout}"  란?
 
             let _id = $(this).attr('id')
             let _value = $(this).val();
-
-            if (_id == "userId") {
-                if ($.trim(_value) == "") {
-                    $("#userIdErrMsg").show();
-                    $("#userIdCheck").hide();
-                    chkSubmitBtn();
-                    return false;
-                } else {
-                    $.ajax({
-                        type: "post",
-                        url: "/member/idCheck",
-                        dataType: "text",
-                        data: {
-                            memberId: _value
-                        },
-                        success: function (result) {
-                            if (result == "ok") {
-                                IS_ID_CHK = true;
-                                $("#userIdCheck")[0].innerHTML = "사용 가능한 아이디 입니다.";
-                                $("#userIdCheck")[0].style.color = "green";
-                                $("#userIdCheck").show();
-                            } else {
-                                $("#userIdCheck")[0].innerHTML = "이미 사용중인 아이디 입니다.";
-                                $("#userIdCheck")[0].style.color = "red";
-                                $("#userIdCheck").show();
-                            }
-                        },
-                        error: function () {
-                            alert("ajax 실패");
-                        }
-                    })
-                    chkSubmitBtn();
-
-                    // $.get(
-                    //     "/js/id.json?" + _value
-                    //     , function (data) {
-                    //         if (data == "success") {
-                    //             IS_ID_CHK = true;
-                    //             console.log(data);
-                    //         } else {
-                    //             alert("사용할 수 없는 아이디 입니다.");
-                    //             $("#userIdErrMsg").show();
-                    //             $("#userId").val("");
-                    //         }
-                    //
-                    //     }
-                    // );
-                }
-            }else{
                 if ($.trim(_value) == "") {
                     $("#" + _id + "ErrMsg").show();
                 }
                 chkSubmitBtn();
-            }
-
         });
 
         //이메일 입력 감지 이벤트
