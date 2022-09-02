@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 </head>
 <body>
   <h2>save.html</h2>
   <form action="/member/save" method="post">
-    아이디: <input type="text" name="memberId"><br>
+    아이디: <input type="text" name="memberId" id="memberId" onblur="idDuplicate()">    <span id="id-dup-result"></span><br>
     비밀번호: <input type="password" name="memberPassword"><br>
     이름: <input type="text" name="memberName"><br>
     이메일: <input type="text" name="memberEmail"><br>
@@ -16,4 +17,30 @@
     <input type="submit" value="회원가입">
   </form>
 </body>
+<script th:inline="javascript">
+  const idDuplicate = () =>{
+    const id = document.getElementById("memberId").value;
+    const checkResult = document.getElementById("id-dup-result");
+    $.ajax({
+      type: "post",
+      url: "/member/idCheck",
+      dataType: "text",
+      data:{
+        memberId: id
+      },
+      success:function (result){
+        if (result == "ok"){
+          checkResult.innerHTML = "사용가능합니다.";
+          checkResult.style.color = "green";
+        }else{
+          checkResult.innerHTML = "이미 사용중인 아이디 입니다.";
+          checkResult.style.color = "red";
+        }
+      },
+      error:function (){
+        alert("ajax 실패");
+      }
+    })
+  }
+</script>
 </html>

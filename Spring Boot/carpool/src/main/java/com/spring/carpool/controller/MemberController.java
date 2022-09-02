@@ -99,4 +99,18 @@ public class MemberController {
         memberService.update(memberDTO);
         return "redirect:/member/"+memberDTO.getMemberId();
     }
+
+    //수정처리(put 요청)
+    @PutMapping("/{memberId}")
+    public ResponseEntity updateByAjax(@RequestBody MemberDTO memberDTO){
+        memberService.update(memberDTO);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    //아이디 중복체크
+    @PostMapping("idCheck")
+    public @ResponseBody String idCheck(@RequestParam String memberId){
+        String checkResult = memberService.idCheck(memberId);
+        return checkResult;
+    }
 }
