@@ -82,4 +82,8 @@ public class MemberService {
         long memberIdx = memberDTO.getMemberIdx();
         memberRepository.deleteById(memberIdx);
     }
+
+    public void update(MemberDTO memberDTO){
+        memberRepository.save(MemberEntity.toUpdateEntity(memberDTO));
+    }
 }

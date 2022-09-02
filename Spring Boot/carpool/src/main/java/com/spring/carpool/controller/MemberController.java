@@ -39,6 +39,7 @@ public class MemberController {
     public String login(@ModelAttribute MemberDTO memberDTO, HttpSession session){
         MemberDTO loginResult = memberService.login(memberDTO);
         if (loginResult != null){
+            session.setAttribute("loginIdx", loginResult.getMemberIdx());
             session.setAttribute("loginId", loginResult.getMemberId());
             session.setAttribute( "loginName", loginResult.getMemberName());
 //            session.setAttribute(name:"loginUserData", MemberService.selectLogin(MemberEntity));
@@ -82,6 +83,20 @@ public class MemberController {
     public ResponseEntity deleteAjax(@PathVariable String memberId){
         memberService.delete(memberId);
         return new ResponseEntity<>(HttpStatus.OK); // ajax 호출한 부분에 리턴으로 200 응답을 줌
+    }
+    //수정
+    @GetMapping("/update")
+    public String updateForm(HttpSession session, Model model){
+        Long memberIdx = (Long)session.getAttribute("loginIdx");
+        MemberDTO memberDTO = memberService.findById(memberIdx);
+        model.addAttribute("updateMember", memberDTO);
+        return "memberPages/update";
+    }
 
+    //수정처리
+    @PostMapping("/update")
+    public String update(@ModelAttribute MemberDTO memberDTO){
+        memberService.update(memberDTO);
+        return "redirect:/member/"+memberDTO.getMemberId();
     }
 }

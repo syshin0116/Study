@@ -40,6 +40,20 @@ public class MemberEntity {
 
     public static MemberEntity toSaveEntity(MemberDTO memberDTO){
         MemberEntity memberEntity = new MemberEntity();
+//        memberEntity.setMemberIdx(memberDTO.getMemberIdx());
+        memberEntity.setMemberId(memberDTO.getMemberId());
+        memberEntity.setMemberPassword(memberDTO.getMemberPassword());
+        memberEntity.setMemberEmail(memberDTO.getMemberEmail());
+        memberEntity.setMemberName(memberDTO.getMemberName());
+        memberEntity.setMemberLicense(memberDTO.getMemberLicense());
+        memberEntity.setMemberBirthDate(memberDTO.getMemberBirthDate());
+//        memberEntity.setMember_points(memberEntity.getMember_points());
+
+        return memberEntity;
+    }
+
+    public static MemberEntity toUpdateEntity(MemberDTO memberDTO){
+        MemberEntity memberEntity = new MemberEntity();
         memberEntity.setMemberIdx(memberDTO.getMemberIdx());
         memberEntity.setMemberId(memberDTO.getMemberId());
         memberEntity.setMemberPassword(memberDTO.getMemberPassword());
