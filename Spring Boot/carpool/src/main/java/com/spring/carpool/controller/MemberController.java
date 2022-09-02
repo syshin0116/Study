@@ -1,7 +1,6 @@
 package com.spring.carpool.controller;
 
 import com.spring.carpool.dto.MemberDTO;
-import com.spring.carpool.entity.MemberEntity;
 import com.spring.carpool.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,7 +20,7 @@ public class MemberController {
 
     @GetMapping("/save-form")
     public String saveForm(){
-        return "memberPages/save";
+        return "memberPages/signup";
     }
 
     @GetMapping("/login-form")
