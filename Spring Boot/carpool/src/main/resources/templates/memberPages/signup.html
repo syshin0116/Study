@@ -1,15 +1,4 @@
 <!DOCTYPE html>
-<!-- layout.html -->
-
-<!--
-layout:decorate="~{layout/layout}"  란?
-- 기본 레이아웃을 layout/layout.html 으로 선언
-- 버전마다 선언방법이 다름 아래 참조.
-- layout:decorate thymeleaf 3.* ver (이거 사용함)
-- layout:decorator thymeleaf 2.* ver
- <th:block layout:fragment="content">
-- 각 파일 마다, 위 코드 다음부터 작성한 내용들이 default_layout.html 의 content 부분에 위치함
--->
 <html lang="ko"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
@@ -31,40 +20,84 @@ layout:decorate="~{layout/layout}"  란?
             <div class="row gx-5 justify-content-center">
                 <div class="col-lg-6">
                     <form id="contactForm" data-sb-form-api-token="API_TOKEN" action="/member/save" method="post">
+                        <p class="lead mb-0">필수 입력 정보</p>
+                        <hr>
                         <!-- 아이디 input-->
                         <div class="form-floating mb-3">
-                            <input class="form-control" id="userId" name="userId"   type="text" placeholder="아이디를 입력하세요..." />
+                            <input class="form-control" id="userId" name="userId" type="text"
+                                   placeholder="아이디를 입력하세요..."/>
                             <label for="userId">아이디</label>
-                            <div class="invalid-feedback"id="userIdErrMsg"style="display:none;" >아이디를 입력하세요.</div>
-                            <div class="valid-feedback"id="userIdCheck"style="display:none;" ></div>
+                            <div class="invalid-feedback" id="userIdErrMsg" style="display:none;">아이디를 입력하세요.</div>
+                            <div class="valid-feedback" id="userIdCheck" style="display:none;"></div>
                         </div>
                         <!-- 비밀번호 input-->
                         <div class="form-floating mb-3">
-                            <input class="form-control" id="userPw" name="userPw"   type="password" placeholder="비밀번호를 입력하세요..." />
+                            <input class="form-control" id="userPw" name="userPw" type="password"
+                                   placeholder="비밀번호를 입력하세요..."/>
                             <label for="userPw">비밀번호</label>
-                            <div class="invalid-feedback" id="userPwErrMsg"style="display:none;">비밀번호를 입력하세요.</div>
+                            <div class="invalid-feedback" id="userPwErrMsg" style="display:none;">비밀번호를 입력하세요.</div>
+                        </div>
+                        <!-- 비밀번호 확인 input-->
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="userPwConfirm" name="userPwConfirm" type="password"
+                                   placeholder="비밀번호 확인을 입력하세요..."/>
+                            <label for="userPw">비밀번호 확인</label>
+                            <div class="invalid-feedback" id="userPwConfirmErrMsg" style="display:none;">비밀번호 확인을
+                                입력하세요.
+                            </div>
+                            <div class="valid-feedback" id="userPwCheckMsg" style="display:none;"></div>
+
                         </div>
                         <!-- 이름 input-->
                         <div class="form-floating mb-3">
-                            <input class="form-control" id="userName" name="userName"   type="text" placeholder="이름을 입력하세요..." />
+                            <input class="form-control" id="userName" name="userName" type="text"
+                                   placeholder="이름을 입력하세요..."/>
                             <label for="userName">이름</label>
-                            <div class="invalid-feedback" id="userNameErrMsg"style="display:none;">이름을 입력하세요.</div>
+                            <div class="invalid-feedback" id="userNameErrMsg" style="display:none;">이름을 입력하세요.</div>
                         </div>
                         <!-- 이메일주소 input-->
                         <div class="form-floating mb-3">
-                            <input class="form-control" id="userMail" name="userMail"   type="email" placeholder="name@example.com" />
+                            <input class="form-control" id="userMail" name="userMail" type="email"
+                                   placeholder="name@example.com"/>
                             <label for="userMail">이메일 주소</label>
-                            <div class="invalid-feedback" id="userMailErrMsg"style="display:none;">메일주소를 입력하세요.</div>
-                            <div class="invalid-feedback" id="userMailNotPattern"style="display:none;">이메일 형식이 아닙니다.</div>
+                            <div class="invalid-feedback" id="userMailErrMsg" style="display:none;">메일주소를 입력하세요.</div>
+                            <div class="invalid-feedback" id="userMailNotPattern" style="display:none;">이메일 형식이 아닙니다.
+                            </div>
                         </div>
                         <!-- 핸드폰번호 input-->
                         <div class="form-floating mb-3">
-                            <input class="form-control" id="userTel" name="userTel" type="tel" placeholder="(010) 0000-0000" />
+                            <input class="form-control" id="userTel" name="userTel" type="tel"
+                                   placeholder="생년월일을 입력해주세요..."/>
                             <label for="userTel">핸드폰 번호</label>
-                            <div class="invalid-feedback" id="userTelErrMsg"style="display:none;">핸드폰 번호를 입력하세요.
+                            <div class="invalid-feedback" id="userTelErrMsg" style="display:none;">생년월일을 입력하세요.
                             </div>
                         </div>
-                        <div class="d-grid"><button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">가입하기</button></div>
+
+
+                        <br>
+                        <br>
+                        <p class="lead mb-0">선택 입력 정보</p>
+                        <hr>
+                        <!-- 면허번호 input-->
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="userLicense" name="userLicense" type="text"
+                                   placeholder="00-000000-00"/>
+                            <label for="userTel">운전면허 번호</label>
+                            <div class="invalid-feedback" id="userLicenseErrMsg" style="display:none;">운전 면허번호를 입력하세요.
+                            </div>
+                        </div>
+                        <!-- 생년월일 input-->
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="userBirthDate" name="userBirthDate" type="date"
+                                   placeholder="00-000000-00"/>
+                            <label for="userTel">생년월일</label>
+                            <div class="invalid-feedback" id="userBirthDateErrMsg" style="display:none;">운전 면허번호를 입력하세요.
+                            </div>
+                        </div>
+                        <div class="d-grid">
+                            <button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">가입하기
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -76,23 +109,17 @@ layout:decorate="~{layout/layout}"  란?
 
         //아이디 중복체크, 입력 감지 이벤트
         $("#userId").on("focus", function () {
-
             let _id = $(this).attr('id')
             $("#" + _id + "ErrMsg").hide();
-
-            if(_id == "userId"){
+            if (_id == "userId") {
                 IS_ID_CHK = false;
                 $("#submitButton").addClass("disabled");
             }
-
-        }).on("input", function () {
-
-
+        }).on("input", function () { //입력시 실시간 id 중복체크
             // alert("입력감지");
             let _id = $(this).attr('id')
             let _value = $(this).val();
             $("#" + _id + "ErrMsg").hide();
-
             if ($.trim(_value) == "") {
                 $("#userIdErrMsg").show();
                 $("#userIdCheck").hide();
@@ -113,6 +140,7 @@ layout:decorate="~{layout/layout}"  란?
                             $("#userIdCheck")[0].style.color = "green";
                             $("#userIdCheck").show();
                         } else {
+                            IS_ID_CHK = false;
                             $("#userIdCheck")[0].innerHTML = "이미 사용중인 아이디 입니다.";
                             $("#userIdCheck")[0].style.color = "red";
                             $("#userIdCheck").show();
@@ -139,29 +167,62 @@ layout:decorate="~{layout/layout}"  란?
                 //     }
                 // );
             }
-
-
-        });
-
-        //아이디,비밀번호,이름 입력 감지 이벤트
-        $("#userPw ,#userName").off().on("focus", function () {
-
-            let _id = $(this).attr('id')
-            $("#" + _id + "ErrMsg").hide();
-
-            if(_id == "userId"){
-                IS_ID_CHK = false;
-                $("#submitButton").addClass("disabled");
-            }
-
         }).on("blur", function () {
 
             let _id = $(this).attr('id')
             let _value = $(this).val();
-                if ($.trim(_value) == "") {
-                    $("#" + _id + "ErrMsg").show();
-                }
+            if ($.trim(_value) == "") {
+                $("#" + _id + "ErrMsg").show();
+            }
+            chkSubmitBtn();
+        });
+
+        // 비밀번호 확인, 이름 입력 감지 이벤트
+        // 비밀번호와 비밀번호 확인 일치 여부 확인
+        $("#userPwConfirm").off().on("focus", function () {
+            let _id = $(this).attr('id')
+            $("#" + _id + "ErrMsg").hide();
+        }).on("input", function () {
+            let pwdConfirm = $("#userPwConfirm").val();
+            let pwd = $("#userPw").val();
+            if (pwdConfirm == pwd && pwdConfirm != "") {
+                $("#userPwCheckMsg")[0].style.color = "green";
+                $("#userPwCheckMsg")[0].innerHTML = "비밀번호가 일치합니다.";
+                $("#userPwCheckMsg").show();
+            } else {
+                $("#userPwCheckMsg")[0].style.color = "red";
+                $("#userPwCheckMsg")[0].innerHTML = "비밀번호가 일치하지 않습니다.";
+                $("#userPwCheckMsg").show();
+                return false;
+            }
+        }).on("blur", function () {
+            let _id = $(this).attr('id')
+            let _value = $(this).val();
+            if ($.trim(_value) == "") {
+                $("#userPwConfirmErrMsg").show();
+                $("#userPwCheckMsg").hide();
                 chkSubmitBtn();
+                return false;
+            }
+            if ($.trim(_value) == "") {
+                $("#" + _id + "ErrMsg").show();
+            }
+            chkSubmitBtn();
+        });
+
+        //비밀번호,이름 입력 감지 이벤트
+        $("#userPw, #userName").off().on("focus", function () {
+
+            let _id = $(this).attr('id')
+            $("#" + _id + "ErrMsg").hide();
+
+        }).on("blur", function () {
+            let _id = $(this).attr('id')
+            let _value = $(this).val();
+            if ($.trim(_value) == "") {
+                $("#" + _id + "ErrMsg").show();
+            }
+            chkSubmitBtn();
         });
 
         //이메일 입력 감지 이벤트
@@ -188,7 +249,7 @@ layout:decorate="~{layout/layout}"  란?
             $("#userTelErrMsg").hide();
         }).on("blur", function () {
             // 휴대폰을 입력안하면 경고문구 표시
-            if ($.trim($(this).val()) == ""){
+            if ($.trim($(this).val()) == "") {
                 $('#userTelErrMsg').show();
                 $(this).val("");
                 chkSubmitBtn();

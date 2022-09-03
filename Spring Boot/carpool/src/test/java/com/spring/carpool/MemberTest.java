@@ -2,6 +2,7 @@ package com.spring.carpool;
 
 import com.spring.carpool.dto.MemberDTO;
 import com.spring.carpool.service.MemberService;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class MemberTest {
     private MemberService memberService;
 
     public MemberDTO newMember(int i){
-        MemberDTO member = new MemberDTO("테스트용아이디"+i, "테스트용비밀번호"+i, "테스트용이름"+i, "이메일"+i, "면허번호"+i, Date.valueOf("2022-08-22"), 0+i);
+        MemberDTO member = new MemberDTO("테스트용아이디"+i, "테스트용비밀번호"+i, "테스트용이름"+i, "이메일"+i, "면허번호"+i, Date.valueOf("2022-08-22"), "010-1111-1111", 0+i);
         return member;
     }
     @Test
@@ -46,8 +47,9 @@ public class MemberTest {
         String memberLicense = "로그인 면허번호";
         Date date = new Date(2022, 8, 26);
         Date memberBirthDate = date;
+        String memberMobile = "010-1111-1111";
         int memberPoints = 200;
-        MemberDTO memberDTO = new MemberDTO(memberId, memberPassword, memberName, memberEmail, memberLicense, memberBirthDate, memberPoints);
+        MemberDTO memberDTO = new MemberDTO(memberId, memberPassword, memberName, memberEmail, memberLicense, memberBirthDate, memberMobile, memberPoints);
 //        Long savedId = memberService.save(memberDTO);
 
         //로그인 샛체 생성 수 로그인

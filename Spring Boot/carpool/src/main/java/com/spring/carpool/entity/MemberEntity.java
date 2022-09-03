@@ -35,6 +35,9 @@ public class MemberEntity {
     @Column(name="member_birthdate")
     private Date memberBirthDate;
 
+    @Column(name="member_mobile")
+    private String memberMobile;
+
     @Column(name="member_points")
     private int memberPoints;
 
@@ -47,6 +50,7 @@ public class MemberEntity {
         memberEntity.setMemberName(memberDTO.getMemberName());
         memberEntity.setMemberLicense(memberDTO.getMemberLicense());
         memberEntity.setMemberBirthDate(memberDTO.getMemberBirthDate());
+        memberEntity.setMemberMobile((memberDTO.getMemberMobile()));
 //        memberEntity.setMember_points(memberEntity.getMember_points());
 
         return memberEntity;
@@ -61,6 +65,7 @@ public class MemberEntity {
         memberEntity.setMemberName(memberDTO.getMemberName());
         memberEntity.setMemberLicense(memberDTO.getMemberLicense());
         memberEntity.setMemberBirthDate(memberDTO.getMemberBirthDate());
+        memberEntity.setMemberMobile((memberDTO.getMemberMobile()));
 //        memberEntity.setMember_points(memberEntity.getMember_points());
 
         return memberEntity;
