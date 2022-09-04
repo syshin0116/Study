@@ -30,6 +30,7 @@ public class MemberController {
 
     @PostMapping("/save")
     public String save(@ModelAttribute MemberDTO memberDTO){
+        System.out.println("Controller/save================================"+memberDTO);
         memberService.save(memberDTO);
         return "memberPages/login";
     }
@@ -37,12 +38,14 @@ public class MemberController {
     @PostMapping("/login")
     public String login(@ModelAttribute MemberDTO memberDTO, HttpSession session){
         MemberDTO loginResult = memberService.login(memberDTO);
+        System.out.println("Controller/login================================"+memberDTO);
+
         if (loginResult != null){
             session.setAttribute("loginIdx", loginResult.getMemberIdx());
             session.setAttribute("loginId", loginResult.getMemberId());
             session.setAttribute( "loginName", loginResult.getMemberName());
 //            session.setAttribute(name:"loginUserData", MemberService.selectLogin(MemberEntity));
-            return "memberPages/main";
+            return "main";
         }else{
             return "memberPages/login";
         }

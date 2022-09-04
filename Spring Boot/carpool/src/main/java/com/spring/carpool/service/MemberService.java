@@ -29,6 +29,7 @@ public class MemberService {
         입력받은 비번과 DB에서 조회한 비번의 일치여부를 판단하여
         일치하면 로그인 성공, 일치하지 않으면 로그인 실패로 처리
          */
+        System.out.println("Service/login=================="+memberDTO);
         Optional<MemberEntity> optionalMemberEntity = memberRepository.findByMemberId(memberDTO.getMemberId());
         if (optionalMemberEntity.isPresent()) {
             MemberEntity loginEntity = optionalMemberEntity.get();
