@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>idx</th>
+            <th>id</th>
+            <th>password</th>
+            <th>name</th>
+            <th>email</th>
+            <th>license</th>
+            <th>birthDate</th>
+            <th>points</th>
+            <th>상세조회</th>
+        </tr>
+        <tr>
+            <td th:text="${member.memberIdx}"></td>
+            <td th:text="${member.memberId}"></td>
+            <td th:text="${member.memberPassword}"></td>
+            <td th:text="${member.memberName}"></td>
+            <td th:text="${member.memberEmail}"></td>
+            <td th:text="${member.memberLicense}"></td>
+            <td th:text="${member.memberBirthDate}"></td>
+            <td th:text="${member.memberPoints}"></td>
+        </tr>
+    </table>
+</body>
+</html>

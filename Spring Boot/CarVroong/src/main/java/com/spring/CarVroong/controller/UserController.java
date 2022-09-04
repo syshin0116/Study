@@ -17,12 +17,12 @@ public class UserController {
 
     @GetMapping("/login")
     public String login() {
-        return "user/login";
+        return "myhome-login";
     }
 
     @GetMapping("/register")
     public String register() {
-        return "user/register";
+        return "myhome-register";
     }
 
     @PostMapping("/register")
