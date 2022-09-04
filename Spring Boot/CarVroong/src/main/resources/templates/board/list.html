@@ -1,7 +1,7 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="fragments/common :: head('게시판')">
+<head th:replace="fragments/myhome-common :: head('게시판')">
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,7 +15,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" th:replace="fragments/common :: menu('board')">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" th:replace="fragments/myhome-common :: menu('board')">
         <!-- <a class="navbar-brand" href="#">Spring Boot Tutorial</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
             aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -81,7 +81,7 @@
         </div>
     </div>
 
-    <footer th:replace="fragments/common :: footer"></footer>
+    <footer th:replace="fragments/myhome-common :: footer"></footer>
 </body>
 
 </html>

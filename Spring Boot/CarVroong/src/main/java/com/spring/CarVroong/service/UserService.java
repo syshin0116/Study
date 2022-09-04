@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Optional;
+
 @Service
 public class UserService {
 
@@ -26,4 +29,17 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    //email 중복 검사
+    public HashMap<String, Object> idCheck(String username) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("result", userRepository.existsByUsername(username));
+        return map;
+    }
+
+    //닉네임 중복 검사
+    public HashMap<String, Object> nicknameOverlap(String nickname) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("result", userRepository.existsByNickname(nickname));
+        return map;
+    }
 }

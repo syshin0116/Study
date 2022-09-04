@@ -17,6 +17,7 @@ public class User {
 
     private String username;
     private String password;
+    private String nickname;
     private Boolean enabled;
     private String email;
     private String license;
