@@ -29,7 +29,7 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    //email 중복 검사
+    //id 중복 검사
     public HashMap<String, Object> idCheck(String username) {
         HashMap<String, Object> map = new HashMap<>();
         map.put("result", userRepository.existsByUsername(username));

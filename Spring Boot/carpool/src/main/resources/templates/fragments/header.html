@@ -13,20 +13,38 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">홈</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/member/login-form">로그인</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/member/save-form">회원가입</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!">공지사항</a></li>
+
+                        <!-- 타임리프 로그인 세션 체크 하기, 세션이 없으면-->
+                        <th:block th:if="${session.loginInfo == null}">
+                            <li class="nav-item"><a class="nav-link" th:href="@{/member/login-form}">로그인</a></li>
+                            <li class="nav-item"><a class="nav-link" th:href="@{/member/save-form}">회원가입</a></li>
+                        </th:block>
 
 
-                        <li class="nav-item"><a class="nav-link" href="/member/">회원관리</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">메뉴2</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown"
-                               aria-expanded="false">게시판</a>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
-                                <li><a class="dropdown-item" href="blog-home.html">공지사항</a></li>
-                                <li><a class="dropdown-item" href="blog-post.html">Q&A</a></li>
-                            </ul>
-                        </li>
+                        <!-- 타임리프 로그인 세션 체크 하기, 세션이 있으면-->
+                        <th:block th:if="${session.loginInfo != null}">
+                            <!-- 타임리프 로그인 세션 체크, 관리자면-->
+                            <th:block th:if="${session.loginInfo.memberId == 'admin'}">
+                                <li class="nav-item"><a class="nav-link" th:href="@{/member/}">회원관리</a></li>
+                            </th:block>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdownMember" href="#" role="button" data-bs-toggle="dropdown"
+                                   aria-expanded="false" th:text="|${session.loginInfo.memberName} 님 환영합니다.|"></a>
+                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMember">
+                                        <li><a class="dropdown-item" th:href="@{/member/myPageForm}">마이페이지</a></li>
+                                        <li><a class="dropdown-item" th:href="@{/member/logout}">로그아웃</a></li>
+                                    </ul>
+    <!--                            <a class="nav-link dropdown-menu-dark"  th:text="|${session.loginInfo.memberName} 님 환영합니다.header|"></a>-->
+    <!--                               aria-expanded="false">게시판</a>-->
+    <!--                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">-->
+    <!--                                <li><a class="dropdown-item" href="blog-home.html">공지사항</a></li>-->
+    <!--                                <li><a class="dropdown-item" href="blog-post.html">Q&A</a></li>-->
+    <!--                            </ul>-->
+                            </li>
+
+                        </th:block>
+
                     </ul>
                 </div>
             </div>

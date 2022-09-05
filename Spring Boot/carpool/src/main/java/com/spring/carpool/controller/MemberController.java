@@ -41,15 +41,25 @@ public class MemberController {
         System.out.println("Controller/login================================"+memberDTO);
 
         if (loginResult != null){
-            session.setAttribute("loginIdx", loginResult.getMemberIdx());
-            session.setAttribute("loginId", loginResult.getMemberId());
-            session.setAttribute( "loginName", loginResult.getMemberName());
+            session.setAttribute("loginInfo", loginResult);
+
+//            session.setAttribute("loginIdx", loginResult.getMemberIdx());
+//            session.setAttribute("loginId", loginResult.getMemberId());
+//            session.setAttribute( "loginName", loginResult.getMemberName());
 //            session.setAttribute(name:"loginUserData", MemberService.selectLogin(MemberEntity));
             return "main";
         }else{
             return "memberPages/login";
         }
     }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        //모든 세션을 삭제
+        session.invalidate();
+        return "redirect:/main";
+    }
+
     @GetMapping("/")
     public String findAll(Model model){
         List<MemberDTO> memberDTOList = memberService.findAll();
@@ -62,7 +72,7 @@ public class MemberController {
     public String findByIdx(@PathVariable String memberId, Model model){
         MemberDTO memberDTO = memberService.findByMemberId(memberId);
         model.addAttribute("member", memberDTO);
-        return "memberPages/detail";
+        return "memberPages/mypage";
     }
     //ajax 상세조회
     @PostMapping("/ajax/{memberId}")
@@ -115,4 +125,17 @@ public class MemberController {
         String checkResult = memberService.idCheck(memberId);
         return checkResult;
     }
+
+    /*마이페이지 상세보기 이동*/
+    @GetMapping("/myPageForm")
+    public String myPageForm() {
+        return "memberPages/myPage";
+    }
+
+    /*마이페이지 수정페이지 이동*/
+    @GetMapping("/myPageUpdateForm")
+    public String myPageUpdateForm() {
+        return "memberPages/myPageUpdate";
+    }
+
 }

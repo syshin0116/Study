@@ -31,7 +31,7 @@
       <td th:text="${member.memberMobile}"></td>
       <td th:text="${member.memberPoints}"></td>
       <td>
-        <a th:href="@{|/templates/memberPages/${member.memberId}|}">조회</a>
+        <a th:href="@{|/templates/memberPages/update/${member.memberId}|}">조회</a>
       </td>
       <td><button th:onclick="detail([[${member.memberId}]])">조회(ajax)</button> </td>
       <td>

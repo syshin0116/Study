@@ -133,6 +133,7 @@
                         username: _value
                     },
                     success: function (result) {
+                        console.log(result)
                         if (result.result == false) {
                             IS_ID_CHK = true;
                             $("#usernameCheck")[0].innerHTML = "사용 가능한 아이디 입니다.";
