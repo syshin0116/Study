@@ -10,10 +10,10 @@ layout:decorate="~{layout/layout}"  란?
  <th:block layout:fragment="content">
 - 각 파일 마다, 위 코드 다음부터 작성한 내용들이 default_layout.html 의 content 부분에 위치함
 -->
-<html lang="ko" 
-        xmlns:th="http://www.thymeleaf.org"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{layout/layout}">
+<html lang="ko"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/layout}" xmlns:text-align="http://www.w3.org/1999/xhtml">
 	<head>
         <meta charset="UTF-8"/>
         <style>
@@ -34,119 +34,50 @@ layout:decorate="~{layout/layout}"  란?
 			    <div class="row">
 			        <div class="col-md-4">
 			            <img alt="" style="width:600px;" title="" 
-			            	class="img-circle img-thumbnail isTooltip" src="https://t1.daumcdn.net/tistoryfile/fs13/30_tistory_2008_12_23_18_01_4950a9072f77f?original" data-original-title="Usuario"> 
-			            <ul title="Ratings" class="list-inline ratings text-center">
-			                <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
-			                <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
-			                <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
-			                <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
-			                <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
-			            </ul>
+			            	class="img-circle img-thumbnail isTooltip" src="https://t1.daumcdn.net/tistoryfile/fs13/30_tistory_2008_12_23_18_01_4950a9072f77f?original" data-original-title="Usuario">
 			        </div>
-			        <div class="col-md-6">
+			        <div class="col-md-6" >
 			            <strong>Information</strong><br>
 			            <div class="table-responsive">
 			            <table class="table table-user-information">
 			                <tbody>
 			                    <tr>        
-			                        <td>
-			                            <strong>
-			                                <span class="glyphicon glyphicon-asterisk text-primary"></span>
-			                                Id                                                
-			                            </strong>
-			                        </td>
-			                        <td class="text-primary">
-			                            pika     
-			                        </td>
+			                        <th>Id</th>
+			                        <td class="text-primary">pika</td>
 			                    </tr>
 			                    <tr>    
-			                        <td>
-			                            <strong>
-			                                <span class="glyphicon glyphicon-user  text-primary"></span>    
-			                                Name                                                
-			                            </strong>
-			                        </td>
-			                        <td class="text-primary">
-			                            pikachu
-			                        </td>
+			                        <th>Name</th>
+			                        <td class="text-primary">pikachu</td>
 			                    </tr>
 			                    <tr>        
-			                        <td>
-			                            <strong>
-			                                <span class="glyphicon glyphicon-cloud text-primary"></span>  
-			                                Email                                                
-			                            </strong>
-			                        </td>
-			                        <td class="text-primary">
-			                            pikapika@naver.com 
-			                        </td>
-			                    </tr>
-			
-			                    <tr>        
-			                        <td>
-			                            <strong>
-			                                <span class="glyphicon glyphicon-bookmark text-primary"></span> 
-			                                Mobile                                              
-			                            </strong>
-			                        </td>
-			                        <td class="text-primary">
-			                            010-2222-2222 
-			                        </td>
-			                    </tr>
-			
-			
-			                    <tr>        
-			                        <td>
-			                            <strong>
-			                                <span class="glyphicon glyphicon-eye-open text-primary"></span> 
-			                                Birth                                                
-			                            </strong>
-			                        </td>
-			                        <td class="text-primary">
-			                            03/03/03
-			                        </td>
+			                        <th>Email</th>
+			                        <td class="text-primary">pikapika@naver.com</td>
 			                    </tr>
 			                    <tr>        
-			                        <td>
-			                            <strong>
-			                                <span class="glyphicon glyphicon-envelope text-primary"></span> 
-			                                License                                                
-			                            </strong>
-			                        </td>
-			                        <td class="text-primary">
-			                            111-11-11-111  
-			                        </td>
+			                        <th>Mobile</th>
+			                        <td class="text-primary">010-2222-2222</td>
 			                    </tr>
 			                    <tr>        
-			                        <td>
-			                            <strong>
-			                                <span class="glyphicon glyphicon-calendar text-primary"></span>
-			                                Like                                                
-			                            </strong>
-			                        </td>
-			                        <td class="text-primary">
-			                            5
-			                        </td>
+			                        <th>Birth</strong>
+			                        </th>
+			                        <td class="text-primary">03/03/03</td>
 			                    </tr>
 			                    <tr>        
-			                        <td>
-			                            <strong>
-			                                <span class="glyphicon glyphicon-calendar text-primary"></span>
-			                                Optional                                               
-			                            </strong>
-			                        </td>
-			                        <td class="text-primary">
-			                        Optional
-			                        </td>
-			                    </tr>                                    
+			                        <th>License</th>
+			                        <td class="text-primary">111-11-11-111</td>
+			                    </tr>
+			                    <tr>        
+			                        <th>Like</th>
+			                        <td class="text-primary">5</td>
+			                    </tr>
 			                </tbody>
 			            </table>
 			            </div>
 						<div class="row gutters">
 							<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 								<div class="text-right">
-									<button type="button" id="submit" name="submit" class="btn btn-secondary">Cancel</button>
-									<button type="button" id="submit" name="submit" class="btn btn-primary">수정하기</button>
+									<button type="button" id="cancel" name="cancel" class="btn btn-secondary">Cancel</button>
+									<button type="button" id="update" name="update" class="btn btn-primary">수정하기</button>
 								</div>
 							</div>
 						</div>
