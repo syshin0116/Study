@@ -23,9 +23,6 @@ public class MemberDTO {
     private Date memberBirthDate;
     private String memberMobile;
     private int memberPoints; // 포인트제도: db에 default=0으로 설정되있음
-//    private List<Car> carList; // 사용자의 동록된 차 list 가져오기 위함이지만 @Entity
-
-//    private List<Car> carList; // 사용자의 동록된 차 list 가져오기 위함이지만 @Entity 쓰면 에러남
 
     public MemberDTO(String memberId, String memberPassword, String memberName, String memberEmail, String memberLicense, Date memberBirthDate, String memberMobile, int memberPoints) {
         this.memberId = memberId;

@@ -14,9 +14,9 @@
       <th>id</th>
       <th>name</th>
       <th>email</th>
+      <th>mobile</th>
       <th>license</th>
       <th>birthDate</th>
-      <th>mobile</th>
       <th>points</th>
       <th>상세조회</th>
       <th>상세조회(ajax)</th>
@@ -26,10 +26,12 @@
       <td th:text="${member.memberId}"></td>
       <td th:text="${member.memberName}"></td>
       <td th:text="${member.memberEmail}"></td>
+      <td th:text="${member.memberMobile}"></td>
       <td th:text="${member.memberLicense}"></td>
       <td th:text="${member.memberBirthDate}"></td>
-      <td th:text="${member.memberMobile}"></td>
       <td th:text="${member.memberPoints}"></td>
+
+
       <td>
         <a th:href="@{|/templates/memberPages/update/${member.memberId}|}">조회</a>
       </td>
