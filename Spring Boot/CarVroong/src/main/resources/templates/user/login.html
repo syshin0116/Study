@@ -22,18 +22,20 @@
             </div>
             <div class="row gx-5 justify-content-center">
                 <div class="col-lg-6">
-                    <form class="form-signin" id="contactForm" action="/login" method="post">
+                    <form class="form-signin" id="contactForm" th:action="@{/user/login}" method="post">
+                        <div th:if="${param.logout}" class="alert alert-primary" role="alert">로그아웃되었습니다.</div>
+
                         <!-- 아이디 input-->
                         <div class="form-floating mb-3">
-                            <input class="form-control" id="username" name="username"   type="text" placeholder="아이디를 입력해주세요..."/>
+                            <input class="form-control" id="username" name="username" type="text" placeholder="아이디를 입력해주세요..."/>
                             <label for="username">아이디</label>
-                            <div class="invalid-feedback" id="usernameErrMsg"style="display:none;">아이디를 입력해주세요.</div>
+                            <div class="invalid-feedback" id="usernameErrMsg" style="display:none;">아이디를 입력해주세요.</div>
                         </div>
                         <!-- 비밀번호 input-->
                         <div class="form-floating mb-3">
                             <input class="form-control" id="password" name="password" type="password" placeholder="비밀번호를 입력해주세요..."/>
                             <label for="password">비밀번호</label>
-                            <div class="invalid-feedback" id="passwordErrMsg"style="display:none;">비밀번호를 입력해주세요.</div>
+                            <div class="invalid-feedback" id="passwordErrMsg" style="display:none;">비밀번호를 입력해주세요.</div>
                         </div>
                         <!-- 로그인  Button-->
                         <div class="d-grid"><button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">Login</button></div>

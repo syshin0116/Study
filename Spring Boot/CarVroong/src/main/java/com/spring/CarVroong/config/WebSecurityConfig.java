@@ -12,7 +12,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-
 import javax.sql.DataSource;
 
 @Configuration
@@ -27,15 +26,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "/user/register", "/api/**", "/css/**", "/js/**", "/assets/**").permitAll()
-                .anyRequest().authenticated()
-                .and()
+                    .antMatchers("/", "/user/register", "/api/**", "/css/**", "/js/**", "/assets/**").permitAll()
+                    .anyRequest().authenticated()
+                    .and()
                 .formLogin()
-                .loginPage("/user/login")
-                .permitAll()
-                .and()
+                    .loginPage("/user/login")
+                    .permitAll()
+                    .and()
                 .logout()
-                .permitAll();
+                    .permitAll();
+    }
+
+    @Bean
+    @Override
+    public UserDetailsService userDetailsService(){
+        UserDetails user =
+                User.withDefaultPasswordEncoder()
+                        .username("user")
+                        .password("password")
+                        .roles("USER")
+                        .build();
+        return new InMemoryUserDetailsManager(user);
     }
 
     @Autowired
@@ -57,6 +68,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-
 }
