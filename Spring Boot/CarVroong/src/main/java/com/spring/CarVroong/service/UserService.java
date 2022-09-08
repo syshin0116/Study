@@ -1,5 +1,6 @@
 package com.spring.CarVroong.service;
 
+import com.spring.CarVroong.model.Board;
 import com.spring.CarVroong.model.Role;
 import com.spring.CarVroong.model.User;
 import com.spring.CarVroong.repository.UserRepository;
@@ -35,6 +36,7 @@ public class UserService {
         map.put("result", userRepository.existsByUsername(username));
         return map;
     }
+
 
     //닉네임 중복 검사
     public HashMap<String, Object> nicknameOverlap(String nickname) {

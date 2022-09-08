@@ -19,7 +19,7 @@
             </div>
             <div class="row gx-5 justify-content-center">
                 <div class="col-lg-6">
-                    <form id="contactForm" th:action="@{/templates/user/register}" method="post"> <!-- data-sb-form-api-token="API_TOKEN" -->
+                    <form id="contactForm" th:action="@{/user/register}" method="post"> <!-- data-sb-form-api-token="API_TOKEN" -->
                         <p class="lead mb-0">필수 입력 정보</p>
                         <hr>
                         <!-- 아이디 input-->
@@ -50,7 +50,7 @@
                         </div>
                         <!-- 이름 input-->
                         <div class="form-floating mb-3">
-                            <input class="form-control" id="nickname" name="memberName" type="text"
+                            <input class="form-control" id="nickname" name="nickname" type="text"
                                    placeholder="닉네임을 입력하세요..."/>
                             <label for="nickname">닉네임</label>
                             <div class="invalid-feedback" id="nicknameErrMsg" style="display:none;">닉네임을 입력하세요.</div>
@@ -134,7 +134,7 @@
                     },
                     success: function (result) {
                         console.log(result)
-                        if (result.result == false) {
+                        if (result.result == "0") {
                             IS_ID_CHK = true;
                             $("#usernameCheck")[0].innerHTML = "사용 가능한 아이디 입니다.";
                             $("#usernameCheck")[0].style.color = "green";

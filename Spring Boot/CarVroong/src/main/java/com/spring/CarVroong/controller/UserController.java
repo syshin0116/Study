@@ -33,8 +33,11 @@ public class UserController {
 
     @PostMapping("idCheck")
     public @ResponseBody HashMap<String, Object> idCheck(@RequestParam String username){
-        HashMap<String, Object> checkResult = userService.idCheck(username);
-        System.out.println("UserController================"+checkResult);
-        return checkResult;
+        return userService.idCheck(username);
+//        return ResponseEntity.ok(userService.idCheck(username));
+//        HashMap<String, Boolean> checkResult = userService.idCheck(username);
+//        System.out.println("UserController================"+checkResult);
+//        return checkResult;
     }
+
 }

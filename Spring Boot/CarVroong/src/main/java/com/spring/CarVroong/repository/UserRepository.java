@@ -9,7 +9,7 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, Long>, QuerydslPredicateExecutor<User>, CustomizedUserRepository {
-    @EntityGraph(attributePaths = { "boards" })
+    @EntityGraph(attributePaths = {"boards"})
     List<User> findAll();
 
     User findByUsername(String username);
@@ -21,5 +21,6 @@ public interface UserRepository extends JpaRepository<User, Long>, QuerydslPredi
     List<User> findByUsernameNativeQuery(String username);
 
     boolean existsByUsername(String username);
+
     boolean existsByNickname(String nickname);
 }

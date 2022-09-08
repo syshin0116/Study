@@ -11,18 +11,20 @@
 <th:block layout:fragment="script"></th:block>
 <th:block layout:fragment="content">
     <!-- Contact section-->
-    <section class="bg-light py-5">
+    <section class="bg-light py-5 text-center">
         <div class="container px-5 my-5 px-5">
             <div class="text-center mb-5">
             <!--
                 <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-envelope"></i>
                 </div>
             -->
-                <h2 class="fw-bolder">로그인</h2>
             </div>
             <div class="row gx-5 justify-content-center">
                 <div class="col-lg-6">
                     <form class="form-signin" id="contactForm" th:action="@{/user/login}" method="post">
+                        <a th:href="@{/}"><img class="mb-4" src="/assets/CarVroong_logo.png" alt="" width="140" height="140"></a>
+                        <h1 class="fw-bolder">로그인</h1>
+                        <div th:if="${param.error}" class="alert alert-danger" role="alert">Invalid username and password.</div>
                         <div th:if="${param.logout}" class="alert alert-primary" role="alert">로그아웃되었습니다.</div>
 
                         <!-- 아이디 input-->

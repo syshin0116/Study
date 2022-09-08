@@ -38,3 +38,18 @@ public class User {
     @JsonIgnore
     private List<Board> boards = new ArrayList<>();
 }
+
+/*
+@OneToOne
+ex) user - userdetail
+
+@OneToMany
+ex) user-board
+
+@ManyToOne
+ex) board-user
+
+@ManyToMany
+ex) user-role
+
+*/

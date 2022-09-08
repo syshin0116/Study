@@ -18,6 +18,8 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    // Authentication 로그인
+    // Authorization 권한
     @Autowired
     private DataSource dataSource;
 
@@ -55,7 +57,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.jdbcAuthentication()
                 .dataSource(dataSource)
                 .passwordEncoder(passwordEncoder())
-                .usersByUsernameQuery("select username, password, enabled "
+                .usersByUsernameQuery("select username, password, enabled, nickname, tel, email, license, birth, points"
                         + "from user "
                         + "where username = ?")
                 .authoritiesByUsernameQuery("select u.username, r.name "
