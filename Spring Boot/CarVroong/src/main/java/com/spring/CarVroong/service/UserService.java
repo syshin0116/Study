@@ -1,15 +1,14 @@
 package com.spring.CarVroong.service;
 
-import com.spring.CarVroong.model.Board;
 import com.spring.CarVroong.model.Role;
 import com.spring.CarVroong.model.User;
 import com.spring.CarVroong.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
-import java.util.Optional;
 
 @Service
 public class UserService {
@@ -31,10 +30,15 @@ public class UserService {
     }
 
     //id 중복 검사
-    public HashMap<String, Object> idCheck(String username) {
-        HashMap<String, Object> map = new HashMap<>();
-        map.put("result", userRepository.existsByUsername(username));
-        return map;
+    public String idCheck(String username) {
+//        HashMap<String, Object> map = new HashMap<>();
+//        map.put("result", userRepository.existsByUsername(username));
+//        return map;
+        if (userRepository.existsByUsername(username)){
+            return "ok";
+        }else{
+            return "no";
+        }
     }
 
 

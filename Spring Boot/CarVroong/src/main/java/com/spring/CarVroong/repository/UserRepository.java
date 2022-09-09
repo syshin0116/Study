@@ -21,6 +21,6 @@ public interface UserRepository extends JpaRepository<User, Long>, QuerydslPredi
     List<User> findByUsernameNativeQuery(String username);
 
     boolean existsByUsername(String username);
-
     boolean existsByNickname(String nickname);
+    boolean existsByEmail(String email);
 }

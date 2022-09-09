@@ -30,6 +30,7 @@
                             <div class="invalid-feedback" id="usernameErrMsg" style="display:none;">아이디를 입력하세요.</div>
                             <div class="valid-feedback" id="usernameCheck" style="display:none;"></div>
                         </div>
+
                         <!-- 비밀번호 input-->
                         <div class="form-floating mb-3">
                             <input class="form-control" id="password" name="password" type="password"
@@ -37,6 +38,7 @@
                             <label for="password">비밀번호</label>
                             <div class="invalid-feedback" id="passwordErrMsg" style="display:none;">비밀번호를 입력하세요.</div>
                         </div>
+
                         <!-- 비밀번호 확인 input-->
                         <div class="form-floating mb-3">
                             <input class="form-control" id="passwordConfirm" name="passwordConfirm" type="password"
@@ -127,14 +129,13 @@
             } else {
                 $.ajax({
                     type: "post",
-                    url: "/user/idCheck",
+                    url: "/member/idCheck",
                     dataType: "text",
                     data: {
-                        username: _value
+                        memberId: _value
                     },
                     success: function (result) {
-                        console.log(result)
-                        if (result.result == "0") {
+                        if (result == "ok") {
                             IS_ID_CHK = true;
                             $("#usernameCheck")[0].innerHTML = "사용 가능한 아이디 입니다.";
                             $("#usernameCheck")[0].style.color = "green";

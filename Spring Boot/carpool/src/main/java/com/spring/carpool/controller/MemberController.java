@@ -46,7 +46,7 @@ public class MemberController {
 
         //로그인 성공시 메인화면, 실패시 다시 로그인 페이지로
         if (loginResult != null){
-            session.setAttribute("loginInfo", loginResult); //세션에 로그인한 memberDTO 저장
+            session.setAttribute("loginInfo", loginResult); // 세션에 로그인한 memberDTO 저장
             return "main";
         }else{
             return "memberPages/login";
@@ -57,7 +57,7 @@ public class MemberController {
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.invalidate(); //모든 세션을 삭제
-        return "redirect:/main";
+        return "main";
     }
 
     /*회원 관리(목록) 페이지*/
@@ -126,7 +126,7 @@ public class MemberController {
     }
 
     /*아이디 중복체크*/
-    @PostMapping("idCheck")
+    @PostMapping("/idCheck")
     public @ResponseBody String idCheck(@RequestParam String memberId){
         String checkResult = memberService.idCheck(memberId);
         return checkResult;

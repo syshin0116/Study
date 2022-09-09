@@ -3,6 +3,7 @@ package com.spring.CarVroong.controller;
 import com.spring.CarVroong.model.User;
 import com.spring.CarVroong.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,13 +32,7 @@ public class UserController {
         return "redirect:/";
     }
 
-    @PostMapping("idCheck")
-    public @ResponseBody HashMap<String, Object> idCheck(@RequestParam String username){
-        return userService.idCheck(username);
-//        return ResponseEntity.ok(userService.idCheck(username));
-//        HashMap<String, Boolean> checkResult = userService.idCheck(username);
-//        System.out.println("UserController================"+checkResult);
-//        return checkResult;
-    }
+    // 아이디 중복 체크
+
 
 }
