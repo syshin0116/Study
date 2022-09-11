@@ -96,4 +96,51 @@ public class MemberService {
             return "no";
         }
     }
+
+    /*아이디 찾기 > 메일주소, 이름으로 찾는다. */
+    public MemberDTO findByMemberEmailAndMemberName(MemberDTO memberDTO) {
+
+        String memberEmail = memberDTO.getMemberEmail();
+        String memberName = memberDTO.getMemberName();
+
+        Optional<MemberEntity> optionalMemberEntity = memberRepository.findByMemberEmailAndMemberName(memberEmail, memberName);
+
+        if (optionalMemberEntity.isPresent()) {
+
+            //	 return MemberDTO.toMemberDTO(optionalMemberEntity.get());
+
+            MemberEntity memberEntity = optionalMemberEntity.get();
+
+            MemberDTO resultDTO = MemberDTO.toMemberDTO(memberEntity);
+
+            return resultDTO;
+
+        } else {
+            return null;
+        }
+    }
+
+    /*비밀번호 찾기 >아이디, 이름으로 찾는다. */
+    public MemberDTO findByMemberIdAndMemberName(MemberDTO memberDTO) {
+
+        String memberName = memberDTO.getMemberName();
+        String memberId = memberDTO.getMemberId();
+
+
+        Optional<MemberEntity> optionalMemberEntity = memberRepository.findByMemberIdAndMemberName(memberId, memberName);
+
+        if (optionalMemberEntity.isPresent()) {
+
+            //	 return MemberDTO.toMemberDTO(optionalMemberEntity.get());
+
+            MemberEntity memberEntity = optionalMemberEntity.get();
+
+            MemberDTO resultDTO = MemberDTO.toMemberDTO(memberEntity);
+
+            return resultDTO;
+
+        } else {
+            return null;
+        }
+    }
 }

@@ -21,7 +21,7 @@ public class MemberController {
     /*회원가입 페이지 요청*/
     @GetMapping("/save-form")
     public String saveForm(){
-        return "memberPages/signup";
+        return "member/signup";
     }
 
     /*저장(회원가입)*/
@@ -29,43 +29,17 @@ public class MemberController {
     public String save(@ModelAttribute MemberDTO memberDTO){
         System.out.println("Controller/save================================"+memberDTO);
         memberService.save(memberDTO);
-        return "memberPages/login";
+        return "login/login";
     }
 
-    /*로그인 페이지 요청*/
-    @GetMapping("/login-form")
-    public String loginForm(){
-        return "memberPages/login";
-    }
-
-    /*로그인*/
-    @PostMapping("/login")
-    public String login(@ModelAttribute MemberDTO memberDTO, HttpSession session){
-        MemberDTO loginResult = memberService.login(memberDTO);
-        System.out.println("Controller/login================================"+loginResult);
-
-        //로그인 성공시 메인화면, 실패시 다시 로그인 페이지로
-        if (loginResult != null){
-            session.setAttribute("loginInfo", loginResult); // 세션에 로그인한 memberDTO 저장
-            return "main";
-        }else{
-            return "memberPages/login";
-        }
-    }
-
-    /*로그아웃 기능*/
-    @GetMapping("/logout")
-    public String logout(HttpSession session) {
-        session.invalidate(); //모든 세션을 삭제
-        return "main";
-    }
+   
 
     /*회원 관리(목록) 페이지*/
     @GetMapping("/")
     public String findAll(Model model){
         List<MemberDTO> memberDTOList = memberService.findAll();
         model.addAttribute("memberList", memberDTOList);
-        return "memberPages/list";
+        return "member/list";
     }
 
     /*상세조회*/
@@ -74,7 +48,7 @@ public class MemberController {
     public String findByIdx(@PathVariable String memberId, Model model){
         MemberDTO memberDTO = memberService.findByMemberId(memberId);
         model.addAttribute("member", memberDTO);
-        return "memberPages/detail";
+        return "member/detail";
     }
 
     /*ajax 상세조회*/
@@ -89,7 +63,7 @@ public class MemberController {
     public String delete(@PathVariable String memberId){
         memberService.delete(memberId);
         return "redirect:/member/";
-        //return "memberPages/memberList";
+        //return "member/memberList";
     }
     /**
      * /member/3 : 조회(get), 저장(post), 수정(put), 삭제(delete)
@@ -108,7 +82,7 @@ public class MemberController {
         Long memberIdx = (Long)session.getAttribute("loginIdx");
         MemberDTO memberDTO = memberService.findById(memberIdx);
         model.addAttribute("updateMember", memberDTO);
-        return "memberPages/update";
+        return "member/update";
     }
 
     /*수정처리 요청*/
@@ -138,13 +112,13 @@ public class MemberController {
         MemberDTO memberDTO = (MemberDTO) session.getAttribute("loginInfo");
         model.addAttribute("member", memberDTO);
         System.out.println("==================="+memberDTO);
-        return "memberPages/myPage";
+        return "member/myPage";
     }
 
     /*마이페이지 수정페이지*/
     @GetMapping("/myPageUpdateForm")
     public String myPageUpdateForm() {
-        return "memberPages/myPageUpdate";
+        return "member/myPageUpdate";
     }
 
 }

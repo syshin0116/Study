@@ -21,8 +21,8 @@
             </div>
             <div class="row gx-5 justify-content-center">
                 <div class="col-lg-6">
-                    <form class="form-signin" id="contactForm" th:action="@{/memberPages/login}" method="post">
-                        <a th:href="@{/}"><img class="mb-4" src="/assets/CarVroong_logo.png" alt="" width="140" height="140"></a>
+                    <form class="form-signin" id="contactForm" th:action="@{/templates/member/login}" method="post">
+                        <a th:href="@{/static}"><img class="mb-4" src="/assets/CarVroong_logo.png" alt="" width="140" height="140"></a>
                         <h1 class="fw-bolder">로그인</h1>
                         <div th:if="${param.error}" class="alert alert-danger" role="alert">Invalid username and password.</div>
                         <div th:if="${param.logout}" class="alert alert-primary" role="alert">로그아웃되었습니다.</div>

@@ -33,11 +33,11 @@
 
 
       <td>
-        <a th:href="@{|/templates/memberPages/update/${member.memberId}|}">조회</a>
+        <a th:href="@{|/templates/member/update/${member.memberId}|}">조회</a>
       </td>
       <td><button th:onclick="detail([[${member.memberId}]])">조회(ajax)</button> </td>
       <td>
-        <a th:href="@{|/templates/memberPages/delete/${member.memberId}|}">삭제</a>
+        <a th:href="@{|/templates/member/delete/${member.memberId}|}">삭제</a>
       </td>
       <!--   삭제 요청을 ajax로. type을 post가 아닌 delete로 하고
          controller에서 @DeleteMapping을 사용함.(삭제하는 코드를 동일함)-->
