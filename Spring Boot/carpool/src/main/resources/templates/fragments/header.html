@@ -17,7 +17,7 @@
 
                         <!-- 타임리프 로그인 세션 체크 하기, 세션이 없으면-->
                         <th:block th:if="${session.loginInfo == null}">
-                            <li class="nav-item"><a class="nav-link" th:href="@{/member/login-form}">로그인</a></li>
+                            <li class="nav-item"><a class="nav-link" th:href="@{/login/loginForm}">로그인</a></li>
                             <li class="nav-item"><a class="nav-link" th:href="@{/member/save-form}">회원가입</a></li>
                         </th:block>
 

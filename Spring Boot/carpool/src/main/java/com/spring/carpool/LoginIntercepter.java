@@ -21,7 +21,7 @@ public class LoginIntercepter implements HandlerInterceptor {
         //로그인 세션정보를 인터셉터에서 체크한다. 없으면 로그인 페이지로 이동, 접근 통제는 WebConfig.java에서함
         if(ObjectUtils.isEmpty(loginInfo)){
             //로그인정보가 없으면 로그인 페이지로 강제이동
-            response.sendRedirect("/memberPages/loginForm"); //이건 컨트롤러 리퀘스트 맵핑주소
+            response.sendRedirect("/login/loginForm"); //이건 컨트롤러 리퀘스트 맵핑주소
         }
 
         return true;

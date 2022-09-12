@@ -25,7 +25,7 @@ public class LoginController {
     /*로그인 페이지 요청*/
     @GetMapping("/loginForm")
     public String loginForm() {
-        return "login/login";
+        return "login/login-form";
     }
 
     /*로그인*/
@@ -39,7 +39,7 @@ public class LoginController {
             session.setAttribute("loginInfo", loginResult); // 세션에 로그인한 memberDTO 저장
             return "main";
         }else{
-            return "login/login";
+            return "login/login-form";
         }
     }
 
@@ -53,7 +53,7 @@ public class LoginController {
     /*아이디 찾기 페이지 이동*/
     @GetMapping("/findIdForm")
     public String findIdForm() {
-        return "login/findId";
+        return "login/findId-form";
     }
 
     /*아이디 찾기 조회*/
@@ -77,13 +77,13 @@ public class LoginController {
     }
 
     /*비밀번호 찾기 페이지 이동*/
-    @GetMapping("/findPw")
+    @GetMapping("/findPassword")
     public String findPwForm() {
-        return "login/findPw";
+        return "login/findPassword-form";
     }
 
     /*비밀번호 찾기 조회*/
-    @PostMapping("/findPw")
+    @PostMapping("/findPassword")
     @ResponseBody
     public String findPw(MemberDTO memberDTO, HttpSession session) {
 
@@ -97,7 +97,7 @@ public class LoginController {
 
             //랜덤 비밀번호 생성
 
-            String tempPw = getRamdomPassword(8);
+            String tempPw = getRandomPassword(8);
 
 //            log.info("임시비밀번호 값 tempPw : "+tempPw);
 
@@ -119,7 +119,7 @@ public class LoginController {
     }
 
     /*임시비밀번호 발급 로직*/
-    public String getRamdomPassword(int size) {
+    public String getRandomPassword(int size) {
 
         char[] charSet = new char[] {
                 '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',

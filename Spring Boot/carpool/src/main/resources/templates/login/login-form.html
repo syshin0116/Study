@@ -21,7 +21,7 @@
             </div>
             <div class="row gx-5 justify-content-center">
                 <div class="col-lg-6">
-                    <form class="form-signin" id="contactForm" th:action="@{/templates/member/login}" method="post">
+                    <form class="form-signin" id="contactForm" th:action="@{/login/login}" method="post">
                         <a th:href="@{/static}"><img class="mb-4" src="/assets/CarVroong_logo.png" alt="" width="140" height="140"></a>
                         <h1 class="fw-bolder">로그인</h1>
                         <div th:if="${param.error}" class="alert alert-danger" role="alert">Invalid username and password.</div>
@@ -41,6 +41,17 @@
                         </div>
                         <!-- 로그인  Button-->
                         <div class="d-grid"><button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">Login</button></div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <br>
+                                <p class=h8>Need help signing in?</p>
+                                <a th:href="@{/login/findIdForm}" class="btn btn-primary btn-block" role="button">아이디 찾기</a>
+                                <a th:href="@{/login/findPasswordForm}" class="btn btn-primary btn-block" role="button">비밀번호 찾기</a>
+                            </div>
+                        </div>
+                        <br/>
+                        <br/>
+                        <p class=h7>아직 회원이 아니신가요?&nbsp;&nbsp;<a  th:href="@{/member/joinForm}">회원가입</a></p>
                     </form>
                 </div>
             </div>

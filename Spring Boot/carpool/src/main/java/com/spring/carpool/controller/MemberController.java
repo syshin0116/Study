@@ -29,7 +29,7 @@ public class MemberController {
     public String save(@ModelAttribute MemberDTO memberDTO){
         System.out.println("Controller/save================================"+memberDTO);
         memberService.save(memberDTO);
-        return "login/login";
+        return "login-form";
     }
 
    
