@@ -1,0 +1,48 @@
+아조씨 의견:
+build a project that is instantly recognizable
+	- build projects with tools&languages companies use
+	- recommends: mvc, spring framework
+
+5 things project must contain:
+1. follow an architectural design pattern
+	- organized, maintable, consistent
+	- most popular: mvc model > companies are likely to use 
+2. professional ui
+	- has to tempt visual buyers
+	- compatible on both pc & mobile
+	- recommends: use bootstrap. dont start from scrap
+
+3. database
+	- without: not robust enough
+
+4. authentication and athorization
+	- activate loggin in, giving permission
+	- companies actually utilize&implement third party services > 
+5. solve business problems
+
+project should be built with a design pattern like mvc, include professional ui, a database, handle security and solve a complex business problem
+
+bug tracker(issue tracker)
+	- every dev manager has a bugtracker > makes ur project familiar > gives u a common ground to discuss  with the interviwer > u can control ur interview
+	- depending on where ur interviewing, u can change the name of ur project
+	- build a srs(software requirement specification) (요구사항정의서)
+	- use the bugtracker that ur building to track ur progress in the project > at the interview: show ur srs, weekly sprints, project, and show how u went through ur construction phase
+
+
+추가 의견: 
+project must be published using AWS EC2 or whatever cloud system
+
+데모아이디: 데모시 회원가입을 시키거나 아이디를 일일히 지급하기 보다 각 admin, project manager, developer, submitter 권한 아이디를 지정해놓고 클릭만드로 편하게 로그인하여 살표볼 수 있게 하는 기능
+
+버그 트래커 장점:
+1. 기본에 충실: MVC 모델, CRUD, 데이터베이스, 유저 인증 및 권한 부여
+2. 비즈니스 문제 해결
+3. 채용자 입장에서 익숙한 주제(비슷한 프로그램을 사용해보거나 사용중):
+	- 주제 이해가 빠름
+	- 궁금한 점이 많을 확률이 높음
+		=> 면접 질문이 프로젝트에 집중되는 효과 기대
+4. 프로젝트를 진행하며 직접 사용 가능
+	- 사이트 데모가 프로젝트 기획, 협업, 수정 과정이 됨
+5. 확정성이 뛰어남
+	- 상황에 따라 간단화 할수 있음
+	- 추후에 추가할 기능이나 발전시킬 방법이 많음
