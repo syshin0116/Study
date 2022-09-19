@@ -5,7 +5,7 @@
 {\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{hyphen\}}{\leveltext\leveltemplateid1\'01\uc0\u8259 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
 {\list\listtemplateid2\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{hyphen\}}{\leveltext\leveltemplateid101\'01\uc0\u8259 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{hyphen\}}{\leveltext\leveltemplateid102\'01\uc0\u8259 ;}{\levelnumbers;}\fi-360\li1440\lin1440 }{\listname ;}\listid2}}
 {\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}}
-\paperw11900\paperh16840\margl1440\margr1440\vieww16540\viewh12560\viewkind0
+\paperw11900\paperh16840\margl1440\margr1440\vieww17080\viewh18840\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
 \f0\fs24 \cf0 Deep-Learning Computer-Vision Guide\
@@ -532,5 +532,13 @@ http://localhost:8888/lab/tree/DeepLearning/%5BInflearn%5DComputer_vision/source
 ### NMS (Non Max Supression)\
 - Object Detection \'be\'cb\'b0\'ed\'b8\'ae\'c1\'f2\'c0\'ba Object\'b0\'a1 \'c0\'d6\'c0\'bb \'b8\'b8\'c7\'d1 \'c0\'a7\'c4\'a1\'bf\'a1 \'b8\'b9\'c0\'ba Detection\'c0\'bb \'bc\'f6\'c7\'e0\'c7\'cf\'b4\'c2 \'b0\'e6\'c7\'e2\'c0\'cc \'b0\'ad\'c7\'d4.\
 - NMS\'b4\'c2 Detected\'b5\'c8 Object\'c0\'c7 Bounding box\'c1\'df\'bf\'a1 \'ba\'f1\'bd\'c1\'c7\'d1 \'c0\'a7\'c4\'a1\'bf\'a1 \'c0\'d6\'b4\'c2 box\'b8\'a6 \'c1\'a6\'b0\'c5\'c7\'cf\'b0\'ed \'b0\'a1\'c0\'e5 \'c0\'fb\'c7\'d5\'c7\'d1 box\'b8\'a6 \'bc\'b1\'c5\'c3\'c7\'cf\'b4\'c2 \'b1\'e2\'b9\'fd\
+\
+### NMS \'bc\'f6\'c7\'e0 \'b7\'ce\'c1\'f7\
+1. Detected \'b5\'c8 bounding box\'ba\'b0\'b7\'ce \'c6\'af\'c1\'a4 Confidence threshold \'c0\'cc\'c7\'cf bounding box\'b4\'c2 \'b8\'d5\'c0\'fa \'c1\'a6\'b0\'c5(confidence score <0.5)\
+2. \'b0\'a1\'c0\'e5 \'b3\'f4\'c0\'ba confidence score\'b8\'a6 \'b0\'a1\'c1\'f8 box \'bc\'f8\'c0\'b8\'b7\'ce \'b3\'bb\'b8\'b2\'c2\'f7\'bc\'f8 \'c1\'a4\'b7\'c4\'c7\'cf\'b0\'ed \'be\'c6\'b7\'a1 \'b7\'ce\'c1\'f7\'c0\'bb \'b8\'f0\'b5\'e7 box\'bf\'a1 \'bc\'f8\'c2\'f7\'c0\'fb\'c0\'b8\'b7\'ce \'c0\'fb\'bf\'eb\
+	- \'b3\'f4\'c0\'ba confidence score\'b8\'a6 \'b0\'a1\'c1\'f8 box \'bf\'cd \'b0\'e3\'c4\'a1\'b4\'c2 \'b4\'d9\'b8\'a5 box\'b8\'a6 \'b8\'f0\'b5\'ce \'c1\'b6\'bb\'e7\'c7\'cf\'bf\'a9 IOU\'b0\'a1 \'c6\'af\'c1\'a4 threshold \'c0\'cc\'bb\'f3\'c0\'ce box\'b8\'a6 \'b8\'f0\'b5\'ce \'c1\'a6\'b0\'c5(\'bf\'b9: IOU Threshold >0.4)\
+3. \'b3\'b2\'be\'c6 \'c0\'d6\'b4\'c2 box\'b8\'b8 \'bc\'b1\'c5\'c3\
+\
+Confidence score\'c0\'cc \'b3\'f4\'c0\'bb\'bc\'f6\'b7\'cf, IOU Threshold\'b0\'a1 \'b3\'b7\'c0\'bb \'bc\'f6\'b7\'cf \'b8\'b9\'c0\'ba Box\'b0\'a1 \'c1\'a6\'b0\'c5\'b5\'ca\
 \
 }
