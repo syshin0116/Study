@@ -1,0 +1,7 @@
+def solution(s):
+    list_a = s.split(' ')
+    list_a = list(map(int, list_a))
+    
+    answer = str(min(list_a)) + " " + str(max(list_a))
+                                         
+    return answer
