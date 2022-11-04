@@ -1,0 +1,26 @@
+# do not track .tar files
+*.tar
+
+**/Detect_25epoch(웨이트 및 로그)/
+
+**/Detect_50epoch(웨이트 및 로그)/
+
+**/Segmentation_85epoch(웨이트 및 로그)/
+
+*.h5
+
+*.npy
+
+*.pkl
+
+data/
+
+*.geojson
+
+*.csv
+
+seoul_pop_visualization.ipynb
+
+seoul_pop_visualization-checkpoint.ipynb
+
+서울시 지도 시각화.ipynb
