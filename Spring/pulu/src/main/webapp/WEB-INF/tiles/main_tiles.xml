@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+       
+<tiles-definitions>
+
+	<definition name="layout" template="/WEB-INF/tiles/layout/layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/tiles/tile/header.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/tiles/tile/mainbody.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/tiles/tile/footer.jsp"/>
+	</definition>
+	
+	<definition name="main_tiles" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/views/main/mainbody.jsp"/>
+	</definition>
+	<definition name="join" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/views/member/join.jsp"/>
+	</definition>
+	<definition name="goodslist" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/views/goods/goodsList.jsp"/>
+	</definition>
+	
+	
+	<!-- 선민: 왜 main_tiles에 넣는지 모름.. 그냥 넣음 -->
+	<definition name="joinOK" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/views/member/joinOK.jsp"/>
+	</definition>
+	<definition name="loginForm" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/views/member/loginForm.jsp"/>
+	</definition>
+	<definition name="myPage" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/views/member/myPage.jsp"/>
+	</definition>
+	<definition name="findIdForm" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/views/member/findIdForm.jsp"/>
+	</definition>
+	<definition name="findIdForm2" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/views/member/findIdForm2.jsp"/>
+	</definition>
+	
+	<definition name="findPwForm" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/views/member/findPwForm.jsp"/>
+	</definition>
+	<definition name="findPwForm2" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/views/member/findPwForm2.jsp"/>
+	</definition>
+	<definition name="deleteForm" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/views/member/deleteForm.jsp"/>
+	</definition>
+	
+</tiles-definitions>

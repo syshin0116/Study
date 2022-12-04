@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<tiles-definitions>
+
+	<definition name="layout" template="/WEB-INF/tiles/Layout/layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/tiles/tile/header.jsp"/>
+		<put-attribute name="body" value="/WEB-INF/tiles/tile/body.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/tiles/tile/footer.jsp"/>
+	</definition>
+	
+	<definition name="join" extends="layout">
+		<put-attribute name="body" value="/WEB-INF/views/member/join.jsp"/>
+	</definition>
+	
+</tiles-definitions>
