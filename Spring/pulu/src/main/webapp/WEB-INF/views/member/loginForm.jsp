@@ -22,8 +22,6 @@
 			uid.focus();
 			return false; 
 		}
-		
-		
 	}
 </script>
  
