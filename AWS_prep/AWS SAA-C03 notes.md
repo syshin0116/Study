@@ -73,5 +73,13 @@ Each availability zones(ZA):
 <img width="431" alt="image" src="https://user-images.githubusercontent.com/99532836/206183704-42b5d5c5-8afd-4a18-9e93-261f8b9d4c78.png">
 
 Organizing Users:
-* best not to use Root id
+* best not to use Root id (security reasons)
 * instead, create a group called admin with all permissions and create a user in it
+
+Account Alias: an account nickname user can create
+
+* once created, sign-in url is created below
+
+<img width="355" alt="image" src="https://user-images.githubusercontent.com/99532836/206187759-94cdaac2-4ab6-45b9-a9c0-793541006ea0.png">
+
+<img width="976" alt="image" src="https://user-images.githubusercontent.com/99532836/206188142-2a239fb9-266b-4fa3-ae4d-a8d921fdb994.png">
