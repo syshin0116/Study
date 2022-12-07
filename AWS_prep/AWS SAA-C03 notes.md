@@ -69,6 +69,9 @@ Each availability zones(ZA):
 <img width="722" alt="image" src="https://user-images.githubusercontent.com/99532836/206182859-b503470c-8d5b-4b25-ae36-36702cedfab7.png">
 
 ### IAM: Permissions
-* Users or Groups can be assigned JSON documnets called policies
+* Users or Groups can be assigned JSON documents called policies(defines permissions of users)
 <img width="431" alt="image" src="https://user-images.githubusercontent.com/99532836/206183704-42b5d5c5-8afd-4a18-9e93-261f8b9d4c78.png">
-* 
+
+Organizing Users:
+* best not to use Root id
+* instead, create a group called admin with all permissions and create a user in it
