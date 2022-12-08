@@ -5,7 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6b01286b-573d-4868-a92d-eff23554e92b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../AWS_prep/AWS SAA-C03 notes.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../AWS_prep/AWS SAA-C03 notes.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Dacon/월간 데이콘 발화자의 감정인식 AI 경진대회/turtle.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/../../Dacon/월간 데이콘 발화자의 감정인식 AI 경진대회/turtle.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +96,7 @@
       <workItem from="1670165837744" duration="23000" />
       <workItem from="1670165885109" duration="3388000" />
       <workItem from="1670307463387" duration="699000" />
-      <workItem from="1670340381644" duration="1297000" />
+      <workItem from="1670340381644" duration="1951000" />
     </task>
     <servers />
   </component>
