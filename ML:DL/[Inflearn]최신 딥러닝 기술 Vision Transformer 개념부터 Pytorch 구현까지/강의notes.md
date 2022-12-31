@@ -35,4 +35,14 @@ CVPR, ECCV, ICCV, BMVC 등 학회 논문을 보는것이 가장 빠르다
 
 #### 1.4 테슬라의 비전 모델-HydraNet
 - 2021년 8월 AI Day에서 공개
-- 
+- Full Self-Driving에 사용됨
+- 카메라 8대에서 데이터를 받음
+
+자율주행차에서 눈 역할을 하는 3가지 장비
+1. Camera
+2. Radar
+3. LIDAR
+
+중 테슬라는 카메라만 사용
+
+<img width="80%" alt="image" src="https://user-images.githubusercontent.com/99532836/210026343-bdc026ce-389d-4874-a38e-0d782d230c83.png" style="display:block; margin-left:auto; margin-right: auto;">
