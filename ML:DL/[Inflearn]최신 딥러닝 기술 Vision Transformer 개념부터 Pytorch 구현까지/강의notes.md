@@ -1,3 +1,9 @@
+---
+layout: post
+title: "[Pytorch]Vision Transformer notes"
+date: 2022-12-30 09:50:23 +0900
+category: Deep-Learning
+---
 # [Inflearn]최신 딥러닝 기술 Vision Transformer 개념부터 Pytorch 구현까지
 
 
@@ -46,3 +52,26 @@ CVPR, ECCV, ICCV, BMVC 등 학회 논문을 보는것이 가장 빠르다
 중 테슬라는 카메라만 사용
 
 <img width="80%" alt="image" src="https://user-images.githubusercontent.com/99532836/210026343-bdc026ce-389d-4874-a38e-0d782d230c83.png" style="display:block; margin-left:auto; margin-right: auto;">
+
+장점
+1. 하나의 백보드를 사용하기 떄문에 효율적
+2. Head마다 떼서 Tuning이 가능함
+3. 멀티스킬 피쳐부분에서 별도 저장이 가능
+
+왜 이미지 처리에 Transformer을 사용하였는가?
+동일한 물체를 찍더라도 카메라 위치에 따라 다르게 보임
+->이미지 스페이스에서 위치를 나타내는 포지셔널 임베디드 메트릭스를 사용
+
+- CNNs + Transformer
+
+### 합성곱 신경망(CNN)
+
+#### 2.1 합성곱 신경망
+- AlexNet(2012)
+- VGGNet(2014)
+- ResNet(2015)
+- DenseNet(2016)
+- NasNet(2018)
+- EfficientNet(2020)
+
+
