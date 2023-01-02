@@ -110,6 +110,16 @@ lstm
 -> 하지만 단어들의 관계가 순차적이지 않기 때문에 한계가 있음
 -> 초반 스텝에서 번역이 잘못되면 다음 번역에도 영향을 미친다는것이 단점
 
-따라서 attention 기법이 주목을 받음
+따라서 CNN, RNN등을 사용하지 않는 attention 기법이 주목을 받음
 
 <img width="80%" alt="image" src="https://user-images.githubusercontent.com/99532836/210197245-3f854802-2116-49cf-8d7e-0b422285e65c.png" style="display:block; margin-left:auto; margin-right: auto;">
+
+Input을 처리하는 Encoder와 Output을 처리하는 Decoder로 구성됨
+
+ex) "I am a student" 의 문장이들어간다면
+LSTM의 경우에는 각 단어를 Sequence로 나뉘어 개별로 들어가겠지만 Transformer의 경우 각 벡터들의 모음이 통째로 한꺼번에 매트릭스 형태로 들어감
+
+Input Embedding을 통해 적절한 크기로 바꾸어줌
+
+단어 수 만큼의 벡터들에서 -> 정해진 크기인 값들로 변환된 값 + Positional Encoding을 통해 위치값(가중치도 가능)
+
