@@ -74,4 +74,31 @@ CVPR, ECCV, ICCV, BMVC 등 학회 논문을 보는것이 가장 빠르다
 - NasNet(2018)
 - EfficientNet(2020)
 
+EfficientNet: Rethinking Model Scaling for Convolutionla Neural Networks
+
+<img width="80%" alt="image" src="https://user-images.githubusercontent.com/99532836/210166435-3ef32ad7-be57-4a29-9fdf-88e1202ba853.png" style="display:block; margin-left:auto; margin-right: auto;">
+
+CNN을 배제하려는 이유
+한번 연산시 국소적인 부분 기준으로 봄
+깊은 신경망을 통해 node간의 관계를 볼 수 있음 (관계를 넓게 보려고 할 수록 layer가 많이 필요함)
+국소적인 메커니즘이 전체를 봐야 할 때는 단점이 됨
+
+### 어텐션 기법 - 키, 쿼리, 밸류는 무엇인가?
+#### 2.2 Attention
+Attention 기법으로 CNN을 개선하는 방법
+
+전체 픽셀에 대해서 각 픽셀에 대한 중요도를 곱하는 방식이 기본 (가중치)
+
+#### 키, 쿼리, 밸류
+- transformer또한 이 기반을 사용함 
+- 파이썬 dictionary의 키 밸류와 유사함
+- query : 데이터베이스 쿼리와 유사
+
+<img width="80%" alt="image" src="https://user-images.githubusercontent.com/99532836/210167126-eb403cb8-2087-4379-b3c2-76ae44612a5a.png"style="display:block; margin-left:auto; margin-right: auto;">
+
+Attention
+- NLP 분야에서 활발히 쓰임
+- BERT, GPT-3 모델이 대표적
+
+
 
