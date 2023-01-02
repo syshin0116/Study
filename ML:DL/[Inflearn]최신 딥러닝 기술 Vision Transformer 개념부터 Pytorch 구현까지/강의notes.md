@@ -94,7 +94,7 @@ Attention 기법으로 CNN을 개선하는 방법
 - 파이썬 dictionary의 키 밸류와 유사함
 - query : 데이터베이스 쿼리와 유사
 
-<img width="80%" alt="image" src="https://user-images.githubusercontent.com/99532836/210167126-eb403cb8-2087-4379-b3c2-76ae44612a5a.png"style="display:block; margin-left:auto; margin-right: auto;">
+<img width="80%" alt="image" src="https://user-images.githubusercontent.com/99532836/210167126-eb403cb8-2087-4379-b3c2-76ae44612a5a.png" style="display:block; margin-left:auto; margin-right: auto;">
 
 Attention
 - NLP 분야에서 활발히 쓰임
@@ -111,3 +111,5 @@ lstm
 -> 초반 스텝에서 번역이 잘못되면 다음 번역에도 영향을 미친다는것이 단점
 
 따라서 attention 기법이 주목을 받음
+
+<img width="80%" alt="image" src="https://user-images.githubusercontent.com/99532836/210197245-3f854802-2116-49cf-8d7e-0b422285e65c.png" style="display:block; margin-left:auto; margin-right: auto;">
