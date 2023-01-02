@@ -20,9 +20,9 @@ Vision Transformer가 2021년 9월 기준 1,2위를 다툼(3-7위는 CNN 최신�
 - 합성곱 신경망(CNN)
 - 비전 트랜스포터(Vision Transformer)
 
-### 컴퓨터 비전(Computer Vision)
+## 컴퓨터 비전(Computer Vision)
 
-####1.1 비전 분야에서의 업무
+###1.1 비전 분야에서의 업무
 1. Image Classification
 2. Object Detection
 3. Image Segmentation
@@ -32,14 +32,14 @@ Vision Transformer가 2021년 9월 기준 1,2위를 다툼(3-7위는 CNN 최신�
 	
 5.  Face Generation
 
-####1.2 연구 현황
+### 1.2 연구 현황
 CVPR, ECCV, ICCV, BMVC 등 학회 논문을 보는것이 가장 빠르다
 
-####1.3 기업 현황
+###1.3 기업 현황
 많은 사업에 Computer Vision 즉 CNN이 활용되고 있다
 자율주행차의 선두기업인 Tesla는 CNN과 Transformer를 함께 사용하는 방법을 사용
 
-#### 1.4 테슬라의 비전 모델-HydraNet
+### 1.4 테슬라의 비전 모델-HydraNet
 - 2021년 8월 AI Day에서 공개
 - Full Self-Driving에 사용됨
 - 카메라 8대에서 데이터를 받음
@@ -64,9 +64,9 @@ CVPR, ECCV, ICCV, BMVC 등 학회 논문을 보는것이 가장 빠르다
 
 - CNNs + Transformer
 
-### 합성곱 신경망(CNN)
+## 합성곱 신경망(CNN)
 
-#### 2.1 합성곱 신경망
+### 2.1 합성곱 신경망
 - AlexNet(2012)
 - VGGNet(2014)
 - ResNet(2015)
@@ -83,8 +83,8 @@ CNN을 배제하려는 이유
 깊은 신경망을 통해 node간의 관계를 볼 수 있음 (관계를 넓게 보려고 할 수록 layer가 많이 필요함)
 국소적인 메커니즘이 전체를 봐야 할 때는 단점이 됨
 
-### 어텐션 기법 - 키, 쿼리, 밸류는 무엇인가?
-#### 2.2 Attention
+## 어텐션 기법 - 키, 쿼리, 밸류는 무엇인가?
+### 2.2 Attention
 Attention 기법으로 CNN을 개선하는 방법
 
 전체 픽셀에 대해서 각 픽셀에 대한 중요도를 곱하는 방식이 기본 (가중치)
@@ -100,5 +100,14 @@ Attention
 - NLP 분야에서 활발히 쓰임
 - BERT, GPT-3 모델이 대표적
 
+### 비전 트랜스포머(Vit)
 
+자연어 처리의 역사를 보면 여태 주축을 이룬 모델들은 lstm 기반 모델들이었다
 
+lstm
+- sequence 형태의 데이터를 받아 처리
+-> 순서를 고려하여 처리
+-> 하지만 단어들의 관계가 순차적이지 않기 때문에 한계가 있음
+-> 초반 스텝에서 번역이 잘못되면 다음 번역에도 영향을 미친다는것이 단점
+
+따라서 attention 기법이 주목을 받음
