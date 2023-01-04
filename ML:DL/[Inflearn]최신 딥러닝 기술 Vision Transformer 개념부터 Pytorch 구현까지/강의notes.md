@@ -112,7 +112,7 @@ lstm
 
 따라서 CNN, RNN등을 사용하지 않는 attention 기법이 주목을 받음
 
-<img width="80%" alt="image" src="https://user-images.githubusercontent.com/99532836/210197245-3f854802-2116-49cf-8d7e-0b422285e65c.png" style="display:block; margin-left:auto; margin-right: auto;">
+<img width="50%" alt="image" src="https://user-images.githubusercontent.com/99532836/210197245-3f854802-2116-49cf-8d7e-0b422285e65c.png" style="display:block; margin-left:auto; margin-right: auto;">
 
 Input을 처리하는 Encoder와 Output을 처리하는 Decoder로 구성됨
 
