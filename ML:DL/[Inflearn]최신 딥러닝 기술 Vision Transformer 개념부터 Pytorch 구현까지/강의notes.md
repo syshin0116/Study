@@ -195,6 +195,8 @@ Input Embedding은 Input에 입력된 데이터를 컴퓨터가 이해할 수 �
 ### Input Embedding과 Positional Encoding 간의 연산 #### Concatenate 대신에 Summation 연산을 사용했을까? 
 위 과정을 통해 얻게 된 단어 벡터와 위치 벡터값은 다음 레이어로 가기 전에 연산과정 Summation을 거친다. 여기서 왜  Concatenate이 아닌 Summation 연산을 사용했을까? 
 
+<img width="665" alt="image" src="https://user-images.githubusercontent.com/99532836/210906568-232169d5-126b-42c1-a620-368cae9aff0c.png">
+
 위 그림은 Concatenate을 사용한 경우이다. Concatenate를 사용하면 단어 의미 정보를 포함하고 있는 단어 벡터 뒤에 위치 정보를 포함하는 positional embedding이 연결된다. 이 경우 단어의 의미 정보는 자체 차원 공간을 갖게 되고, 위치 정보 역시 자체 차원 공간을 갖으며, 직교성질(orthogonal)에 의해 둘은 서로 전혀 관계없는 공간에 있게 된다.  
 
 이러한 Concatenate가 주는 이점은 정보가 뒤섞이는 혼란을 피할 수 있게 해주지만, 메모리, 파라미터, 런타임 등과 관련된 비용 문제가 발생한다.  
