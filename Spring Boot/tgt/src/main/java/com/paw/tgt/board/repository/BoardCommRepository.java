@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface BoardCommRepository extends JpaRepository<BoardComm, Long> {
     List<BoardComm> findAll();
-
+    List<BoardComm> findByTitleOrContent(String bcTitle, String bcContents);
 }

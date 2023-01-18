@@ -21,33 +21,33 @@ public class BoardServiceImpl implements BoardService {
 	// 멍멍왈왈 게시판 리스트 띄우기
 	@Override
 	public List<Map<String, Object>> boardList(Map<String, Object> map) throws Exception {
-		return boardDAO.boardList(map);
+		return boardCommRepository.boardList(map);
 	}
 	
 	//멍멍왈왈 게시판 글쓰기
 	@Override
 	public void boardWrite(Map<String, Object> map) throws Exception {
-		boardDAO.boardWrite(map);
+		boardCommRepository.boardWrite(map);
 	}
 	
 	//멍멍왈왈 디테일
 	@Override
 	public Map<String, Object> boardDetail(Map<String, Object> map) throws Exception {
-		boardDAO.boardHit(map);
-		Map<String, Object> resultMap = boardDAO.boardDetail(map);
+		boardCommRepository.boardHit(map);
+		Map<String, Object> resultMap = boardCommRepository.boardDetail(map);
 		return resultMap;
 	}
 	
 	//멍멍왈왈 수정하기
 	@Override
 	public void boardModify(Map<String ,Object> map) throws Exception {
-		boardDAO.boardModify(map);
+		boardCommRepository.boardModify(map);
 	}
 	
 	//멍멍왈왈 글 삭제하기
 	@Override
 	public void boardDelete(Map<String ,Object> map) throws Exception {
-		boardDAO.boardDelete(map);
+		boardCommRepository.boardDelete(map);
 	}
 	
 	
