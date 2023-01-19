@@ -2,6 +2,7 @@ package com.paw.tgt.common.domain;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 //request 영역의 파라미터를 맵에 담게할 클래스.
