@@ -1,9 +1,9 @@
 package com.paw.tgt.board.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.paw.tgt.member.entity.Member;
+import jakarta.persistence.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDate;
 
@@ -23,8 +23,10 @@ public class BoardComm {
     @Column(name = "BC_CONTENTS", length = 3000)
     private String bcContents;
 
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="MEM_ID")
     @Column(name = "BC_WRITER_ID", length = 36)
-    private String bcWriterId;
+    private Member bcWriterId;
 
     @Column(name = "BC_WRITER_NAME", length = 50)
     private String bcWriterName;
@@ -32,9 +34,11 @@ public class BoardComm {
     @Column(name = "BC_READHIT")
     private Long bcReadhit;
 
+    @CreatedDate
     @Column(name = "BC_REG_DATE")
     private LocalDate bcRegDate;
 
+    @LastModifiedDate
     @Column(name = "BC_MOD_DATE")
     private LocalDate bcModDate;
 
