@@ -5,29 +5,54 @@
 </head>
 <!--headerFragment 선언-->
 <th:block th:fragment="headerFragment">
-<body id="admin_body">
-<!-- css -->
-<link rel="stylesheet" type="text/css" href="/resources/css/common/layout_admin.css"/>
 
-<header class="bgColor">
-    <div class="logo_wrap">
-        <a href="/admin.paw">
-            <img class="logo" alt="투개더 로고" src="/resources/image/logo.png">
-        </a>
-    </div>
-    <ul class="sub_pages">
-        <li><a href=""><i class="fa-solid fa-user-group"></i> 고객정보 관리</a></li>
-        <li><a href=""><i class="fa-solid fa-flag"></i> 함께해요 관리</a></li>
-        <li><a href=""><i class="fa-solid fa-comments"></i> 멍멍왈왈 관리</a></li>
-        <li><a href=""><i class="fa-solid fa-building-wheat"></i> 우리동네 관리</a></li>
-        <li><a href=""><i class="fa-solid fa-bell"></i>알람 관리</a>
-    </ul>
-    <div class="btn_wrap flex flexWrap flexBetween">
-        <a href=""><i class="fa-solid fa-arrow-right-from-bracket"></i>로그아웃</a>
-        <div class="arrow_wrap">
-            <button type="button" class="toggle_header" onclick="click_toggle_on('body')"><i class="fa-regular fa-circle-left"></i>메뉴 닫기</button>
-            <button type="button" onclick="go_top()"><i class="fa-regular fa-circle-up"></i>맨 위로가기</button>
+    <body>
+    <!-- css -->
+    <link rel="stylesheet" type="text/css" href="/resources/css/common/layout.css"/>
+
+    <header>
+        <div class="header_wrap slim_scroll layoutCenter flexBetween">
+            <div class="logo_wrap">
+                <a href="/">
+                    <img class="logo" alt="투개더 로고" src="/resources/image/logo.png">
+                </a>
+            </div>
+            <button class="menu_btn" type="button" onclick="click_toggle_on('header')">
+                <svg viewBox="0 0 24 24">
+                    <line class="bar1" x1="3" y1="6" x2="21" y2="6"/>
+                    <line class="bar2" x1="3" y1="12" x2="21" y2="12"/>
+                    <line class="bar3" x1="3" y1="18" x2="21" y2="18"/>
+                </svg>
+            </button>
+            <ul class="sub_pages flexCenter">
+                <li><a class="paw_hover" href="">함께해요</a></li>
+                <li><a class="paw_hover" href="/board/list.paw">멍멍왈왈</a></li>
+                <li><a class="paw_hover" href="/mbti.paw">개BTI</a></li>
+                <li><a class="paw_hover" href="">우리동네</a></li>
+            </ul>
+            <ul class="sub_icons flexCenter">
+                <li class="search flex">
+                    <form id="search" name="search" method="post" action="/search.paw">
+                        <input type="text" name="search_keyword" placeholder="무엇이 궁금하개?" autocomplete="off"
+                               value="${empty search_keyword?'':search_keyword}">
+                        <input type="hidden" name="nPageIndex" value="${empty nPageIndex?'1':nPageIndex}">
+                    </form>
+                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i><span
+                            class="displaynone">검색</span></button>
+                </li>
+                <li class="mypage"><a href=""><i class="fa-solid fa-paw"></i><span class="displaynone">마이페이지</span></a>
+                </li>
+                <li class="alram"><a href=""><span class="al_cnt bgColor">1</span><i
+                        class="fa-regular fa-bell"></i><span class="displaynone">알람</span></a></li>
+                <!-- 타임리프 로그인 세션 체크 하기, 세션이 있으면-->
+                <th:block th:if="${session.loginInfo != null}">
+                    <!-- 타임리프 로그인 세션 체크, 관리자면-->
+                    <th:block th:if="${session.loginInfo.memb_type == 0}">
+                        <li class="nav-item"><a class="nav-link" th:href="@{/member/}">회원관리</a></li>
+                    </th:block>
+                    <li class="logout"><a href=""><i class="fa-solid fa-arrow-right-from-bracket"></i><span
+                            class="displaynone">로그아웃</span></a></li>
+                </th:block>
+            </ul>
         </div>
-    </div>
-    <form id="common" method="post"></form>
-</header>
+    </header>
