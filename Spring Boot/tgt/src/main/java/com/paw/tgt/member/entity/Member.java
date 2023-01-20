@@ -1,11 +1,13 @@
 package com.paw.tgt.member.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.paw.tgt.board.entity.BoardComm;
+import jakarta.persistence.*;
+import org.apache.ibatis.annotations.One;
 
+import java.sql.Array;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "MEMBERS")
@@ -58,6 +60,14 @@ public class Member {
 
     @Column(name = "MEM_DEL_GB", length = 1)
     private String memDelGb;
+
+    //권한[ROLE_USER, ROLE_ADMIN]
+    @Column(name="MEM_ROLE")
+    @Enumerated(EnumType.STRING)
+    private Authority authority;
+
+    @OneToMany(mappedBy="bcWriterId")
+    private List<BoardComm> boardComms = new ArrayList<>();
 
     public String getId() {
         return id;
