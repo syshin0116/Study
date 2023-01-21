@@ -1,10 +1,8 @@
 package com.paw.tgt.member.entity;
 
-import com.paw.tgt.board.entity.BoardComm;
+import com.paw.tgt.board.entity.Board;
 import jakarta.persistence.*;
-import org.apache.ibatis.annotations.One;
 
-import java.sql.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +12,7 @@ import java.util.List;
 public class Member {
     @Id
     @Column(name = "MEM_ID", nullable = false, length = 36)
-    private String id;
+    private Long id;
 
     @Column(name = "MEM_PW", length = 15)
     private String memPw;
@@ -66,135 +64,9 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private Authority authority;
 
-    @OneToMany(mappedBy="bcWriterId")
-    private List<BoardComm> boardComms = new ArrayList<>();
+    @OneToMany(mappedBy="writerId")
+    private List<Board> boards = new ArrayList<>();
 
-    public String getId() {
-        return id;
-    }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getMemPw() {
-        return memPw;
-    }
-
-    public void setMemPw(String memPw) {
-        this.memPw = memPw;
-    }
-
-    public String getMemCall() {
-        return memCall;
-    }
-
-    public void setMemCall(String memCall) {
-        this.memCall = memCall;
-    }
-
-    public String getMemEmail() {
-        return memEmail;
-    }
-
-    public void setMemEmail(String memEmail) {
-        this.memEmail = memEmail;
-    }
-
-    public String getMemAddr() {
-        return memAddr;
-    }
-
-    public void setMemAddr(String memAddr) {
-        this.memAddr = memAddr;
-    }
-
-    public Boolean getMemType() {
-        return memType;
-    }
-
-    public void setMemType(Boolean memType) {
-        this.memType = memType;
-    }
-
-    public String getMemDogName() {
-        return memDogName;
-    }
-
-    public void setMemDogName(String memDogName) {
-        this.memDogName = memDogName;
-    }
-
-    public Long getMemDogNum() {
-        return memDogNum;
-    }
-
-    public void setMemDogNum(Long memDogNum) {
-        this.memDogNum = memDogNum;
-    }
-
-    public Long getMemBrIdx() {
-        return memBrIdx;
-    }
-
-    public void setMemBrIdx(Long memBrIdx) {
-        this.memBrIdx = memBrIdx;
-    }
-
-    public String getMemBrName() {
-        return memBrName;
-    }
-
-    public void setMemBrName(String memBrName) {
-        this.memBrName = memBrName;
-    }
-
-    public Integer getMemDogWeight() {
-        return memDogWeight;
-    }
-
-    public void setMemDogWeight(Integer memDogWeight) {
-        this.memDogWeight = memDogWeight;
-    }
-
-    public String getMemDogMbti() {
-        return memDogMbti;
-    }
-
-    public void setMemDogMbti(String memDogMbti) {
-        this.memDogMbti = memDogMbti;
-    }
-
-    public String getMemDogEtc() {
-        return memDogEtc;
-    }
-
-    public void setMemDogEtc(String memDogEtc) {
-        this.memDogEtc = memDogEtc;
-    }
-
-    public LocalDate getMemRegDate() {
-        return memRegDate;
-    }
-
-    public void setMemRegDate(LocalDate memRegDate) {
-        this.memRegDate = memRegDate;
-    }
-
-    public LocalDate getMemModDate() {
-        return memModDate;
-    }
-
-    public void setMemModDate(LocalDate memModDate) {
-        this.memModDate = memModDate;
-    }
-
-    public String getMemDelGb() {
-        return memDelGb;
-    }
-
-    public void setMemDelGb(String memDelGb) {
-        this.memDelGb = memDelGb;
-    }
 
 }
