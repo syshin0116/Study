@@ -1,58 +1,35 @@
-<!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
-</head>
-<!--headerFragment 선언-->
-<th:block th:fragment="headerFragment">
+<!DOCTYPE html> 
+	<html lang="ko" xmlns:th="http://www.thymeleaf.org">  
+	<head>
+        <meta charset="UTF-8"/>
+	</head>      
+    <!--headerFragment 선언-->
+    <th:block th:fragment="headerFragment">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
-    <body>
-    <!-- css -->
-    <link rel="stylesheet" type="text/css" href="/resources/css/common/layout.css"/>
+            <div class="container px-5">
+                <a class="navbar-brand" href="/">카부릉 로고</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">홈</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/user/login">로그인</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/user/register">회원가입</a></li>
 
-    <header>
-        <div class="header_wrap slim_scroll layoutCenter flexBetween">
-            <div class="logo_wrap">
-                <a href="/">
-                    <img class="logo" alt="투개더 로고" src="/resources/image/logo.png">
-                </a>
+
+                        <li class="nav-item"><a class="nav-link" href="/member/">회원관리</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#!">메뉴2</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown"
+                               aria-expanded="false">게시판</a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
+                                <li><a class="dropdown-item" href="blog-home.html">공지사항</a></li>
+                                <li><a class="dropdown-item" href="blog-post.html">Q&A</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <button class="menu_btn" type="button" onclick="click_toggle_on('header')">
-                <svg viewBox="0 0 24 24">
-                    <line class="bar1" x1="3" y1="6" x2="21" y2="6"/>
-                    <line class="bar2" x1="3" y1="12" x2="21" y2="12"/>
-                    <line class="bar3" x1="3" y1="18" x2="21" y2="18"/>
-                </svg>
-            </button>
-            <ul class="sub_pages flexCenter">
-                <li><a class="paw_hover" href="">함께해요</a></li>
-                <li><a class="paw_hover" href="/board/list.paw">멍멍왈왈</a></li>
-                <li><a class="paw_hover" href="/mbti.paw">개BTI</a></li>
-                <li><a class="paw_hover" href="">우리동네</a></li>
-            </ul>
-            <ul class="sub_icons flexCenter">
-                <li class="search flex">
-                    <form id="search" name="search" method="post" action="/search.paw">
-                        <input type="text" name="search_keyword" placeholder="무엇이 궁금하개?" autocomplete="off"
-                               value="${empty search_keyword?'':search_keyword}">
-                        <input type="hidden" name="nPageIndex" value="${empty nPageIndex?'1':nPageIndex}">
-                    </form>
-                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i><span
-                            class="displaynone">검색</span></button>
-                </li>
-                <li class="mypage"><a href=""><i class="fa-solid fa-paw"></i><span class="displaynone">마이페이지</span></a>
-                </li>
-                <li class="alram"><a href=""><span class="al_cnt bgColor">1</span><i
-                        class="fa-regular fa-bell"></i><span class="displaynone">알람</span></a></li>
-                <!-- 타임리프 로그인 세션 체크 하기, 세션이 있으면-->
-                <th:block th:if="${session.loginInfo != null}">
-                    <!-- 타임리프 로그인 세션 체크, 관리자면-->
-                    <th:block th:if="${session.loginInfo.memb_type == 0}">
-                        <li class="nav-item"><a class="nav-link" th:href="@{/member/}">회원관리</a></li>
-                    </th:block>
-                    <li class="logout"><a href=""><i class="fa-solid fa-arrow-right-from-bracket"></i><span
-                            class="displaynone">로그아웃</span></a></li>
-                </th:block>
-            </ul>
-        </div>
-    </header>
+        </nav>
+	</th:block>
+</html>

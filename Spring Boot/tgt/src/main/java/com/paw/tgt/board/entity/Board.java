@@ -18,14 +18,17 @@ import java.time.LocalDate;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
 public class Board {
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     @Column(name = "BC_IDX", nullable = false)
     private Long id;
 
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="BCC_IDX")
+
     @Column(name = "BC_BCC_IDX")
-    private BoardCate categoryId;
+    private Long cateNum;
+    @OneToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="BCC_IDX")
+    private BoardCate boardCate;
 
     @Column(name = "BC_TITLE", length = 150)
     private String title;
@@ -33,10 +36,12 @@ public class Board {
     @Column(name = "BC_CONTENTS", length = 3000)
     private String content;
 
+    @Column(name = "BC_WRITER_ID", length = 36)
+    private Long writerId;
+
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="MEM_ID")
-    @Column(name = "BC_WRITER_ID", length = 36)
-    private Member writerId;
+    private Member member;
 
 //    @Column(name = "BC_WRITER_NAME", length = 50)
 //    private String writerName;
@@ -57,9 +62,9 @@ public class Board {
     private String delGb;
 
     @Builder
-    public Board(Long id, BoardCate categoryId, String title, String content, Member writerId) {
+    public Board(Long id, Long cateNum, String title, String content, Long writerId) {
         this.id = id;
-        this.categoryId = categoryId;
+        this.cateNum = cateNum;
         this.title = title;
         this.content = content;
         this.writerId = writerId;
