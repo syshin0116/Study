@@ -5,13 +5,14 @@ import com.paw.tgt.board.entity.BoardCate;
 import com.paw.tgt.board.service.BoardService;
 import jakarta.annotation.Resource;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
 import java.util.Map;
 
-@RestController
+@Controller
 @RequestMapping("/board")
 public class BoardController {
 
