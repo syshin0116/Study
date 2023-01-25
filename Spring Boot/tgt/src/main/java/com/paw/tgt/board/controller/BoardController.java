@@ -3,15 +3,10 @@ package com.paw.tgt.board.controller;
 import com.paw.tgt.board.entity.Board;
 import com.paw.tgt.board.entity.BoardCate;
 import com.paw.tgt.board.service.BoardService;
-import com.paw.tgt.common.domain.CommandMap;
 import jakarta.annotation.Resource;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.thymeleaf.util.StringUtils;
+
 
 import java.util.List;
 import java.util.Map;
