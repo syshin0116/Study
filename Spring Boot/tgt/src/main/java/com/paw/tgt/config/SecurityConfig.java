@@ -21,8 +21,8 @@ public class SecurityConfig{
                 .authenticated()
                 .and()
                 .httpBasic();
-        http.formLogin();
-        http.httpBasic();
+//        http.formLogin();
+//        http.httpBasic();
         return http.build();
     }
 
