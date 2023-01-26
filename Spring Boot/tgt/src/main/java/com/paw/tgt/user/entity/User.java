@@ -1,6 +1,7 @@
 package com.paw.tgt.user.entity;
 
 import com.paw.tgt.board.entity.Board;
+import com.paw.tgt.dog.Dog;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,48 +20,22 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long idx;
 
-    @Column(name = "MEM_PW", length = 15)
+    private String id;
+
     private String pw;
 
-    @Column(name = "MEM_CALL", nullable = false, length = 20)
     private String phone;
 
-    @Column(name = "MEM_EMAIL", nullable = false, length = 100)
     private String email;
 
-    @Column(name = "MEM_ADDR")
     private String addr;
 
-    @Column(name = "MEM_TYPE")
     private Boolean type;
 
-    @Column(name = "MEM_DOG_NAME", nullable = false, length = 50)
-    private String dogName;
+    private LocalDate regDate;
 
-    @Column(name = "MEM_DOG_NUM")
-    private Long dogNum;
-
-    @Column(name = "MEM_BR_IDX")
-    private Long memBrIdx;
-
-    @Column(name = "MEM_BR_NAME", length = 30)
-    private String memBrName;
-
-    @Column(name = "MEM_DOG_WEIGHT", nullable = false)
-    private Integer memDogWeight;
-
-    @Column(name = "MEM_DOG_MBTI", length = 10)
-    private String memDogMbti;
-
-    @Column(name = "MEM_DOG_ETC")
-    private String memDogEtc;
-
-    @Column(name = "MEM_REG_DATE")
-    private LocalDate memRegDate;
-
-    @Column(name = "MEM_MOD_DATE")
     private LocalDate memModDate;
 
     //권한[ROLE_USER, ROLE_ADMIN]
@@ -68,8 +43,11 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Authority authority;
 
-    @OneToMany(mappedBy="writerId")
+    @OneToMany(mappedBy="user")
     private List<Board> boards = new ArrayList<>();
+
+    @OneToMany(mappedBy="user")
+    private List<Dog> dogs = new ArrayList<>();
 
 
 

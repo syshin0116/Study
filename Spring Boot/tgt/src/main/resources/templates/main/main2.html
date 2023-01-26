@@ -20,12 +20,12 @@ layout:decorate="~{layout/layout}"  란?
     <meta charset="UTF-8"/>
     <title>메인 페이지</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
-    <!-- swiper -->
+    <!-- Demo styles -->
     <style>
-        /*.swiper {*/
-        /*    width: 100%;*/
-        /*    height: 100%;*/
-        /*}*/
+        .swiper {
+            width: 100%;
+            height: 100%;
+        }
 
         .swiper-slide {
             text-align: center;
@@ -46,15 +46,52 @@ layout:decorate="~{layout/layout}"  란?
             -webkit-align-items: center;
             align-items: center;
         }
+
         .swiper-slide img {
             display: block;
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
+
         .swiper {
+            width: 100%;
+            height: 300px;
             margin-left: auto;
             margin-right: auto;
+        }
+
+        .swiper-slide {
+            background-size: cover;
+            background-position: center;
+        }
+
+        .mySwiper2 {
+            height: 80%;
+            width: 100%;
+        }
+
+        .mySwiper {
+            height: 20%;
+            box-sizing: border-box;
+            padding: 10px 0;
+        }
+
+        .mySwiper .swiper-slide {
+            width: 25%;
+            height: 100%;
+            opacity: 0.4;
+        }
+
+        .mySwiper .swiper-slide-thumb-active {
+            opacity: 1;
+        }
+
+        .swiper-slide img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
     </style>
 </head>
@@ -67,31 +104,102 @@ layout:decorate="~{layout/layout}"  란?
 <header class="bg-dark py-5">
     <div class="container px-5">
         <div class="row gx-5 justify-content-center">
-            <div class="col-lg-6">
+            <div class="col-lg-6" style="height: 50%">
                 <div class="text-center my-5">
-
                     <!-- Swiper -->
-                    <div class="swiper mySwiper">
+                    <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper2">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
-                                <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
+                                <img src="/assets/TGT_logo.png">
                             </div>
                             <div class="swiper-slide">
-                                <img src="/assets/TGT_logo.png" alt="Logo" ></div>
-                            <div class="swiper-slide">
-                                <img src="https://swiperjs.com/demos/images/nature-2.jpg"/>
+                                <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
                             </div>
-<!--                            <div class="swiper-slide">Slide 4</div>-->
-<!--                            <div class="swiper-slide">Slide 5</div>-->
-<!--                            <div class="swiper-slide">Slide 6</div>-->
-<!--                            <div class="swiper-slide">Slide 7</div>-->
-<!--                            <div class="swiper-slide">Slide 8</div>-->
-<!--                            <div class="swiper-slide">Slide 9</div>-->
+                            <div class="swiper-slide">
+                                <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
+                            </div>
                         </div>
                         <div class="swiper-button-next"></div>
                         <div class="swiper-button-prev"></div>
-                        <div class="swiper-pagination"></div>
                     </div>
+                    <div thumbsSlider="" class="swiper mySwiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <img src="/assets/TGT_logo.png" alt="Logo">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Swiper -->
+<!--                    <div class="swiper mySwiper">-->
+<!--                        <div class="swiper-wrapper">-->
+<!--                            <div class="swiper-slide">-->
+<!--                                <img src="https://swiperjs.com/demos/images/nature-1.jpg" style="height:530px;width:500px;" />-->
+<!--                            </div>-->
+<!--                            <div class="swiper-slide">-->
+<!--                                <img src="/assets/TGT_logo.png" alt="Logo" style="width:530px;height:500px;"></div>-->
+<!--                            <div class="swiper-slide">-->
+<!--                                <img src="https://swiperjs.com/demos/images/nature-2.jpg" style="width:530px;height:500px;"/>-->
+<!--                            </div>-->
+<!--&lt;!&ndash;                            <div class="swiper-slide">Slide 4</div>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <div class="swiper-slide">Slide 5</div>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <div class="swiper-slide">Slide 6</div>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <div class="swiper-slide">Slide 7</div>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <div class="swiper-slide">Slide 8</div>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <div class="swiper-slide">Slide 9</div>&ndash;&gt;-->
+<!--                        </div>-->
+<!--                        <div class="swiper-gallery-next"></div>-->
+<!--                        <div class="swiper-gallery-prev"></div>-->
+<!--                        <div class="swiper-pagination"></div>-->
+<!--                    </div>-->
 <!--                    <h1 class="display-5 fw-bolder text-white mb-2"><img src="/assets/TGT_logo.png" alt="Logo" style="width:530px;height:500px;"></h1>-->
 <!--                    <p class="lead text-white-50 mb-4">강아지 커뮤니티</p>-->
                     <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
@@ -364,58 +472,58 @@ layout:decorate="~{layout/layout}"  란?
 </section>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
-<!--    <script>-->
-<!--        var swiper = new Swiper(".mySwiper", {-->
-<!--            loop: true,-->
-<!--            spaceBetween: 10,-->
-<!--            slidesPerView: 4,-->
-<!--            freeMode: true,-->
-<!--            watchSlidesProgress: true,-->
-<!--        });-->
-<!--        var swiper2 = new Swiper(".mySwiper2", {-->
-<!--            loop: true,-->
-<!--            spaceBetween: 10,-->
-<!--            navigation: {-->
-<!--                nextEl: ".swiper-button-next",-->
-<!--                prevEl: ".swiper-button-prev",-->
-<!--            },-->
-<!--            thumbs: {-->
-<!--                swiper: swiper,-->
-<!--            },-->
-<!--        });-->
-<!--    </script>-->
     <script>
-        <!-- Initialize Swiper -->
         var swiper = new Swiper(".mySwiper", {
-            slidesPerView: 1,
-            spaceBetween: 30,
             loop: true,
-            // effect: "fade",
-            // fadeEffect: { // Add this
-            //     crossFade: true,
-            // },
-            centeredSlides: true,
-            autoplay: {
-            delay: 2500,
-            disableOnInteraction: false,
-            pauseOnMouseEnter:true
-            },
-            pagination: {
-            el: ".swiper-pagination",
-            dynamicBullets: true,
-            clickable: true
-            },
-            navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev"
-            },
+            spaceBetween: 10,
+            slidesPerView: 4,
             freeMode: true,
             watchSlidesProgress: true,
+        });
+        var swiper2 = new Swiper(".mySwiper2", {
+            loop: true,
+            spaceBetween: 10,
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
             thumbs: {
                 swiper: swiper,
-            }
+            },
         });
     </script>
+<!--    <script>-->
+<!--        &lt;!&ndash; Initialize Swiper &ndash;&gt;-->
+<!--        var swiper = new Swiper(".mySwiper", {-->
+<!--            slidesPerView: 1,-->
+<!--            spaceBetween: 30,-->
+<!--            loop: true,-->
+<!--            // effect: "fade",-->
+<!--            // fadeEffect: { // Add this-->
+<!--            //     crossFade: true,-->
+<!--            // },-->
+<!--            centeredSlides: true,-->
+<!--            autoplay: {-->
+<!--            delay: 2500,-->
+<!--            disableOnInteraction: false,-->
+<!--            pauseOnMouseEnter:true-->
+<!--            },-->
+<!--            pagination: {-->
+<!--            el: ".swiper-pagination",-->
+<!--            dynamicBullets: true,-->
+<!--            clickable: true-->
+<!--            },-->
+<!--            navigation: {-->
+<!--            nextEl: ".swiper-gallery-next",-->
+<!--            prevEl: ".swiper-gallery-prev"-->
+<!--            },-->
+<!--            freeMode: true,-->
+<!--            watchSlidesProgress: true,-->
+<!--            thumbs: {-->
+<!--                swiper: swiper,-->
+<!--            }-->
+<!--        });-->
+<!--    </script>-->
 </th:block>
 
 </html>

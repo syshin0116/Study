@@ -4,6 +4,7 @@ import com.paw.tgt.user.entity.User;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
@@ -12,8 +13,9 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
 
+@Data
 @Entity
-@Table(name = "BOARD_COMM")
+@Table(name = "BOARD")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
 public class Board {
@@ -22,20 +24,15 @@ public class Board {
     @Column(name = "BC_IDX", nullable = false)
     private Long id;
 
-
-    @Column(name = "BC_BCC_IDX")
-    private Long cateNum;
     @OneToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="BCC_IDX")
+    @JoinColumn(name="board")
     private BoardCate boardCate;
 
-    @Column(name = "BC_TITLE", length = 150)
     private String title;
 
-    @Column(name = "BC_CONTENTS", length = 3000)
     private String content;
 
-    @Column(name = "BC_WRITER_ID", length = 36)
+    @Column(name = "WRITER_ID", length = 36)
     private Long writerId;
 
     @ManyToOne(fetch=FetchType.LAZY)
@@ -50,20 +47,15 @@ public class Board {
     private Integer readHit;
 
     @CreatedDate
-    @Column(name = "BC_REG_DATE", updatable = false)
     private LocalDate regDate;
 
     @LastModifiedDate
-    @Column(name = "BC_MOD_DATE")
     private LocalDate modDate;
 
-    @Column(name = "BC_DEL_GB", length = 1)
-    private String delGb;
 
     @Builder
     public Board(Long id, Long cateNum, String title, String content, Long writerId) {
         this.id = id;
-        this.cateNum = cateNum;
         this.title = title;
         this.content = content;
         this.writerId = writerId;
