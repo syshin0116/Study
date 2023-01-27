@@ -1,6 +1,6 @@
 package com.paw.tgt.board.entity;
 
-import com.paw.tgt.user.entity.User;
+import com.paw.tgt.user.entity.Users;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -37,7 +37,7 @@ public class Board {
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="MEM_ID")
-    private User user;
+    private Users users;
 
 //    @Column(name = "BC_WRITER_NAME", length = 50)
 //    private String writerName;
