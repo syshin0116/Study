@@ -10,7 +10,6 @@ member_list = []
 global time
 time_list = []
 
-
 # 1번 영화 선택 함수
 def movie1():
     root.title('1번 영화')  # movie_list 변수안에 내용 중 가장 귀에 추가
