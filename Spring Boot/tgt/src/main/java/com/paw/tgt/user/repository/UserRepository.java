@@ -1,10 +1,10 @@
 package com.paw.tgt.user.repository;
 
-import com.spring.CarVroong.model.User;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
+import org.springframework.security.core.userdetails.User;
 
 import java.util.List;
 

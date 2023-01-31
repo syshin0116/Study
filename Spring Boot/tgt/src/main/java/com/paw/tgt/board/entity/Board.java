@@ -10,13 +10,14 @@ import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.security.core.userdetails.User;
 
 import java.time.LocalDate;
 
 @Data
 @Entity
 @Table(name = "BOARD")
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
 public class Board {
     @Id
@@ -36,7 +37,7 @@ public class Board {
     private Long writerId;
 
     @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="MEM_ID")
+    @JoinColumn(name="users")
     private Users users;
 
 //    @Column(name = "BC_WRITER_NAME", length = 50)

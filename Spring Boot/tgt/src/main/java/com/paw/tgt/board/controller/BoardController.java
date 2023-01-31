@@ -2,8 +2,13 @@ package com.paw.tgt.board.controller;
 
 import com.paw.tgt.board.entity.Board;
 import com.paw.tgt.board.entity.BoardCate;
+import com.paw.tgt.board.repository.BoardRepository;
+import com.paw.tgt.board.service.BoardService;
 import com.paw.tgt.board.service.BoardService1;
+import com.paw.tgt.board.validator.BoardValidator;
 import jakarta.annotation.Resource;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -21,13 +26,18 @@ import java.util.List;
 public class BoardController {
 
     @Resource(name="boardService")
-    private BoardService1 boardService;
+    private BoardService boardService;
 
+    @Autowired
+    private BoardValidator boardValidator;
+
+    @Autowired
+    private BoardRepository boardRepository;
     //게시판별 리스트
-    @GetMapping("/{boardCate}")
-    public List<Board> boardList(@PathVariable(required = false) BoardCate boardCate, Pageable pageable)throws Exception {
-        return boardService.boardListByBoardCate(boardCate, pageable);
-    }
+//    @GetMapping("/{boardCate}")
+//    public List<Board> boardList(@PathVariable(required = false) BoardCate boardCate, Pageable pageable)throws Exception {
+//        return boardService.boardListByBoardCate(boardCate, pageable);
+//    }
 
 
     // 멍멍왈왈 게시판 리스트
