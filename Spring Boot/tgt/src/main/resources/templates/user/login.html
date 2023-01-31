@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout}">
+<head>
+    <meta charset="UTF-8"/>
+</head>
+<!-- 해당 html페이지에서만 사용할 css, script  -->
+<th:block layout:fragment="css"></th:block>
+<th:block layout:fragment="script"></th:block>
+<th:block layout:fragment="content">
+    <!-- Contact section-->
+    <section class="bg-light py-5 text-center">
+        <div class="container px-5 my-5 px-5">
+            <div class="text-center mb-5">
+            <!--
+                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-envelope"></i>
+                </div>
+            -->
+            </div>
+            <div class="row gx-5 justify-content-center">
+                <div class="col-lg-6">
+                    <form class="form-signin" id="contactForm" th:action="@{/user/login}" method="post">
+                        <a th:href="@{/}"><img class="mb-4" src="/assets/CarVroong_logo.png" alt="" width="140" height="140"></a>
+                        <h1 class="fw-bolder">로그인</h1>
+                        <div th:if="${param.error}" class="alert alert-danger" role="alert">Invalid username and password.</div>
+                        <div th:if="${param.logout}" class="alert alert-primary" role="alert">로그아웃되었습니다.</div>
+
+                        <!-- 아이디 input-->
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="username" name="username" type="text" placeholder="아이디를 입력해주세요..."/>
+                            <label for="username">아이디</label>
+                            <div class="invalid-feedback" id="usernameErrMsg" style="display:none;">아이디를 입력해주세요.</div>
+                        </div>
+                        <!-- 비밀번호 input-->
+                        <div class="form-floating mb-3">
+                            <input class="form-control" id="password" name="password" type="password" placeholder="비밀번호를 입력해주세요..."/>
+                            <label for="password">비밀번호</label>
+                            <div class="invalid-feedback" id="passwordErrMsg" style="display:none;">비밀번호를 입력해주세요.</div>
+                        </div>
+                        <!-- 로그인  Button-->
+                        <div class="d-grid"><button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">Login</button></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+
+        $("#username, #password").off().on("focus", function () {
+
+            let _id = $(this).attr('id')
+            $("#" + _id + "ErrMsg").hide();
+
+        }).on("blur", function () {
+
+            let _id = $(this).attr('id')
+            let _value = $(this).val();     
+
+            if ($.trim(_value) == "") {
+                $("#"+ _id+"ErrMsg").show();
+            }
+            chkSubmitBtn();
+        });
+
+        function chkSubmitBtn(){
+
+            let flag = true;
+
+            $("input").each(function (index, item) {
+                if($.trim($(this).val()) == ""){
+                    flag = false;
+                }
+            });
+
+            if($(".invalid-feedback:visible").length == 0 && flag){
+                $("#submitButton").removeClass("disabled");
+            }else{
+                $("#submitButton").addClass("disabled");                
+            }
+        }
+
+    </script>
+</th:block>
+
+</html>

@@ -1,6 +1,6 @@
 package com.paw.tgt.dog;
 
-import com.paw.tgt.user.entity.Users;
+import com.paw.tgt.user.entity.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,5 +29,5 @@ public class Dog {
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="dog")
-    private Users users;
+    private User user;
 }

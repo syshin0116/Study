@@ -1,12 +1,13 @@
 package com.paw.tgt.user.repository;
 
 
-import org.springframework.security.core.userdetails.User;
+
+import com.paw.tgt.user.entity.User;
 
 import java.util.List;
 
 public interface CustomizedUserRepository {
-    List<User> findByUsernameCustom(String username);
+//    List<Users> findByUsernameCustom(String username);
 
     List<User> findByUsernameJdbc(String username);
 }

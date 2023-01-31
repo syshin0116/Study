@@ -1,10 +1,10 @@
 package com.paw.tgt.user.repository;
 
+import com.paw.tgt.user.entity.User;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
-import org.springframework.security.core.userdetails.User;
 
 import java.util.List;
 
@@ -21,6 +21,4 @@ public interface UserRepository extends JpaRepository<User, Long>, QuerydslPredi
     List<User> findByUsernameNativeQuery(String username);
 
     boolean existsByUsername(String username);
-    boolean existsByNickname(String nickname);
-    boolean existsByEmail(String email);
 }

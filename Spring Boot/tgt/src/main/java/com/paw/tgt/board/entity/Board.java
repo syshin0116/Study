@@ -1,8 +1,7 @@
 package com.paw.tgt.board.entity;
 
-import com.paw.tgt.user.entity.Users;
+import com.paw.tgt.user.entity.User;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +9,6 @@ import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.security.core.userdetails.User;
 
 import java.time.LocalDate;
 
@@ -38,7 +36,7 @@ public class Board {
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="users")
-    private Users users;
+    private User user;
 
 //    @Column(name = "BC_WRITER_NAME", length = 50)
 //    private String writerName;

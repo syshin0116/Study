@@ -1,10 +1,8 @@
 package com.paw.tgt.board.controller;
 
 import com.paw.tgt.board.entity.Board;
-import com.paw.tgt.board.entity.BoardCate;
 import com.paw.tgt.board.repository.BoardRepository;
 import com.paw.tgt.board.service.BoardService;
-import com.paw.tgt.board.service.BoardService1;
 import com.paw.tgt.board.validator.BoardValidator;
 import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
@@ -17,9 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/board")
@@ -164,5 +159,4 @@ public class BoardController {
 //        boardRepository.save(board);
         return "redirect:/board/list";
     }
-
 }

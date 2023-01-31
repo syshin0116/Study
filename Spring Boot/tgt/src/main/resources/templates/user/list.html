@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+</head>
+<body>
+  <h2>list.html</h2>
+  세션값 확인: <p th:text="${session['loginId']}"> </p>
+  <table>
+    <tr>
+      <th>idx</th>
+      <th>id</th>
+      <th>name</th>
+      <th>email</th>
+      <th>license</th>
+      <th>birthDate</th>
+      <th>mobile</th>
+      <th>points</th>
+      <th>상세조회</th>
+      <th>상세조회(ajax)</th>
+    </tr>
+    <tr th:each="member: ${memberList}">
+      <td th:text="${member.memberIdx}"></td>
+      <td th:text="${member.memberId}"></td>
+      <td th:text="${member.memberName}"></td>
+      <td th:text="${member.memberEmail}"></td>
+      <td th:text="${member.memberLicense}"></td>
+      <td th:text="${member.memberBirthDate}"></td>
+      <td th:text="${member.memberMobile}"></td>
+      <td th:text="${member.memberPoints}"></td>
+      <td>
+        <a th:href="@{|/templates/memberPages/${member.memberId}|}">조회</a>
+      </td>
+      <td><button th:onclick="detail([[${member.memberId}]])">조회(ajax)</button> </td>
+      <td>
+        <a th:href="@{|/templates/memberPages/delete/${member.memberId}|}">삭제</a>
+      </td>
+      <!--   삭제 요청을 ajax로. type을 post가 아닌 delete로 하고
+         controller에서 @DeleteMapping을 사용함.(삭제하는 코드를 동일함)-->
+      <td><button th:onclick="deleteByMemberId([[${member.memberId}]])">삭제(ajax)</button> </td>
+    </tr>
+  </table>
+  <div id="member-detail">
+
+
+  </div>
+</body>
+<script th:inline="javascript">
+  const deleteByMemberId = (memberId) => {
+    $.ajax({
+      type: "delete",
+      url: "/member/"+memberId,
+      //dataType: "text",
+      success: function(result){ //status code = 200
+        location.href = "/member/";
+      }, error:function (){
+        alert("ajax 실패");
+      }
+    });
+  }
+  const detail = (memberId) =>{
+    $.ajax({
+      type: "post",
+      url: "/member/ajax/"+memberId,
+      dataType:"json",
+      success: function (result){
+        console.log(result);
+        let detailView = "<table>\n" +
+                "        <tr>\n" +
+                "            <th>idx</th>\n" +
+                "            <th>id</th>\n" +
+                "            <th>password</th>\n" +
+                "            <th>name</th>\n" +
+                "            <th>email</th>\n" +
+                "            <th>license</th>\n" +
+                "            <th>birthDate</th>\n" +
+                "            <th>points</th>\n" +
+                "            <th>상세조회</th>\n" +
+                "        </tr>\n" +
+                "        <tr>\n" +
+                "            <td>"+result.memberIdx+"</td>\n" +
+                "            <td>"+result.memberId+"</td>\n" +
+                "            <td>"+result.memberPassword+"</td>\n" +
+                "            <td>"+result.memberName+"</td>\n" +
+                "            <td>"+result.memberLicense+"</td>\n" +
+                "            <td>"+result.memberBirthDate+"</td>\n" +
+                "            <td>"+result.memberMobile+"</td>\n"+
+                "            <td>"+result.memberPoints+"</td>\n" +
+                "        </tr>\n" +
+                "    </table>"
+        document.getElementById("member-detail").innerHTML = detailView;
+      },
+      error:function (){
+        alert("ajax 실페");
+      }
+    })
+  }
+</script>
+</html>

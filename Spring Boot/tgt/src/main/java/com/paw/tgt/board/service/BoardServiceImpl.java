@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.paw.tgt.board.entity.Board;
 import com.paw.tgt.board.entity.BoardCate;
-import com.paw.tgt.board.repository.BoardRepository1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;

@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
@@ -21,14 +22,14 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name="users")
-public class Users implements UserDetails {
+public class User implements UserDetails{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idx;
 
-    private String id;
+    private String username;
 
-    private String pw;
+    private String password;
 
     private String phone;
 
@@ -43,49 +44,49 @@ public class Users implements UserDetails {
     private LocalDate memModDate;
 
     //권한[ROLE_USER, ROLE_ADMIN]
-    @Column(name="MEM_ROLE")
+    @Column(name="authority")
     @Enumerated(EnumType.STRING)
-    private Authority authority;
+    private Role role;
 
-    @OneToMany(mappedBy="users")
+    @OneToMany(mappedBy="user")
     private List<Board> boards = new ArrayList<>();
 
-    @OneToMany(mappedBy="users")
+    @OneToMany(mappedBy="user")
     private List<Dog> dogs = new ArrayList<>();
 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
     @Override
     public String getPassword() {
-        return null;
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return username;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }

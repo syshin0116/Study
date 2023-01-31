@@ -2,11 +2,10 @@ package com.paw.tgt.board.service;
 
 import com.paw.tgt.board.entity.Board;
 import com.paw.tgt.board.repository.BoardRepository;
-import com.paw.tgt.board.repository.BoardRepository1;
 
+import com.paw.tgt.user.entity.User;
 import com.paw.tgt.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 @Service
