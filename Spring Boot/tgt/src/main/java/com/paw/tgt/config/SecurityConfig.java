@@ -28,7 +28,7 @@ public class SecurityConfig{
                 .and()
                 .authorizeHttpRequests().requestMatchers("/board/**").authenticated()
                 .and().formLogin();
-                
+
 //        http.formLogin();
 //        http.httpBasic();
         return http.build();
