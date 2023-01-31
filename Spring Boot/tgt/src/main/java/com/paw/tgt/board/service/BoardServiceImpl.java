@@ -1,26 +1,21 @@
 package com.paw.tgt.board.service;
 
 import java.util.List;
-import java.util.Map;
 
 
 import com.paw.tgt.board.entity.Board;
 import com.paw.tgt.board.entity.BoardCate;
-import com.paw.tgt.board.repository.BoardRepository;
+import com.paw.tgt.board.repository.BoardRepository1;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 
 @Service("boardService")
-public class BoardServiceImpl implements BoardService {
+public class BoardServiceImpl implements BoardService1 {
 	
 	@Autowired
-	private BoardRepository boardRepository;
+	private BoardRepository1 boardRepository;
 
 	public List<Board> boardListByBoardCate(BoardCate boardCate, Pageable pageable){
 		return boardRepository.findAllByBoardCate(boardCate, pageable);

@@ -2,7 +2,7 @@ package com.paw.tgt.board.controller;
 
 import com.paw.tgt.board.entity.Board;
 import com.paw.tgt.board.entity.BoardCate;
-import com.paw.tgt.board.service.BoardService;
+import com.paw.tgt.board.service.BoardService1;
 import jakarta.annotation.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,14 +15,13 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/board")
 public class BoardController {
 
     @Resource(name="boardService")
-    private BoardService boardService;
+    private BoardService1 boardService;
 
     //게시판별 리스트
     @GetMapping("/{boardCate}")
