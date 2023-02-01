@@ -7,10 +7,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long>, QuerydslPredicateExecutor<User>, CustomizedUserRepository {
     @EntityGraph(attributePaths = {"boards"})
     List<User> findAll();
+
+//    Optional<User> findByUsername(String username);
 
     User findByUsername(String username);
 

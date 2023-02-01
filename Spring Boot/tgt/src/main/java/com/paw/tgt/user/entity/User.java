@@ -44,7 +44,6 @@ public class User implements UserDetails{
     private LocalDate memModDate;
 
     //권한[ROLE_USER, ROLE_ADMIN]
-    @Column(name="authority")
     @Enumerated(EnumType.STRING)
     private Role role;
 
