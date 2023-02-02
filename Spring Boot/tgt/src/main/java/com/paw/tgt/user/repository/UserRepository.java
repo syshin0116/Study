@@ -13,9 +13,9 @@ public interface UserRepository extends JpaRepository<User, Long>, QuerydslPredi
     @EntityGraph(attributePaths = {"boards"})
     List<User> findAll();
 
-//    Optional<User> findByUsername(String username);
+    Optional<User> findByUsername(String username);
 
-    User findByUsername(String username);
+    User findByUsername2(String username);
 
     @Query("select u from User u where u.username like %?1%")
     List<User> findByUsernameQuery(String username);
