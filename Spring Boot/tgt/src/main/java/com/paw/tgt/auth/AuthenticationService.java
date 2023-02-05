@@ -5,6 +5,8 @@ import com.paw.tgt.user.entity.Role;
 import com.paw.tgt.user.entity.User;
 import com.paw.tgt.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,7 @@ public class AuthenticationService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
+    private final AuthenticationManager authenticationManager;
     public AuthenticationResponse register(RegisterRequest request) {
         var user = User.builder()
                 .username(request.getUsername())
@@ -21,7 +24,6 @@ public class AuthenticationService {
                 .email((request.getEmail()))
                 .addr(request.getAddr())
                 .phone(request.getPhone())
-                .type(request.getType())
                 .regDate(request.getRegDate())
                 .memModDate(request.getMemModDate())
                 .role(Role.ROLE_USER)
@@ -29,10 +31,17 @@ public class AuthenticationService {
         userRepository.save(user);
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder().token(jwtToken).build();
-
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
-        
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        request.getUsername(),
+                        request.getPassword()
+                )
+        );
+        var user = userRepository.findByUsername(request.getUsername()).orElseThrow();
+        var jwtToken = jwtService.generateToken(user);
+        return AuthenticationResponse.builder().token(jwtToken).build();
     }
 }

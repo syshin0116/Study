@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,19 +30,13 @@ public class User implements UserDetails{
     private Long idx;
 
     private String username;
-
     private String password;
-
     private String phone;
-
     private String email;
-
     private String addr;
-
-    private Boolean type;
-
+    @CreationTimestamp
     private LocalDate regDate;
-
+    @UpdateTimestamp
     private LocalDate memModDate;
 
     //권한[ROLE_USER, ROLE_ADMIN]

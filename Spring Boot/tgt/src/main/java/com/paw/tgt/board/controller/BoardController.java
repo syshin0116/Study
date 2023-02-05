@@ -155,7 +155,7 @@ public class BoardController {
             return "board/form";
         }
         String username = authentication.getName();
-        boardService.save(username, board);
+//        boardService.save(username, board);
 //        boardRepository.save(board);
         return "redirect:/board/list";
     }

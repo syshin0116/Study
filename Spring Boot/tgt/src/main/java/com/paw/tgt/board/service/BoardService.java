@@ -17,10 +17,10 @@ public class BoardService {
     @Autowired
     private UserRepository userRepository;
 
-    public Board save(String username, Board board) {
-        User user = userRepository.findByUsername2(username);
-        board.setUser(user);
-        return boardRepository.save(board);
-    }
+//    public Board save(String username, Board board) {
+//        User user = userRepository.findByUsername2(username);
+//        board.setUser(user);
+//        return boardRepository.save(board);
+//    }
 
 }

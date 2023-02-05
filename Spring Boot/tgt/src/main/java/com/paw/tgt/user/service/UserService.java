@@ -30,6 +30,7 @@ public class UserService {
 //        HashMap<String, Object> map = new HashMap<>();
 //        map.put("result", userRepository.existsByUsername(username));
 //        return map;
+
         if (userRepository.existsByUsername(username)){
             return "ok";
         }else{
