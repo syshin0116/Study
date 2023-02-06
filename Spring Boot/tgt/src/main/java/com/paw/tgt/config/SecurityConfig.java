@@ -63,8 +63,5 @@ public class SecurityConfig{
 //                .build();
 //        return new InMemoryUserDetailsManager(admin, user);
 //    }
-//    @Bean
-//    public PasswordEncoder passwordEncoder(){
-//        return new BCryptPasswordEncoder();
-//    }
+
 }
