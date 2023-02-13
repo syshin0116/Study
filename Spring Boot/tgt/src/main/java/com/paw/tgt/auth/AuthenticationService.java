@@ -24,6 +24,7 @@ public class AuthenticationService {
                 .email((request.getEmail()))
                 .addr(request.getAddr())
                 .phone(request.getPhone())
+                .birth(request.getBirth())
                 .regDate(request.getRegDate())
                 .memModDate(request.getMemModDate())
                 .role(Role.ROLE_USER)

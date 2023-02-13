@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 @Data
@@ -22,7 +23,7 @@ public class RegisterRequest {
 
     private String addr;
 
-    private Boolean type;
+    private Date birth;
 
     private LocalDate regDate;
 
