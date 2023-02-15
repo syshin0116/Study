@@ -29,18 +29,18 @@ public class User implements UserDetails{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idx;
-
     private String username;
     private String password;
     private String phone;
     private String email;
     private String addr;
     private Date birth;
+
     @CreationTimestamp
     private LocalDate regDate;
+
     @UpdateTimestamp
     private LocalDate memModDate;
-
     //권한[ROLE_USER, ROLE_ADMIN]
     @Enumerated(EnumType.STRING)
     private Role role;
