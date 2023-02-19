@@ -128,6 +128,9 @@ Multi-lead Attention: 학습에 따라서 Attention들이 같은 것을 보더�
 
 들어온 데이터의 크기와 내보내는 데이터의 크기가 같다 -> 여러 층의 Layer 사용 가능(실제로  논문에서는 6번 과정을 반복함)
 
+## 외부 블로그 내용
+
+출처: [https://www.blossominkyung.com/deeplearning/transfomer-positional-encoding](https://www.blossominkyung.com/deeplearning/transfomer-positional-encoding)
 ### Input Embedding이란?
 
 Input Embedding은 Input에 입력된 데이터를 컴퓨터가 이해할 수 있도록 행렬 값으로 바꾸어 준다.
@@ -196,6 +199,7 @@ Input Embedding은 Input에 입력된 데이터를 컴퓨터가 이해할 수 �
 	위 그림처럼 첫 번째 차원의 벡터값들의 차이가 크지 않다면, 단어 벡터의 다음 차원에도 벡터값을 부여하면 된다. 이때 동일한 sine 값을 사용하게 되면, 벡터들 간의 차가 크지 않게 되므로, cosine 값을 사용한다. 하지만 두 번째 차원의 벡터값들 역시 그 차가 크지 않다면, 서로 다른 단어 벡터 간의 위치 정보 차이가 미미하게 된다. 이 경우 cosine의 frequency를 이전 sine 함수보다 크게 주면되고, 마지막 차원의 벡터값이 채워질 때까지 서로 다른 frequency를 가진 sine & cosine을 번갈아가며 계산하다 보면 결과적으로 충분히 서로 다른 positional encoding 값을 지니게 된다. 이를 수식으로 표현하면 아래와 같다.(이때 pos는 position, i는 차원을 의미한다.)  
 	
 ### Input Embedding과 Positional Encoding 간의 연산 #### Concatenate 대신에 Summation 연산을 사용했을까? 
+
 위 과정을 통해 얻게 된 단어 벡터와 위치 벡터값은 다음 레이어로 가기 전에 연산과정 Summation을 거친다. 여기서 왜  Concatenate이 아닌 Summation 연산을 사용했을까? 
 
 <img width="665" alt="image" src="https://user-images.githubusercontent.com/99532836/210906568-232169d5-126b-42c1-a620-368cae9aff0c.png">
@@ -208,6 +212,7 @@ Summation을 사용한다면, 단어 의미 정보와 위치 정보 간의 균�
 
 트랜스포머 논문이 처음 발표됐던 2017년도만 해도 GPU 등 컴퓨팅 파워가 지금만큼 좋지 않았다. 따라서 당시 저자들이 Concatenate 대신 Summation을 단어 벡터와 위치 벡터 간의 연산으로 선택했다고 생각된다. 
 
+
 #### 참고자료 
 1. Ashish Vaswani et al. “Attention is All You Need”, NIPS 2017 
 2. Dzmitry Bahdanau et al. “Neural Machine Translation by Jointly Leraing to Align and Translate”, ICLR 2015 
@@ -216,4 +221,5 @@ Summation을 사용한다면, 단어 의미 정보와 위치 정보 간의 균�
 5. Lil’Log, “The Transformer Family”, Blog 
 6. AI Coffee Break with Letitia, “Positional embeddings in transformers”, Youtube
 
-https://www.blossominkyung.com/deeplearning/transfomer-positional-encoding
+
+
