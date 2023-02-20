@@ -19,7 +19,7 @@
             </div>
             <div class="row gx-5 justify-content-center">
                 <div class="col-lg-6">
-                    <form id="contactForm" th:action="@{/user/register}" method="post"> <!-- data-sb-form-api-token="API_TOKEN" -->
+                    <form id="registerForm">
                         <p class="lead mb-0">필수 입력 정보</p>
                         <hr>
                         <!-- 아이디 input-->
@@ -68,9 +68,9 @@
                         </div>
                         <!-- 핸드폰번호 input-->
                         <div class="form-floating mb-3">
-                            <input class="form-control" id="tel" name="phone" type="phone"
+                            <input class="form-control" id="phone" name="phone" type="tel"
                                    placeholder="휴대폰 번호를 입력하세요..."/>
-                            <label for="tel">휴대폰 번호</label>
+                            <label for="phone">휴대폰 번호</label>
                             <div class="invalid-feedback" id="phoneErrMsg" style="display:none;">휴대폰 번호를 입력하세요.</div>
                             <div class="valid-feedback" id="phoneCheckForm" style="display:none;"></div>
 
@@ -81,13 +81,6 @@
                         <br>
                         <p class="lead mb-0">선택 입력 정보</p>
                         <hr>
-                        <!-- 면허번호 input-->
-                        <div class="form-floating mb-3">
-                            <input class="form-control" id="license" name="license" type="text"
-                                   placeholder="00-000000-00"/>
-                            <label for="license">운전면허 번호</label>
-<!--                            <div class="invalid-feedback" id="licenseErrMsg" style="display:none;">운전 면허번호를 입력하세요.</div>-->
-                        </div>
                         <!-- 생년월일 input-->
                         <div class="form-floating mb-3">
                             <input class="form-control" id="birth" name="birth" type="date"
@@ -96,7 +89,7 @@
 <!--                            <div class="invalid-feedback" id="birthErrMsg" style="display:none;">생년월일을 입력하세요.</div> -->
                         </div>
                         <div class="d-grid">
-                            <button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">가입하기
+                            <button class="btn btn-primary btn-lg disabled" id="submitButton" type="button">가입하기
                             </button>
                         </div>
                     </form>
@@ -245,33 +238,33 @@
         });
 
         //휴대폰 입력 감지 이벤트
-        $("#tel").off().on("focus", function () {
+        $("#phone").off().on("focus", function () {
             $(this).val($(this).val().replace(/[^0-9]/g, ""));
-            $("#telErrMsg").hide();
+            $("#phoneErrMsg").hide();
         }).on("input", function() {
             // 휴대폰 형식이 안맞으면 경고문구 표시
             if ($(this).val().replace(/[^0-9]/g, "").length < 10) {
-                $("#telCheckForm")[0].innerHTML = "옳바르지 않은 휴대폰 번호 형식입니다.";
-                $("#telCheckForm")[0].style.color = "red";
-                $("#telCheckForm").show()
-                $('#telErrMsg').hide();
+                $("#phoneCheckForm")[0].innerHTML = "옳바르지 않은 휴대폰 번호 형식입니다.";
+                $("#phoneCheckForm")[0].style.color = "red";
+                $("#phoneCheckForm").show()
+                $('#phoneErrMsg').hide();
                 chkSubmitBtn();
             }else{
-                $("#telCheckForm")[0].innerHTML = "옳바른 휴대폰 번호 형식입니다.";
-                $("#telCheckForm")[0].style.color = "green";
-                $("#telCheckForm").show()
+                $("#phoneCheckForm")[0].innerHTML = "옳바른 휴대폰 번호 형식입니다.";
+                $("#phoneCheckForm")[0].style.color = "green";
+                $("#phoneCheckForm").show()
             }
         }).on("blur", function () {
             // 휴대폰을 입력안하면 경고문구 표시
             if ($.trim($(this).val()) == "") {
-                $('#telErrMsg').show();
-                $("#telCheckForm").hide();
+                $('#phoneErrMsg').show();
+                $("#phoneCheckForm").hide();
 
                 $(this).val("");
                 chkSubmitBtn();
             }else{
                 $(this).val(fncSetPhoneFormat($(this).val()));
-                $("#tel").text($(this).val());
+                $("#phone").text($(this).val());
                 chkSubmitBtn();
             }
         });
@@ -281,7 +274,7 @@
 
             let flag = true;
 
-            $("#username, #password, #passwordConfirm, #nickname, #tel, #email").each(function (index, item) {
+            $("#username, #password, #passwordConfirm, #nickname, #phone, #email").each(function (index, item) {
                 if ($.trim($(this).val()) == "") {
                     flag = false;
                 }
@@ -323,6 +316,30 @@
         function fncIsValidPhoneNumber(s) {
             return /^(82|0)1(0|1|6|7|8|9)\d{3,4}\d{4}/.test(String(s).replace(/[^0-9]/g, ""));
         }
+
+    //  submit 버튼 클릭 시 post 방식, json형태로 정보 전달
+        $('#submitButton').on("click", function (){
+            var registerForm = $("#registerForm").serialize();
+
+            console.log(registerForm);
+            $.ajax({
+                type: "post",
+                url: "/api/v1/auth/register",
+                headers: {'Content-Type': 'application/json'},
+                data: registerForm,
+                dataType: 'json',
+                success: function (data) {
+                    alert("success");
+                    console.log(data);
+                },
+                error: function (request, status, error) {
+                    console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+
+                }
+            });
+
+        })
+
     </script>
 </th:block>
 </html>
