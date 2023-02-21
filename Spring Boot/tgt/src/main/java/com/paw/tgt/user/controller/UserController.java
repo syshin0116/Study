@@ -26,8 +26,6 @@ public class UserController {
     @PostMapping("/idCheck")
     public @ResponseBody String idCheck(@RequestParam String username){
         String checkResult = userService.idCheck(username);
-        System.out.println("UserController>>>IdCheck");
-
         return checkResult;
     }
 

@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -31,7 +32,8 @@ public class UserService {
 //        map.put("result", userRepository.existsByUsername(username));
 //        return map;
 
-        if (userRepository.existsByUsername(username)){
+        Optional<User> optionalMemberEntity = userRepository.findByUsername(username);
+        if (optionalMemberEntity.isEmpty()){
             return "ok";
         }else{
             return "no";
