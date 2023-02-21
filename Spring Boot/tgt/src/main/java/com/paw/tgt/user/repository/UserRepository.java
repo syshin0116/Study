@@ -13,6 +13,7 @@ public interface UserRepository extends JpaRepository<User, Long>{
     @EntityGraph(attributePaths = {"boards"})
     List<User> findAll();
 
+
     Optional<User> findByUsername(String username);
 
 //    User findByUsername2(String username);

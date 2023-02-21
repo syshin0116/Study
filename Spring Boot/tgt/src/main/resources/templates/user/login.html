@@ -10,7 +10,6 @@
 <th:block layout:fragment="css"></th:block>
 <th:block layout:fragment="script"></th:block>
 <th:block layout:fragment="content">
-    <!-- Contact section-->
     <section class="bg-light py-5 text-center">
         <div class="container px-5 my-5 px-5">
             <div class="text-center mb-5">
@@ -21,7 +20,7 @@
             </div>
             <div class="row gx-5 justify-content-center">
                 <div class="col-lg-6">
-                    <form class="form-signin" id="contactForm" th:action="@{/user/login}" method="post">
+                    <form class="form-signin" id="loginForm" th:action="@{/user/login}" method="post">
                         <a th:href="@{/}"><img class="mb-4" src="/assets/CarVroong_logo.png" alt="" width="140" height="140"></a>
                         <h1 class="fw-bolder">로그인</h1>
                         <div th:if="${param.error}" class="alert alert-danger" role="alert">Invalid username and password.</div>
@@ -40,7 +39,8 @@
                             <div class="invalid-feedback" id="passwordErrMsg" style="display:none;">비밀번호를 입력해주세요.</div>
                         </div>
                         <!-- 로그인  Button-->
-                        <div class="d-grid"><button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">Login</button></div>
+
+                        <div class="d-grid"><button class="btn btn-primary btn-lg disabled" id="submitButton" type="button">로그인</button></div>
                     </form>
                 </div>
             </div>
@@ -80,6 +80,29 @@
                 $("#submitButton").addClass("disabled");                
             }
         }
+
+        $('#submitButton').on("click", function (){
+            var registerForm = $("#loginForm").serialize();
+
+            console.log(registerForm);
+            $.ajax({
+                type: "post",
+                url: "/api/v1/auth/authenticate",
+                headers: {'Content-Type': 'application/json'},
+                data: registerForm,
+                dataType: 'json',
+                success: function (data) {
+                    alert("success");
+                    console.log(data);
+                    // window.location.href = '';
+                },
+                error: function (request, status, error) {
+                    console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+
+                }
+            });
+
+        })
 
     </script>
 </th:block>
