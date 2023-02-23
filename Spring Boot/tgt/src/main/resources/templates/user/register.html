@@ -319,13 +319,14 @@
 
     //  submit 버튼 클릭 시 post 방식, json형태로 정보 전달
         $('#submitButton').on("click", function (){
-            var registerForm = $("#registerForm").serialize();
+            var registerForm = JSON.stringify(objectifyForm($("#registerForm").serialize()));
+           
 
             console.log(registerForm);
             $.ajax({
                 type: "post",
                 url: "/api/v1/auth/register",
-                headers: {'Content-Type': 'application/json'},
+                // headers: {'Content-Type': 'application/json'},
                 data: registerForm,
                 dataType: 'json',
                 success: function (data) {
