@@ -80,25 +80,35 @@
                 $("#submitButton").addClass("disabled");                
             }
         }
+        // get the form element from dom
+        const formElement = document.querySelector('form#loginForm')
+
+        // convert the form to JSON
+        const getFormJSON = (form) => {
+            const data = new FormData(form);
+            return Array.from(data.keys()).reduce((result, key) => {
+                result[key] = data.get(key);
+                return result;
+            }, {});
+        };
 
         $('#submitButton').on("click", function (){
-            var registerForm = $("#loginForm").serialize();
+            const data = JSON.stringify(getFormJSON(formElement));
 
-            console.log(registerForm);
+            console.log(data);
             $.ajax({
-                type: "post",
                 url: "/api/v1/auth/authenticate",
-                headers: {'Content-Type': 'application/json'},
-                data: registerForm,
+                type: "post",
+                contentType: "application/json; charset=utf-8",
+                data: data,
                 dataType: 'json',
                 success: function (data) {
                     alert("success");
                     console.log(data);
-                    // window.location.href = '';
+                    window.location.href = '/';
                 },
                 error: function (request, status, error) {
                     console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-
                 }
             });
 
