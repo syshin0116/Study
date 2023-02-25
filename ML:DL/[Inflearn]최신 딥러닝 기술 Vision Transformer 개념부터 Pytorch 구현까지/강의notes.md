@@ -221,5 +221,3 @@ Summation을 사용한다면, 단어 의미 정보와 위치 정보 간의 균�
 5. Lil’Log, “The Transformer Family”, Blog 
 6. AI Coffee Break with Letitia, “Positional embeddings in transformers”, Youtube
 
-
-
