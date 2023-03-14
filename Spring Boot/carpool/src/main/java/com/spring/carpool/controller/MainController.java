@@ -1,4 +1,4 @@
-package com.spring.carpool.controller;
+package src.main.java.com.spring.carpool.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

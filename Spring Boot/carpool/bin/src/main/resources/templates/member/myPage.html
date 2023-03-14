@@ -1,0 +1,87 @@
+<!DOCTYPE html> 
+<!-- layout.html -->
+
+<!-- 
+layout:decorate="~{layout/layout}"  란?
+- 기본 레이아웃을 layout/layout.html 으로 선언
+- 버전마다 선언방법이 다름 아래 참조.
+- layout:decorate thymeleaf 3.* ver (이거 사용함)
+- layout:decorator thymeleaf 2.* ver
+ <th:block layout:fragment="content">
+- 각 파일 마다, 위 코드 다음부터 작성한 내용들이 default_layout.html 의 content 부분에 위치함
+-->
+<html lang="ko"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{layout/layout}">
+	<head>
+        <meta charset="UTF-8"/>
+        <style>
+			 .inf-content{
+	    		border:1px solid #DDDDDD;
+			    -webkit-border-radius:10px;
+			    -moz-border-radius:10px;
+			    border-radius:10px;
+			    box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);
+			}			        
+        </style>
+	</head>
+	<th:block layout:fragment="css"></th:block>
+	<th:block layout:fragment="script"></th:block>
+	<th:block layout:fragment="content">
+		<!-- Contact section-->
+	    <section class="bg-light py-5">
+			<div class="panel-body inf-content">
+			    <div class="row">
+			        <div class="col-md-4">
+			            <img alt="" style="width:600px;" title="" 
+			            	class="img-circle img-thumbnail isTooltip" src="https://t1.daumcdn.net/tistoryfile/fs13/30_tistory_2008_12_23_18_01_4950a9072f77f?original" data-original-title="Usuario">
+			        </div>
+			        <div class="col-md-6" >
+			            <strong>Information</strong><br>
+			            <div class="table-responsive">
+			            <table class="table table-user-information">
+			                    <tr>
+			                        <th>Id</th>
+			                        <td class="text-primary" th:text="${member.memberId}"></td>
+			                    </tr>
+			                    <tr>
+									<th>Name</th>
+									<td class="text-primary" th:text="${member.memberName}"></td>
+			                    </tr>
+			                    <tr>
+			                        <th>Email</th>
+			                        <td class="text-primary" th:text="${member.memberEmail}"></td>
+			                    </tr>
+			                    <tr>
+			                        <th>Mobile</th>
+			                        <td class="text-primary" th:text="${member.memberMobile}"></td>
+			                    </tr>
+			                    <tr>
+			                        <th>License</th>
+			                        <td class="text-primary" th:text="${member.memberLicense}"></td>
+			                    </tr>
+								<tr>
+									<th>Birth</th>
+									<td class="text-primary" th:text="${member.memberBirthDate}"></td>
+								</tr>
+			                    <tr>
+			                        <th>Points</th>
+			                        <td class="text-primary" th:text="${member.memberPoints}"></td>
+			                    </tr>
+			            </table>
+			            </div>
+						<div class="row gutters">
+							<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+								<div class="text-right">
+									<button type="button" id="cancel" name="cancel" class="btn btn-secondary">Cancel</button>
+									<button type="submit" id="update" name="update" class="btn btn-primary">수정하기</button>
+								</div>
+							</div>
+						</div>
+			        </div>
+			    </div>
+			</div>
+	    </section>
+	</th:block>
+</html>

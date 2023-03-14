@@ -14,6 +14,7 @@
       <th>id</th>
       <th>name</th>
       <th>email</th>
+      <th>mobile</th>
       <th>license</th>
       <th>birthDate</th>
       <th>points</th>
@@ -25,15 +26,18 @@
       <td th:text="${member.memberId}"></td>
       <td th:text="${member.memberName}"></td>
       <td th:text="${member.memberEmail}"></td>
+      <td th:text="${member.memberMobile}"></td>
       <td th:text="${member.memberLicense}"></td>
       <td th:text="${member.memberBirthDate}"></td>
       <td th:text="${member.memberPoints}"></td>
+
+
       <td>
-        <a th:href="@{|/templates/memberPages/${member.memberId}|}">조회</a>
+        <a th:href="@{|/templates/member/update/${member.memberId}|}">조회</a>
       </td>
       <td><button th:onclick="detail([[${member.memberId}]])">조회(ajax)</button> </td>
       <td>
-        <a th:href="@{|/templates/memberPages/delete/${member.memberId}|}">삭제</a>
+        <a th:href="@{|/templates/member/delete/${member.memberId}|}">삭제</a>
       </td>
       <!--   삭제 요청을 ajax로. type을 post가 아닌 delete로 하고
          controller에서 @DeleteMapping을 사용함.(삭제하는 코드를 동일함)-->
@@ -84,6 +88,7 @@
                 "            <td>"+result.memberName+"</td>\n" +
                 "            <td>"+result.memberLicense+"</td>\n" +
                 "            <td>"+result.memberBirthDate+"</td>\n" +
+                "            <td>"+result.memberMobile+"</td>\n"+
                 "            <td>"+result.memberPoints+"</td>\n" +
                 "        </tr>\n" +
                 "    </table>"
