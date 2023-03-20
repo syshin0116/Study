@@ -55,13 +55,19 @@ import { Component} from 'react';
 
 import ClassComponent from './ClassComponent'
 
-export default class App extends Component{
-  render(){
-    return(
-      <ul>
-        <ClassComponent />
-        <ClassComponent />
-      </ul>
-    )
-  }
+// export default class App extends Component{
+//   render(){
+//     // return(
+//       // <ul>
+//       //   <ClassComponent href="https://www.google.com" text="go to Google"/>
+//       //   <ClassComponent href="https://twitter.com" text="go to Twitter"/>
+//       // </ul>
+//       return <div>Hello function-keyword component!</div>
+//     // )
+//   }
+// }
+
+const App = () => {
+  return <h1>function component</h1>
 }
+export default App
