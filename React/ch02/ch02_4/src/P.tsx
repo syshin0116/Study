@@ -1,10 +1,8 @@
-import type { FC, ReactNode } from "react";
+import type { FC, PropsWithChildren } from "react";
 
-export type PProps = {
-    children?: ReactNode
-}
-const P: FC<PProps> = props => {
+export type PProps = {}
+const P: FC<PropsWithChildren<PProps>> = props => {
     const {children} = props
-    return <p children={children}/>
+    return <p {...props}/>
 }
 export default P
