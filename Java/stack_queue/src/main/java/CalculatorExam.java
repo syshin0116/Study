@@ -1,4 +1,3 @@
-
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.GridLayout;
@@ -98,15 +97,15 @@ class Calculator extends JFrame implements ActionListener{
                 System.out.println(result);
                 jtf.setText(String.valueOf(result));
             }else if(operator.charAt(0)=='-') {
-                result = Double.parseDouble(operand_left) + Double.parseDouble(operand_right);
+                result = Double.parseDouble(operand_left) - Double.parseDouble(operand_right);
                 jtf.setText(String.valueOf(result));
                 System.out.println(result);
             }else if(operator.charAt(0)=='*') {
+                result = Double.parseDouble(operand_left) * Double.parseDouble(operand_right);
                 jtf.setText(String.valueOf(result));
-                result = Double.parseDouble(operand_left) + Double.parseDouble(operand_right);
                 System.out.println(result);
             }else if(operator.charAt(0)=='/') {
-                result = Double.parseDouble(operand_left) + Double.parseDouble(operand_right);
+                result = Double.parseDouble(operand_left) / Double.parseDouble(operand_right);
                 jtf.setText(String.valueOf(result));
                 System.out.println(result);
             }
