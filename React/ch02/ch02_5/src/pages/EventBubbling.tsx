@@ -11,7 +11,7 @@ export default function EventBubbling(){
     }
     return (
     <div onClick={onDivClick}>
-        <p>EvnetBubbling</p>
+        <p>EventBubbling</p>
         <button onClick={onButtonClick}>Click Me</button>
     </div>
     )
