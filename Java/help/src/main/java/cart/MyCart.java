@@ -1,5 +1,7 @@
 package cart;
 
+import java.util.Arrays;
+
 public class MyCart extends Cart {
 
     //1. 생성자는 money를 전달받고 money값 초기화, tv = 300, com = 400, radio = 500;
@@ -23,58 +25,26 @@ public class MyCart extends Cart {
      *
      */
 
-
     /*
      * info()는
      * cart배열에 담긴 물건 목록만 (null 제외) 출력해주세요.
      *
      */
 
-
-
     void money (int tv, int com, int radio) {
         this.tv = 300;
         this.com = 400;
         this.radio = 500;
+    }
 
-    }
-    public void buy(String product) {
-        if (product.equals("tv")) {
-            if (money >= tv) {
-                money -= tv;
-                add("tv");
-            } else {
-                System.out.println("금액이 부족합니다.");
-            }
-        } else if (product.equals("com")) {
-            if (money >= com) {
-                money -= com;
-                add("com");
-            } else {
-                System.out.println("금액이 부족합니다.");
-            }
-        } else if (product.equals("radio")) {
-            if (money >= radio) {
-                money -= radio;
-                add("radio");
-            } else {
-                System.out.println("금액이 부족합니다.");
-            }
-        } else {
-            System.out.println("잘못된 상품명입니다.");
-        }
-    }
     public MyCart(int money) {
         this.money = money;
         money(tv, com, radio);
-        System.out.println("money: "+this.money);
-        System.out.println("tv: "+this.tv);
-        System.out.println("com: "+this.com);
-        System.out.println("radio: "+this.radio);
     }
 
     public static void main(String[] args) {
-        MyCart mycart = new MyCart(100);
-
+        MyCart mycart = new MyCart(1000);
+        mycart.buy("tv");
+        mycart.buy("com");
     }
 }
