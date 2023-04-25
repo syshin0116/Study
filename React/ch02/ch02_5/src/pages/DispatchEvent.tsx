@@ -7,9 +7,11 @@ export default function DispatchEvent(){
         console.log('onCallClick')
         document.getElementById('root')?.click()
     }
-    return <div>
-        <p>DispatchEvent</p>
-        <button onClick={onCallDispatchEvent}>call dispatchEvent</button>
-        <button onClick={onCallClick}>call click</button>
-    </div>
+    return (
+        <div>
+            <p>DispatchEvent</p>
+            <button onClick={onCallDispatchEvent}>call dispatchEvent</button>
+            <button onClick={onCallClick}>call click</button>
+        </div>
+    )
 }
