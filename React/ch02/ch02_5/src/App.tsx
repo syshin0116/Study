@@ -18,7 +18,6 @@ export default function App(){
       <FileInput/>
       <OnChange/>
       <VariousInputs/>
-      <VariousInputs/>
       <StopPropagation/>
       <EventBubbling/>
       {/* <DispatchEvent/>

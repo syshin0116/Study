@@ -5,7 +5,7 @@ export default function ReactOnClick(){
         const {isTrusted, target, bubbles} = e
         console.log('mouse click occurs on <button>', isTrusted, target, bubbles)
     }
-    return(
+    return (
         <div>
             <p>ReactOnClick</p>
             <button onClick={onClick}>Click Me</button>
