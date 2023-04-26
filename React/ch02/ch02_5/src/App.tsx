@@ -21,10 +21,10 @@ export default function App(){
       <VariousInputs/>
       <StopPropagation/>
       <EventBubbling/>
-      <DispatchEvent/>
+      {/* <DispatchEvent/>
       <ReactOnClick/>
       <OnClick/>
-      <EventListener/>
+      <EventListener/> */}
     </div>
   )
 }
