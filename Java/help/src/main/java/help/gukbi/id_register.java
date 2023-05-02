@@ -1,4 +1,4 @@
-package help;
+package help.gukbi;
 
 import java.util.Scanner;
 
