@@ -13,7 +13,6 @@ public class MapQuiz01 {
         Map<String, Integer> map = new HashMap<>();
 
         while(true) {
-
             System.out.println("-----음식 메뉴 관리------");
             System.out.println("1. 신규 메뉴 등록"); //이미 등록된 메뉴인지 확인 후에 메뉴 등록
             System.out.println("2. 메뉴판 전체 보기"); //메뉴와 가격을 전부 출력
@@ -67,9 +66,6 @@ public class MapQuiz01 {
             }else {
                 System.out.println("잘못된 입력입니다.");
             }
-
         }
-
-
     }
 }
