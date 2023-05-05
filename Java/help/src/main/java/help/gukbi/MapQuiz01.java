@@ -21,7 +21,7 @@ public class MapQuiz01 {
             System.out.println("5. 프로그램 종료"); //종료
 
             System.out.print("메뉴입력>");
-            int menu = scan.nextInt();
+            int menu = scan.nextInt();`
 
             if(menu == 1) {
                 System.out.print("신규 메뉴명:");
