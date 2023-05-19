@@ -1,8 +1,0 @@
-def solution(array, commands):
-    answer = []
-    for command in commands:
-        start, to, number = command
-        list = array[start-1:to]
-        list.sort()
-        answer.append(list[number-1])
-    return answer

@@ -1,8 +1,0 @@
-# 중복값을 뺀 리스트의 리스트 길이의 절반 보다 
-# 작을시: 중복값을 뺀 리스트의 길이
-# 크면: 리스트 길이의 절반
-def solution(nums):
-    answer = len(nums)/2
-    if len(set(nums)) < answer:
-        answer = len(set(nums))
-    return answer

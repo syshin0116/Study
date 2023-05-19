@@ -1,9 +1,0 @@
-# 영문숫자:숫자형숫자 형태의 dictionary를 만들고
-# replace 함수를 사용하여 변환
-
-def solution(s):
-    number_english = {'zero':0, 'one':1, 'two':2, 'three':3, 'four':4, 'five':5, 'six':6, 'seven':7, 'eight':8, 'nine':9, 'ten':10}
-    for key in number_english:
-        s = s.replace(key, str(number_english[key]))
-    answer = int(s)
-    return answer
