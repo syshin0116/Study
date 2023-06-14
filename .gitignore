@@ -4,3 +4,5 @@ Dacon/Seoul Citizen Data Utilization/서울시 새로운 자전거도로 노선 
 
 test/
 train/
+mdata.py
+sunvalley_login_info.py
