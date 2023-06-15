@@ -1,0 +1,124 @@
+ERROR:root:An error occurred during the reservation process: 'sessionId'
+Traceback (most recent call last):
+  File "/var/folders/3m/knb96f9s4xg2t2gcrl96r6jh0000gn/T/ipykernel_70519/144550285.py", line 122, in main
+    login(driver)
+  File "/var/folders/3m/knb96f9s4xg2t2gcrl96r6jh0000gn/T/ipykernel_70519/144550285.py", line 20, in login
+    driver.get(config['URLs']['login_url'])
+  File "/Users/syshin/miniforge3/lib/python3.9/site-packages/selenium/webdriver/remote/webdriver.py", line 441, in get
+    self.execute(Command.GET, {'url': url})
+  File "/Users/syshin/miniforge3/lib/python3.9/site-packages/selenium/webdriver/remote/webdriver.py", line 427, in execute
+    response = self.command_executor.execute(driver_command, params)
+  File "/Users/syshin/miniforge3/lib/python3.9/site-packages/selenium/webdriver/remote/remote_connection.py", line 339, in execute
+    path = string.Template(command_info[1]).substitute(params)
+  File "/Users/syshin/miniforge3/lib/python3.9/string.py", line 121, in substitute
+    return self.pattern.sub(convert, self.template)
+  File "/Users/syshin/miniforge3/lib/python3.9/string.py", line 114, in convert
+    return str(mapping[named])
+KeyError: 'sessionId'
+ERROR:root:An error occurred during the reservation process: 'sessionId'
+Traceback (most recent call last):
+  File "/var/folders/3m/knb96f9s4xg2t2gcrl96r6jh0000gn/T/ipykernel_70519/144550285.py", line 122, in main
+    login(driver)
+  File "/var/folders/3m/knb96f9s4xg2t2gcrl96r6jh0000gn/T/ipykernel_70519/144550285.py", line 20, in login
+    driver.get(config['URLs']['login_url'])
+  File "/Users/syshin/miniforge3/lib/python3.9/site-packages/selenium/webdriver/remote/webdriver.py", line 441, in get
+    self.execute(Command.GET, {'url': url})
+  File "/Users/syshin/miniforge3/lib/python3.9/site-packages/selenium/webdriver/remote/webdriver.py", line 427, in execute
+    response = self.command_executor.execute(driver_command, params)
+  File "/Users/syshin/miniforge3/lib/python3.9/site-packages/selenium/webdriver/remote/remote_connection.py", line 339, in execute
+    path = string.Template(command_info[1]).substitute(params)
+  File "/Users/syshin/miniforge3/lib/python3.9/string.py", line 121, in substitute
+    return self.pattern.sub(convert, self.template)
+  File "/Users/syshin/miniforge3/lib/python3.9/string.py", line 114, in convert
+    return str(mapping[named])
+KeyError: 'sessionId'
+ERROR:root:An error occurred during the reservation process: 'sessionId'
+Traceback (most recent call last):
+  File "/var/folders/3m/knb96f9s4xg2t2gcrl96r6jh0000gn/T/ipykernel_70519/144550285.py", line 122, in main
+    login(driver)
+  File "/var/folders/3m/knb96f9s4xg2t2gcrl96r6jh0000gn/T/ipykernel_70519/144550285.py", line 20, in login
+    driver.get(config['URLs']['login_url'])
+  File "/Users/syshin/miniforge3/lib/python3.9/site-packages/selenium/webdriver/remote/webdriver.py", line 441, in get
+    self.execute(Command.GET, {'url': url})
+  File "/Users/syshin/miniforge3/lib/python3.9/site-packages/selenium/webdriver/remote/webdriver.py", line 427, in execute
+    response = self.command_executor.execute(driver_command, params)
+  File "/Users/syshin/miniforge3/lib/python3.9/site-packages/selenium/webdriver/remote/remote_connection.py", line 339, in execute
+    path = string.Template(command_info[1]).substitute(params)
+  File "/Users/syshin/miniforge3/lib/python3.9/string.py", line 121, in substitute
+    return self.pattern.sub(convert, self.template)
+  File "/Users/syshin/miniforge3/lib/python3.9/string.py", line 114, in convert
+    return str(mapping[named])
+KeyError: 'sessionId'
+ERROR:root:An error occurred during the reservation process: 'sessionId'
+Traceback (most recent call last):
+  File "/var/folders/3m/knb96f9s4xg2t2gcrl96r6jh0000gn/T/ipykernel_70519/144550285.py", line 122, in main
+    login(driver)
+  File "/var/folders/3m/knb96f9s4xg2t2gcrl96r6jh0000gn/T/ipykernel_70519/144550285.py", line 20, in login
+    driver.get(config['URLs']['login_url'])
+  File "/Users/syshin/miniforge3/lib/python3.9/site-packages/selenium/webdriver/remote/webdriver.py", line 441, in get
+    self.execute(Command.GET, {'url': url})
+  File "/Users/syshin/miniforge3/lib/python3.9/site-packages/selenium/webdriver/remote/webdriver.py", line 427, in execute
+    response = self.command_executor.execute(driver_command, params)
+  File "/Users/syshin/miniforge3/lib/python3.9/site-packages/selenium/webdriver/remote/remote_connection.py", line 339, in execute
+    path = string.Template(command_info[1]).substitute(params)
+  File "/Users/syshin/miniforge3/lib/python3.9/string.py", line 121, in substitute
+    return self.pattern.sub(convert, self.template)
+  File "/Users/syshin/miniforge3/lib/python3.9/string.py", line 114, in convert
+    return str(mapping[named])
+KeyError: 'sessionId'
+ERROR:root:An error occurred during the reservation process: 'sessionId'
+Traceback (most recent call last):
+  File "/var/folders/3m/knb96f9s4xg2t2gcrl96r6jh0000gn/T/ipykernel_70519/328895076.py", line 123, in main
+    login(driver)
+  File "/var/folders/3m/knb96f9s4xg2t2gcrl96r6jh0000gn/T/ipykernel_70519/328895076.py", line 20, in login
+    driver.get(config['URLs']['login_url'])
+  File "/Users/syshin/miniforge3/lib/python3.9/site-packages/selenium/webdriver/remote/webdriver.py", line 441, in get
+    self.execute(Command.GET, {'url': url})
+  File "/Users/syshin/miniforge3/lib/python3.9/site-packages/selenium/webdriver/remote/webdriver.py", line 427, in execute
+    response = self.command_executor.execute(driver_command, params)
+  File "/Users/syshin/miniforge3/lib/python3.9/site-packages/selenium/webdriver/remote/remote_connection.py", line 339, in execute
+    path = string.Template(command_info[1]).substitute(params)
+  File "/Users/syshin/miniforge3/lib/python3.9/string.py", line 121, in substitute
+    return self.pattern.sub(convert, self.template)
+  File "/Users/syshin/miniforge3/lib/python3.9/string.py", line 114, in convert
+    return str(mapping[named])
+KeyError: 'sessionId'
+ERROR:root:An error occurred during the reservation process: 'sessionId'
+Traceback (most recent call last):
+  File "/var/folders/3m/knb96f9s4xg2t2gcrl96r6jh0000gn/T/ipykernel_70519/903915554.py", line 126, in main
+    login(driver)
+  File "/var/folders/3m/knb96f9s4xg2t2gcrl96r6jh0000gn/T/ipykernel_70519/903915554.py", line 22, in login
+    driver.get(config['URLs']['login_url'])
+  File "/Users/syshin/miniforge3/lib/python3.9/site-packages/selenium/webdriver/remote/webdriver.py", line 441, in get
+    self.execute(Command.GET, {'url': url})
+  File "/Users/syshin/miniforge3/lib/python3.9/site-packages/selenium/webdriver/remote/webdriver.py", line 427, in execute
+    response = self.command_executor.execute(driver_command, params)
+  File "/Users/syshin/miniforge3/lib/python3.9/site-packages/selenium/webdriver/remote/remote_connection.py", line 339, in execute
+    path = string.Template(command_info[1]).substitute(params)
+  File "/Users/syshin/miniforge3/lib/python3.9/string.py", line 121, in substitute
+    return self.pattern.sub(convert, self.template)
+  File "/Users/syshin/miniforge3/lib/python3.9/string.py", line 114, in convert
+    return str(mapping[named])
+KeyError: 'sessionId'
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:There is no [mac_arm64] chromedriver "latest" for browser google-chrome "114.0.5735" in cache
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:About to download new driver from https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_mac_arm64.zip
+INFO:WDM:Driver has been saved in cache [/Users/syshin/.wdm/drivers/chromedriver/mac_arm64/114.0.5735.90]
+ERROR:root:An error occurred during the reservation process: 'sessionId'
+Traceback (most recent call last):
+  File "/var/folders/3m/knb96f9s4xg2t2gcrl96r6jh0000gn/T/ipykernel_70519/2022766982.py", line 126, in main
+    login(driver)
+  File "/var/folders/3m/knb96f9s4xg2t2gcrl96r6jh0000gn/T/ipykernel_70519/2022766982.py", line 22, in login
+    driver.get(config['URLs']['login_url'])
+  File "/Users/syshin/miniforge3/lib/python3.9/site-packages/selenium/webdriver/remote/webdriver.py", line 441, in get
+    self.execute(Command.GET, {'url': url})
+  File "/Users/syshin/miniforge3/lib/python3.9/site-packages/selenium/webdriver/remote/webdriver.py", line 427, in execute
+    response = self.command_executor.execute(driver_command, params)
+  File "/Users/syshin/miniforge3/lib/python3.9/site-packages/selenium/webdriver/remote/remote_connection.py", line 339, in execute
+    path = string.Template(command_info[1]).substitute(params)
+  File "/Users/syshin/miniforge3/lib/python3.9/string.py", line 121, in substitute
+    return self.pattern.sub(convert, self.template)
+  File "/Users/syshin/miniforge3/lib/python3.9/string.py", line 114, in convert
+    return str(mapping[named])
+KeyError: 'sessionId'
