@@ -122,3 +122,21 @@ Traceback (most recent call last):
   File "/Users/syshin/miniforge3/lib/python3.9/string.py", line 114, in convert
     return str(mapping[named])
 KeyError: 'sessionId'
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:There is no [mac_arm64] chromedriver "latest" for browser google-chrome "115.0.5790" in cache
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:There is no [mac_arm64] chromedriver "latest" for browser google-chrome "115.0.5790" in cache
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:There is no [mac_arm64] chromedriver "latest" for browser google-chrome "115.0.5790" in cache
+INFO:WDM:Get LATEST chromedriver version for google-chrome
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:There is no [mac_arm64] chromedriver "115.0.5790.102" for browser google-chrome "115.0.5790" in cache
+INFO:WDM:About to download new driver from https://chromedriver.storage.googleapis.com/115.0.5790.102/chromedriver_mac_arm64.zip
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:Driver [/Users/syshin/.wdm/drivers/chromedriver/mac_arm64/114.0.5735.90/chromedriver] found in cache
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:Driver [/Users/syshin/.wdm/drivers/chromedriver/mac_arm64/114.0.5735.90/chromedriver] found in cache
+INFO:WDM:====== WebDriver manager ======
+INFO:WDM:Driver [/Users/syshin/.wdm/drivers/chromedriver/mac_arm64/114.0.5735.90/chromedriver] found in cache
