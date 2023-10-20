@@ -51,5 +51,4 @@ public class Switch {
             c += 1; // c = c + 1
         }
     }
-
 }
