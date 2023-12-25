@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
+
+	<context:annotation-config />
+
+	<!-- datasource postgresql config -->
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
+		<property name="url" value="jdbc:log4jdbc:mysql://192.168.0.58/study?useUnicode=true&amp;characterEncoding=utf8"/>
+		<property name="username" value="studyuser"/>
+		<property name="password" value="1111"/>
+		<property name="initialSize" value="20"/>
+		<property name="maxTotal" value="20"/>
+		<property name="maxIdle" value="20"/>
+		<property name="minIdle" value="20"/>
+		<property name="defaultReadOnly" value="false"/>
+		<property name="maxWaitMillis" value="3000"/>
+		<property name="validationQuery" value="SELECT 1"/>
+		<property name="testOnBorrow" value="false"/>
+		<property name="testOnReturn" value="false"/>
+		<property name="testWhileIdle" value="true"/>
+		<property name="timeBetweenEvictionRunsMillis" value="150000"/>
+		<property name="numTestsPerEvictionRun" value="4"/>
+		<property name="minEvictableIdleTimeMillis" value="-1"/>
+		<property name="poolPreparedStatements" value="true"/>
+		<property name="maxOpenPreparedStatements" value="50"/>
+	</bean>
+
+	<bean id="dataSource1" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+	<!-- PostgreSQL JDBC Driver 클래스 사용 -->
+		<property name="driverClassName" value="org.postgresql.Driver"/>
+		<property name="url" value="jdbc:postgresql://192.168.0.58:5432/medi_scholar?useUnicode=true&amp;characterEncoding=utf8"/>
+		<property name="username" value="scorlar"/>
+		<property name="password" value="11111111"/>
+		<property name="initialSize" value="20"/>
+		<property name="maxTotal" value="20"/>
+		<property name="maxIdle" value="20"/>
+		<property name="minIdle" value="20"/>
+		<property name="defaultReadOnly" value="false"/>
+		<property name="maxWaitMillis" value="3000"/>
+		<property name="validationQuery" value="SELECT 1"/>
+		<property name="testOnBorrow" value="false"/>
+		<property name="testOnReturn" value="false"/>
+		<property name="testWhileIdle" value="true"/>
+		<property name="timeBetweenEvictionRunsMillis" value="150000"/>
+		<property name="numTestsPerEvictionRun" value="4"/>
+		<property name="minEvictableIdleTimeMillis" value="-1"/>
+		<property name="poolPreparedStatements" value="true"/>
+		<property name="maxOpenPreparedStatements" value="50"/>
+</bean>
+
+	<!-- SqlSession setup for MyBatis Database Layer -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mapperLocations" value="classpath:/sql/*.xml" />
+	</bean>
+
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSession"></constructor-arg>
+	</bean>
+	
+	<!-- MyBatis Mapper 인터페이스 스캔 -->
+	<mybatis-spring:scan base-package="com.medi.pubmed" />
+</beans>

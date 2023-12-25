@@ -1,0 +1,23 @@
+html,body{height:100%;}
+
+header{height:150px;}
+
+.chart-container{width:100%;height:calc(100% - 150px);padding:2.0rem;}
+
+.bubble-chart{position:relative;width:100%;height:100%;border:1px solid #ccc;overflow:hidden;}
+.bubble{position:absolute;border-radius:50%;border:none;transform-origin:center center;transition: transform 0.3s ease;aspect-ratio:1/1;box-shadow:inset 5px 5px 5px rgba(255,255,255,.5),inset -5px -5px 5px rgba(0,0,0,.5);}
+.bubble:hover{transform:scale(1.2)}
+.bubble:hover{width:150%;}
+.bubble1{background-color:rgba(255, 0, 140, 0.6);}
+.bubble2{background-color:rgba(255, 123, 0, 0.6);}
+.bubble3{background-color:rgba(47, 0, 255, 0.61);}
+.bubble4{background-color:rgba(255, 0, 0, 0.6);}
+.bubble5{background-color:rgba(0, 255, 76, 0.6);}
+.bubble6{background-color:rgba(200, 255, 0, 0.6);}
+.bubble7{background-color:rgba(140, 0, 255, 0.6);}
+.bubble8{background-color:rgba(0, 195, 255, 0.6);}
+.bubble9{background-color:rgba(0, 0, 0, 0.6);}
+
+table.tbl-chart{width:100%;height:100%;border-collapse:0;border-spacing:0;}
+table.tbl-chart,table.tbl-chart td{border:1px solid #efefef;}
+table.tbl-chart td{width:10%;height:10%;}

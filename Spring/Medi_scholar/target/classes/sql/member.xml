@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sql.member">
+
+	<!-- 저널목록 -->	
+	<!--  "" 안에 든 인자 값을 가져온다/ 결과를 ""인자에 넣는다 	 -->
+	<select id="getUserInfo" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		  select tun.user_email as userId,
+                tun.user_nm as userNm ,
+                tun.user_pass as userPw,
+                tun.user_hometown as nation,
+                tun.user_job as job,
+                tun.pri_field as priField,
+                tun.sec_field as secField
+          from pubmed.tb_user_nt_01 tun 
+          where user_email = #{email}
+           and user_pass = pubmed.crypt('1111', #{pass});
+	<!-- jsp와 #{}안에 단어를 맞춰준다 -->
+	</select>
+	<!-- 구글이메일 회원디비 유무 체크 -->
+	<select id="checkEmailExist" parameterType="java.lang.String" resultType="java.lang.Integer">
+	select count(*)
+	from pubmed.tb_user_nt_01 tun 
+	where tun.user_email = #{email}
+	</select>
+	
+	<select id="googleUserInfo" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	select tun.user_email as userId ,
+		   tun.user_nm as userNm	
+	from pubmed.tb_user_nt_01 tun 
+	where user_email = #{user_email}
+	</select>
+	
+	<insert id="insertUserInfo" parameterType="java.util.HashMap">
+		INSERT INTO pubmed.tb_user_nt_01(user_email, user_nm, user_pass,user_hometown, user_job, pri_field, sec_field)
+		VALUES (#{userid}, #{usernm}, pubmed.crypt(#{userpw}, pubmed.gen_salt('bf')), #{nation},#{job}, #{major}, #{interest})
+	</insert>
+
+	<select id="isUserIdDuplicate" parameterType="java.lang.String" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM pubmed.tb_user_nt_01 tun WHERE tun.user_email = #{userId}
+	</select>
+
+	<!-- primary 분야 -->
+	<select id="getpriList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select tcc.code_konm as kn , tcc.code_id as ci
+		  from pubmed.tb_comm_ct_01 tcc 
+		 where  tcc.parent_cd = 'cd01'
+	</select>
+
+	<!--  second 분야 -->
+	<select id="getsignList" parameterType="java.lang.String" resultType="java.util.HashMap">
+		select tcc.code_konm as codeko,  tcc.code_id as ci
+		  from pubmed.tb_comm_ct_01 tcc 
+		where  tcc.parent_cd = #{primary}
+	</select>
+
+	<!-- nation  -->
+	<select id="getnation" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select tcc.code_konm as codeko,  tcc.code_id as ci
+		  from pubmed.tb_comm_ct_01 tcc 
+		 where  tcc.parent_cd = 'cd20'
+	</select>
+	
+	<!-- job  -->
+	<select id="getjob" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select tcc.code_konm as codeko ,  tcc.code_id as ci
+		from pubmed.tb_comm_ct_01 tcc 
+		where  tcc.parent_cd = 'cd28'
+	</select>
+</mapper>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.medi.pubmed.journal.JournalDao">
+	<select id="getJournalList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select jl.id as id,
+				jt.journal_nm as title,
+				jt.issn as issn,
+				jt.eissn  as eissn,
+				jl.`Author(s)` as author,
+				jt.factor as factor,
+				STR_TO_DATE(concat(jl.`Publication Start Year`,'-', SUBSTR(now(),6)), '%Y-%m-%d %H:%i:%s') as year
+		   from journal_impact_temp jt
+		  inner join journal_impact_low jl on jt.issn = jl.issn 
+		  order by jt.factor desc limit 5
+	</select>
+</mapper>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sql.journal">
+
+<select id="getJournalList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+    SELECT * FROM (
+        SELECT ROW_NUMBER() OVER() as num, n.*
+        FROM (
+            SELECT tjn2.jour_fact_seq as jnlno,
+                   tjm.jour_nm as jnlnm,
+                   tjm.jour_id as jnlid,
+                   tjm.issn as issn,
+                   tjm.eissn as eissn,
+                   tjm.scie as scie,
+                   tjm.ssci as ssci,
+                   tjm.esci as esci,
+                   tjn2.jcr as jcr,
+                   tjn2.jci as jci
+            FROM pubmed.tb_jour_mt_01 tjm, pubmed.tb_jour_nt_02 tjn2, pubmed.tb_jour_nt_03 tjn3
+            where tjm.jour_id = tjn2.jour_id
+             and tjn2.jour_id = tjn3.jour_id
+            and tjn2.scr_year = '2022'
+            <choose>
+                <when test="field =='title' and sjournal != null and sjournal != ''" >
+                    AND tjm.jour_nm ilike concat('%', #{sjournal}, '%')
+                </when>
+                <when test="field =='issn' and sjournal != null and sjournal != ''" >
+                    AND tjm.issn like concat('%', #{sjournal}, '%')
+                </when>
+                <otherwise></otherwise>
+            </choose>
+            ORDER BY jcr desc
+        ) n
+    ) AS journal_list
+    <where>
+        num BETWEEN #{startPage} AND #{lastPage}
+    </where>
+</select>
+
+<select id="getJournalCount" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+	SELECT count(*) as count
+	FROM pubmed.tb_jour_mt_01 tjm,
+			pubmed.tb_jour_nt_02 tjn
+	WHERE tjm.jour_id = tjn.jour_id
+</select>
+
+
+</mapper>
