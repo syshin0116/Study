@@ -1,0 +1,3 @@
+[submodule "Hugo/quickstart/hugoplate"]
+	path = Hugo/quickstart/hugoplate
+	url = https://github.com/zeon-studio/hugoplate
