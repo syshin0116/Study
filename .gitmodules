@@ -1,3 +1,6 @@
 [submodule "Hugo/quickstart/hugoplate"]
 	path = Hugo/quickstart/hugoplate
 	url = https://github.com/zeon-studio/hugoplate
+[submodule "Hugo/quickstart/themes/ananke"]
+	path = Hugo/quickstart/themes/ananke
+	url = https://github.com/theNewDynamic/gohugo-theme-ananke.git
