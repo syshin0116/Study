@@ -7,3 +7,4 @@ train/
 mdata.py
 sunvalley_login_info.py
 config.ini
+.env
