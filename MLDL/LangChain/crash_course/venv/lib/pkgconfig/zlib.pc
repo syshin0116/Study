@@ -1,0 +1,13 @@
+prefix=/Users/syshin/Desktop/Syshin/Study/MLDL/LangChain/crash_course/venv
+exec_prefix=/Users/syshin/Desktop/Syshin/Study/MLDL/LangChain/crash_course/venv
+libdir=/Users/syshin/Desktop/Syshin/Study/MLDL/LangChain/crash_course/venv/lib
+sharedlibdir=/Users/syshin/Desktop/Syshin/Study/MLDL/LangChain/crash_course/venv/lib
+includedir=/Users/syshin/Desktop/Syshin/Study/MLDL/LangChain/crash_course/venv/include
+
+Name: zlib
+Description: zlib compression library
+Version: 1.2.13
+
+Requires:
+Libs: -L${libdir} -L${sharedlibdir} -lz
+Cflags: -I${includedir}
