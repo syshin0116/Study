@@ -10,8 +10,7 @@ llm = CTransformers(model='models/llama-2-7b-chat.ggmlv3.q8_0.bin',
                     config={'max_new_tokens':256,
                             'temperature':0.01})
 
-print("llm called")
-print(llm.invoke("what is the capital of USA?"))
+
 def getLlama2Response(llm, input_text, no_words, blog_style):
     ## Prompt Template
     print(f'getLlama2Response called: {llm}, {input_text}, {no_words}, {blog_style}')
