@@ -3,7 +3,8 @@
 Copyright (c) 2019 - present AppSeed.us
 """
 
-import os, environ
+import os, environ, logging
+
 
 env = environ.Env(
     # set casting, default value
@@ -39,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'apps.home'  # Enable the inner home (home)
+    'apps.home',  # Enable the inner home (home)
+    'apps.authentication'
 ]
 
 MIDDLEWARE = [
@@ -81,13 +83,14 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 if os.environ.get('DB_ENGINE') and os.environ.get('DB_ENGINE') == "mysql":
+    logging.info("MYSQL DATABASE USED env.DB_USERNMAE: %s", os.getenv('DB_USERNAME'))
     DATABASES = { 
       'default': {
         'ENGINE'  : 'django.db.backends.mysql', 
-        'NAME'    : os.getenv('DB_NAME'     , 'appseed_db'),
-        'USER'    : os.getenv('DB_USERNAME' , 'appseed_db_usr'),
-        'PASSWORD': os.getenv('DB_PASS'     , 'pass'),
-        'HOST'    : os.getenv('DB_HOST'     , 'localhost'),
+        'NAME'    : os.getenv('DB_NAME'     , 'coinProject'),
+        'USER'    : os.getenv('DB_USERNAME' , 'coinProject'),
+        'PASSWORD': os.getenv('DB_PASS'     , 'coinProject'),
+        'HOST'    : os.getenv('DB_HOST'     , 'db'),
         'PORT'    : os.getenv('DB_PORT'     , 3306),
         }, 
     }

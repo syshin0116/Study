@@ -1,13 +1,42 @@
 version: '3.8'
 services:
-  appseed-app:
-    container_name: appseed_app
+  web:
+    container_name: web
     restart: always
     env_file: .env
     build: .
     networks:
       - db_network
       - web_network
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    container_name: db
+    image: mysql:8
+    command: '--default-authentication-plugin=caching_sha2_password'
+    restart: always
+    healthcheck:
+      test: ['CMD-SHELL', 'mysqladmin ping -h 127.0.0.1 --password="$$(cat /run/secrets/db-password)" --silent']
+      interval: 3s
+      retries: 5
+      start_period: 30s
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - db_network
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_MYSQL_DATABASE}
+      MYSQL_USER: ${DB_MYSQL_USER}
+      MYSQL_PASSWORD: ${DB_MYSQL_PASSWORD}
+      TZ: ${TZ}
+    expose:
+      - 3306
+    ports:
+      - 3306:3306
+
   nginx:
     container_name: nginx
     restart: always
@@ -19,10 +48,12 @@ services:
     networks:
       - web_network
     depends_on: 
-      - appseed-app
+      - web
 networks:
   db_network:
     driver: bridge
   web_network:
     driver: bridge
- 
+
+volumes:
+  db-data:
