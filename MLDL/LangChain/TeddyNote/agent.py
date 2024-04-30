@@ -43,7 +43,7 @@ retriever = vector.as_retriever()
 retriever_tool = create_retriever_tool(
     retriever,
     name="pdf_search",
-    # 도구에 대한 설명을 자세히 기입해야 합니다!!!
+    # 도구에 대한 설명 기입
     description="2024년 1월 고용보험법 시행령(대통령령) 제34048호 관련 정보를 PDF 문서에서 검색합니다. '고용보험법 시행령' 과 관련된 질문은 이 도구를 사용해야 합니다!",
 )
 
