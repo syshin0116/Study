@@ -1,0 +1,11 @@
+langchain
+langchain_community 
+tiktoken 
+langchain-openai 
+langchainhub 
+chromadb 
+langchain 
+langgraph
+bs4
+rank_bm25
+faiss-cpu
