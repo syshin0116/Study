@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Charts</title>
+    <style>
+        #container {
+            display: flex;
+            justify-content: space-around;
+        }
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <canvas id="pieChart" width="400" height="400"></canvas>
+        <canvas id="barChart" width="600" height="400"></canvas>
+    </div>
+    <script>
+        // Pie chart data
+        const pieData = [
+            { label: "Apple", value: 34, color: "blue" },
+            { label: "Grapes", value: 18, color: "red" },
+            { label: "Melon", value: 16, color: "green" },
+            { label: "Banana", value: 32, color: "orange" }
+        ];
+
+        // Draw pie chart
+        function drawPieChart(ctx, data) {
+            const total = data.reduce((sum, item) => sum + item.value, 0);
+            let startAngle = 1.5 * Math.PI;  // Start at the bottom
+
+            data.forEach(item => {
+                const sliceAngle = 2 * Math.PI * item.value / total;
+                const endAngle = startAngle + sliceAngle;
+
+                ctx.beginPath();
+                ctx.moveTo(200, 200);  // Center of the pie chart
+                ctx.arc(200, 200, 150, startAngle, endAngle);
+                ctx.closePath();
+                ctx.fillStyle = item.color;
+                ctx.fill();
+
+                // Draw labels
+                const midAngle = (startAngle + endAngle) / 2;
+                const x = 200 + Math.cos(midAngle) * 170;
+                const y = 200 + Math.sin(midAngle) * 170;
+                ctx.fillStyle = "black";
+                ctx.font = "16px Arial";
+                ctx.fillText(`${item.label} ${item.value}%`, x - 20, y);
+
+                startAngle = endAngle;
+            });
+        }
+
+        // Bar chart data
+        const barData = [
+            { label: "a", value: 3, color: "black" },
+            { label: "b", value: 7, color: "red" },
+            { label: "c", value: 4, color: "blue" },
+            { label: "d", value: 9, color: "cyan" }
+        ];
+
+        // Draw bar chart
+        function drawBarChart(ctx, data) {
+            const max = Math.max(...data.map(item => item.value));
+            const barWidth = 50;
+            const spacing = 70;
+            const chartHeight = 350;
+
+            data.forEach((item, index) => {
+                const x = 50 + index * spacing;
+                const y = chartHeight - (item.value / max) * chartHeight + 20;
+                const height = (item.value / max) * chartHeight;
+
+                ctx.fillStyle = item.color;
+                ctx.fillRect(x, y, barWidth, height);
+                ctx.fillStyle = "black";
+                ctx.font = "14px Arial";
+                ctx.fillText(item.label, x + barWidth / 4, chartHeight + 30);
+            });
+
+            // Draw y-axis labels
+            ctx.font = "14px Arial";
+            for (let i = 0; i <= max; i += 2) {
+                const y = chartHeight - (i / max) * chartHeight + 20;
+                ctx.fillText(i, 10, y);
+            }
+
+            // Draw title
+            ctx.font = "20px Arial";
+            ctx.fillText("Vertical Bar Graph", 200, 30);
+        }
+
+        // Get canvas contexts
+        const pieCtx = document.getElementById('pieChart').getContext('2d');
+        const barCtx = document.getElementById('barChart').getContext('2d');
+
+        // Draw charts
+        drawPieChart(pieCtx, pieData);
+        drawBarChart(barCtx, barData);
+    </script>
+</body>
+</html>
