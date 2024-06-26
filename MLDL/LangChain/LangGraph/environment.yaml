@@ -1,0 +1,48 @@
+name: agent
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.12
+  - flask
+  - pymysql
+  - cryptography
+  - pip
+  - pip:
+    - tenacity==8.3.0
+    - gunicorn
+    - python-dotenv
+    - mysql-connector
+    - python-docx
+    - pyarmor==8.5.9
+    - pyinstaller==6.8.0
+    - docx2pdf==0.1.8
+    - olefile
+    - demoji
+    - chromadb==0.5.2
+    - onnxruntime
+    - redis
+    - celery==5.4.0
+    - cython==3.0.10
+    - duckduckgo_search==5.3.0b4
+    - pypdfium2
+    - rank-bm25
+    - simsimd
+    - beautifulsoup4==4.12.3
+    - Flask-WTF
+    - python-keycloak
+    - Flask-Cors
+    - crontab
+    - flower
+    - pypdf
+    - langchain==0.2.5
+    - langchain-community==0.2.5
+    - langchain-core==0.2.7
+    - langchain-openai==0.1.8
+    - langchain-text-splitters==0.2.1
+    - langchainhub==0.1.20
+    - langdetect==1.0.9
+    - langgraph==0.0.69
+    - langsmith==0.1.77
+    - nest-asyncio==1.6.0
+    
