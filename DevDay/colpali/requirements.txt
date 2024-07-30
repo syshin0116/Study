@@ -1,0 +1,8 @@
+-e .
+
+black
+pytest
+pdf2image
+Pillow
+typer
+

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en"></html>
+  <head>
+    <meta charset="UTF-8">
+    <style type="text/css">
+      table,
+      th,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding-left: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <form action="">
+    <table>
+    
+      개인신상정보입력
+
+      <tr>
+        <td>1.성명:</td>
+        <td>
+          <input type="text" name="name" placeholder="이름을 입력하세요" />
+        </td>
+      </tr>
+
+      <tr>
+        <td>2.아이디:</td>
+        <td>
+          <input type="text" name="id" placeholder="ID를 입력하세요" />
+        </td>
+      </tr>
+
+      <tr>
+        <td>3.패스워드:</td>
+        <td><input type="text" name="pwd" placeholder="" /></td>
+      </tr>
+
+      <tr>
+        <td>4.사진:</td>
+        <td><input type="file" name="image" value="파일선택" /></td>
+      </tr>
+
+      <tr>
+        <td>5.소개:</td>
+        <td><textarea name="intro" rows="2"></textarea></td>
+      </tr>
+      <tr>
+        <td>6.성별:</td>
+        <td>
+          <input type="radio" id="male" name="gender" value="남" >
+          <label for="male">남</label>
+          <input type="radio" id="female" name="gender" value="여">
+          <label for="female">여</label>
+        </td>
+      </tr>
+
+      <tr>
+        <td>7.전화:</td>
+        <td>
+          <input type="tel" name="tel" pattern="/^\d{2,3}-\d{3,4}-\d{4}$/;" required/>
+        </td>
+      </tr>
+      <tr>
+        <td>8.수강과목:</td>
+        <td>
+          <input type="checkbox" id="DT" value="DT">
+          <label for="DT">디자인씽킹과SW프로젝트</label>
+          <input type="checkbox" id="PG" value="PG">
+          <label for="DT">컴퓨터프로그래밍</label>
+          <input type="checkbox" id="CD" value="CD">
+          <label for="DT">기초코팅과문제해결</label>
+        </td>
+      </tr>
+      <tr>
+        <td>9.융합전공:</td>
+        <td>
+          <select name="lecture">
+            <option value="항공정비">항공정비</option>
+            <option value="드론">드론촬영</option>
+            <option value="항공">항공시뮬레이션</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" style="text-align: center;">
+          <input type="submit" value="전송">
+          <input type="reset" value="초기화">
+        </td>
+      </tr>
+    </table>
+  </form>
+  </body>
+</html>
