@@ -11,3 +11,4 @@ pillow
 matplotlib 
 chromadb 
 tiktoken
+pymilvus
