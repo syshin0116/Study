@@ -1,0 +1,13 @@
+names:
+- character_brown
+- medal
+nc: 2
+roboflow:
+  license: CC BY 4.0
+  project: -_-htfds
+  url: https://universe.roboflow.com/sesac/-_-htfds/dataset/1
+  version: 1
+  workspace: sesac
+test: /Users/syshin/Desktop/Syshin/Study/MLDL/help/monte_yolo/monte_dataset-1/test/images
+train: /Users/syshin/Desktop/Syshin/Study/MLDL/help/monte_yolo/monte_dataset-1/train/images
+val: /Users/syshin/Desktop/Syshin/Study/MLDL/help/monte_yolo/monte_dataset-1/valid/images

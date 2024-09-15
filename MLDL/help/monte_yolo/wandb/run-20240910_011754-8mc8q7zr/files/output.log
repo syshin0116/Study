@@ -1,0 +1,52 @@
+MPS 사용 가능: True
+MPS 빌드: True
+사용 중인 디바이스: mps
+New https://pypi.org/project/ultralytics/8.2.90 available 😃 Update with 'pip install -U ultralytics'
+Requirement already satisfied: ultralytics in /opt/homebrew/Caskroom/miniconda/base/envs/yolov8/lib/python3.11/site-packages (8.1.34)
+Collecting ultralytics
+  Using cached ultralytics-8.2.90-py3-none-any.whl.metadata (41 kB)
+Requirement already satisfied: numpy<2.0.0,>=1.23.0 in /opt/homebrew/Caskroom/miniconda/base/envs/yolov8/lib/python3.11/site-packages (from ultralytics) (1.26.4)
+Requirement already satisfied: matplotlib>=3.3.0 in /opt/homebrew/Caskroom/miniconda/base/envs/yolov8/lib/python3.11/site-packages (from ultralytics) (3.9.2)
+Requirement already satisfied: opencv-python>=4.6.0 in /opt/homebrew/Caskroom/miniconda/base/envs/yolov8/lib/python3.11/site-packages (from ultralytics) (4.10.0.84)
+Requirement already satisfied: pillow>=7.1.2 in /opt/homebrew/Caskroom/miniconda/base/envs/yolov8/lib/python3.11/site-packages (from ultralytics) (10.4.0)
+Requirement already satisfied: pyyaml>=5.3.1 in /opt/homebrew/Caskroom/miniconda/base/envs/yolov8/lib/python3.11/site-packages (from ultralytics) (6.0.2)
+Requirement already satisfied: requests>=2.23.0 in /opt/homebrew/Caskroom/miniconda/base/envs/yolov8/lib/python3.11/site-packages (from ultralytics) (2.32.3)
+Requirement already satisfied: scipy>=1.4.1 in /opt/homebrew/Caskroom/miniconda/base/envs/yolov8/lib/python3.11/site-packages (from ultralytics) (1.14.1)
+Requirement already satisfied: torch>=1.8.0 in /opt/homebrew/Caskroom/miniconda/base/envs/yolov8/lib/python3.11/site-packages (from ultralytics) (2.4.1)
+Requirement already satisfied: torchvision>=0.9.0 in /opt/homebrew/Caskroom/miniconda/base/envs/yolov8/lib/python3.11/site-packages (from ultralytics) (0.19.1)
+Requirement already satisfied: tqdm>=4.64.0 in /opt/homebrew/Caskroom/miniconda/base/envs/yolov8/lib/python3.11/site-packages (from ultralytics) (4.66.5)
+Requirement already satisfied: psutil in /opt/homebrew/Caskroom/miniconda/base/envs/yolov8/lib/python3.11/site-packages (from ultralytics) (5.9.0)
+Requirement already satisfied: py-cpuinfo in /opt/homebrew/Caskroom/miniconda/base/envs/yolov8/lib/python3.11/site-packages (from ultralytics) (9.0.0)
+Requirement already satisfied: pandas>=1.1.4 in /opt/homebrew/Caskroom/miniconda/base/envs/yolov8/lib/python3.11/site-packages (from ultralytics) (2.2.2)
+Requirement already satisfied: seaborn>=0.11.0 in /opt/homebrew/Caskroom/miniconda/base/envs/yolov8/lib/python3.11/site-packages (from ultralytics) (0.13.2)
+Requirement already satisfied: ultralytics-thop>=2.0.0 in /opt/homebrew/Caskroom/miniconda/base/envs/yolov8/lib/python3.11/site-packages (from ultralytics) (2.0.6)
+Requirement already satisfied: contourpy>=1.0.1 in /opt/homebrew/Caskroom/miniconda/base/envs/yolov8/lib/python3.11/site-packages (from matplotlib>=3.3.0->ultralytics) (1.3.0)
+Requirement already satisfied: cycler>=0.10 in /opt/homebrew/Caskroom/miniconda/base/envs/yolov8/lib/python3.11/site-packages (from matplotlib>=3.3.0->ultralytics) (0.12.1)
+Requirement already satisfied: fonttools>=4.22.0 in /opt/homebrew/Caskroom/miniconda/base/envs/yolov8/lib/python3.11/site-packages (from matplotlib>=3.3.0->ultralytics) (4.53.1)
+Requirement already satisfied: kiwisolver>=1.3.1 in /opt/homebrew/Caskroom/miniconda/base/envs/yolov8/lib/python3.11/site-packages (from matplotlib>=3.3.0->ultralytics) (1.4.7)
+Requirement already satisfied: packaging>=20.0 in /opt/homebrew/Caskroom/miniconda/base/envs/yolov8/lib/python3.11/site-packages (from matplotlib>=3.3.0->ultralytics) (24.1)
+Requirement already satisfied: pyparsing>=2.3.1 in /opt/homebrew/Caskroom/miniconda/base/envs/yolov8/lib/python3.11/site-packages (from matplotlib>=3.3.0->ultralytics) (3.1.4)
+Requirement already satisfied: python-dateutil>=2.7 in /opt/homebrew/Caskroom/miniconda/base/envs/yolov8/lib/python3.11/site-packages (from matplotlib>=3.3.0->ultralytics) (2.9.0)
+Requirement already satisfied: pytz>=2020.1 in /opt/homebrew/Caskroom/miniconda/base/envs/yolov8/lib/python3.11/site-packages (from pandas>=1.1.4->ultralytics) (2024.1)
+Requirement already satisfied: tzdata>=2022.7 in /opt/homebrew/Caskroom/miniconda/base/envs/yolov8/lib/python3.11/site-packages (from pandas>=1.1.4->ultralytics) (2024.1)
+Requirement already satisfied: charset-normalizer<4,>=2 in /opt/homebrew/Caskroom/miniconda/base/envs/yolov8/lib/python3.11/site-packages (from requests>=2.23.0->ultralytics) (3.3.2)
+Requirement already satisfied: idna<4,>=2.5 in /opt/homebrew/Caskroom/miniconda/base/envs/yolov8/lib/python3.11/site-packages (from requests>=2.23.0->ultralytics) (3.7)
+Requirement already satisfied: urllib3<3,>=1.21.1 in /opt/homebrew/Caskroom/miniconda/base/envs/yolov8/lib/python3.11/site-packages (from requests>=2.23.0->ultralytics) (2.2.2)
+Requirement already satisfied: certifi>=2017.4.17 in /opt/homebrew/Caskroom/miniconda/base/envs/yolov8/lib/python3.11/site-packages (from requests>=2.23.0->ultralytics) (2024.8.30)
+Requirement already satisfied: filelock in /opt/homebrew/Caskroom/miniconda/base/envs/yolov8/lib/python3.11/site-packages (from torch>=1.8.0->ultralytics) (3.16.0)
+Requirement already satisfied: typing-extensions>=4.8.0 in /opt/homebrew/Caskroom/miniconda/base/envs/yolov8/lib/python3.11/site-packages (from torch>=1.8.0->ultralytics) (4.12.2)
+Requirement already satisfied: sympy in /opt/homebrew/Caskroom/miniconda/base/envs/yolov8/lib/python3.11/site-packages (from torch>=1.8.0->ultralytics) (1.13.2)
+Requirement already satisfied: networkx in /opt/homebrew/Caskroom/miniconda/base/envs/yolov8/lib/python3.11/site-packages (from torch>=1.8.0->ultralytics) (3.3)
+Requirement already satisfied: jinja2 in /opt/homebrew/Caskroom/miniconda/base/envs/yolov8/lib/python3.11/site-packages (from torch>=1.8.0->ultralytics) (3.1.4)
+Requirement already satisfied: fsspec in /opt/homebrew/Caskroom/miniconda/base/envs/yolov8/lib/python3.11/site-packages (from torch>=1.8.0->ultralytics) (2024.9.0)
+Requirement already satisfied: six>=1.5 in /opt/homebrew/Caskroom/miniconda/base/envs/yolov8/lib/python3.11/site-packages (from python-dateutil>=2.7->matplotlib>=3.3.0->ultralytics) (1.16.0)
+Requirement already satisfied: MarkupSafe>=2.0 in /opt/homebrew/Caskroom/miniconda/base/envs/yolov8/lib/python3.11/site-packages (from jinja2->torch>=1.8.0->ultralytics) (2.1.5)
+Requirement already satisfied: mpmath<1.4,>=1.1.0 in /opt/homebrew/Caskroom/miniconda/base/envs/yolov8/lib/python3.11/site-packages (from sympy->torch>=1.8.0->ultralytics) (1.3.0)
+Using cached ultralytics-8.2.90-py3-none-any.whl (871 kB)
+Installing collected packages: ultralytics
+  Attempting uninstall: ultralytics
+    Found existing installation: ultralytics 8.1.34
+    Uninstalling ultralytics-8.1.34:
+      Successfully uninstalled ultralytics-8.1.34
+Successfully installed ultralytics-8.2.90
+Note: you may need to restart the kernel to use updated packages.

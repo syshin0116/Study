@@ -1,0 +1,36 @@
+{
+    "os": "macOS-14.6.1-arm64-arm-64bit",
+    "python": "3.11.9",
+    "heartbeatAt": "2024-09-09T16:30:04.402382",
+    "startedAt": "2024-09-09T16:29:54.694889",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "<python with no main file>",
+    "codePathLocal": null,
+    "git": {
+        "remote": "https://github.com/syshin0116/Study.git",
+        "commit": "b3fc24e76a308756b15054a65e9d7ba965f7b20f"
+    },
+    "email": "syshin0116@gmail.com",
+    "root": "/Users/syshin/Desktop/Syshin/Study",
+    "host": "Sys-MacBook-Pro-2.local",
+    "username": "syshin",
+    "executable": "/opt/homebrew/Caskroom/miniconda/base/envs/yolov8/bin/python",
+    "cpu_count": 12,
+    "cpu_count_logical": 12,
+    "disk": {
+        "/": {
+            "total": 926.3517189025879,
+            "used": 458.5170593261719
+        }
+    },
+    "gpuapple": {
+        "type": "Apple M3 Pro",
+        "vendor": "sppci_vendor_Apple"
+    },
+    "memory": {
+        "total": 18.0
+    }
+}

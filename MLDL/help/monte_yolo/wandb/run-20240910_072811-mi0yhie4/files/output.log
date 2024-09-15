@@ -1,0 +1,13 @@
+
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):   0%|          | 0/2 [00:00<?, ?it/s]
+
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95):  50%|█████     | 1/2 [04:32<04:32, 272.17s/it]
+
+                 Class     Images  Instances      Box(P          R      mAP50  mAP50-95): 100%|██████████| 2/2 [07:38<00:00, 229.19s/it]
+                   all         25        127       0.31      0.186      0.316       0.15
+       character_brown         25        123      0.536      0.122      0.356      0.238
+                 medal         25          4     0.0833       0.25      0.277     0.0616
+Generating Visualizations for batch-1/1: 100%|██████████| 16/16 [00:01<00:00, 11.61it/s]
+MPS 사용 가능: True
+MPS 빌드: True
+사용 중인 디바이스: mps

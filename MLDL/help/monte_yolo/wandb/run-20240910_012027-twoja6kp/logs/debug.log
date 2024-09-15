@@ -1,0 +1,69 @@
+2024-09-10 01:20:27,593 INFO    MainThread:94888 [wandb_setup.py:_flush():77] Current SDK version is 0.17.9
+2024-09-10 01:20:27,594 INFO    MainThread:94888 [wandb_setup.py:_flush():77] Configure stats pid to 94888
+2024-09-10 01:20:27,594 INFO    MainThread:94888 [wandb_setup.py:_flush():77] Loading settings from /Users/syshin/.config/wandb/settings
+2024-09-10 01:20:27,594 INFO    MainThread:94888 [wandb_setup.py:_flush():77] Loading settings from /Users/syshin/Desktop/Syshin/Study/MLDL/help/monte_yolo/wandb/settings
+2024-09-10 01:20:27,594 INFO    MainThread:94888 [wandb_setup.py:_flush():77] Loading settings from environment variables: {}
+2024-09-10 01:20:27,594 INFO    MainThread:94888 [wandb_setup.py:_flush():77] Applying setup settings: {'_disable_service': False}
+2024-09-10 01:20:27,594 INFO    MainThread:94888 [wandb_setup.py:_flush():77] Inferring run settings from compute environment: {'program': '<python with no main file>'}
+2024-09-10 01:20:27,594 INFO    MainThread:94888 [wandb_setup.py:_flush():77] Applying login settings: {}
+2024-09-10 01:20:27,595 INFO    MainThread:94888 [wandb_setup.py:_flush():77] Applying login settings: {'api_key': '***REDACTED***'}
+2024-09-10 01:20:27,595 INFO    MainThread:94888 [wandb_init.py:_log_setup():524] Logging user logs to /Users/syshin/Desktop/Syshin/Study/MLDL/help/monte_yolo/wandb/run-20240910_012027-twoja6kp/logs/debug.log
+2024-09-10 01:20:27,595 INFO    MainThread:94888 [wandb_init.py:_log_setup():525] Logging internal logs to /Users/syshin/Desktop/Syshin/Study/MLDL/help/monte_yolo/wandb/run-20240910_012027-twoja6kp/logs/debug-internal.log
+2024-09-10 01:20:27,595 INFO    MainThread:94888 [wandb_init.py:_jupyter_setup():470] configuring jupyter hooks <wandb.sdk.wandb_init._WandbInit object at 0x32e3ab610>
+2024-09-10 01:20:27,595 INFO    MainThread:94888 [wandb_init.py:init():608] calling init triggers
+2024-09-10 01:20:27,595 INFO    MainThread:94888 [wandb_init.py:init():615] wandb.init called with sweep_config: {}
+config: {}
+2024-09-10 01:20:27,595 INFO    MainThread:94888 [wandb_init.py:init():633] re-initializing run, found existing run on stack: 09js046u
+2024-09-10 01:20:27,596 INFO    MainThread:94888 [wandb_run.py:_finish():2162] finishing run syshin0116/yolov8-character-detection/09js046u
+2024-09-10 01:20:27,596 INFO    MainThread:94888 [wandb_run.py:_atexit_cleanup():2426] got exitcode: 0
+2024-09-10 01:20:27,597 INFO    MainThread:94888 [wandb_run.py:_restore():2408] restore
+2024-09-10 01:20:27,597 INFO    MainThread:94888 [wandb_run.py:_restore():2414] restore done
+2024-09-10 01:20:27,597 INFO    MainThread:94888 [wandb_run.py:_on_finish():2679] communicating current version
+2024-09-10 01:20:27,838 INFO    MainThread:94888 [wandb_run.py:_on_finish():2688] got version response 
+2024-09-10 01:20:32,416 INFO    MainThread:94888 [wandb_run.py:_footer_history_summary_info():4088] rendering history
+2024-09-10 01:20:32,416 INFO    MainThread:94888 [wandb_run.py:_footer_history_summary_info():4120] rendering summary
+2024-09-10 01:20:32,424 INFO    MainThread:94888 [wandb_run.py:_footer_sync_info():4047] logging synced files
+2024-09-10 01:20:32,474 INFO    MainThread:94888 [wandb_init.py:init():658] starting backend
+2024-09-10 01:20:32,474 INFO    MainThread:94888 [wandb_init.py:init():662] setting up manager
+2024-09-10 01:20:32,475 INFO    MainThread:94888 [backend.py:_multiprocessing_setup():105] multiprocessing start_methods=spawn,fork,forkserver, using: spawn
+2024-09-10 01:20:32,475 INFO    MainThread:94888 [wandb_init.py:init():670] backend started and connected
+2024-09-10 01:20:32,481 INFO    MainThread:94888 [wandb_run.py:_label_probe_notebook():1344] probe notebook
+2024-09-10 01:20:32,481 INFO    MainThread:94888 [wandb_run.py:_label_probe_notebook():1354] Unable to probe notebook: 'NoneType' object has no attribute 'get'
+2024-09-10 01:20:32,481 INFO    MainThread:94888 [wandb_init.py:init():768] updated telemetry
+2024-09-10 01:20:32,497 INFO    MainThread:94888 [wandb_init.py:init():801] communicating run to backend with 90.0 second timeout
+2024-09-10 01:20:33,916 INFO    MainThread:94888 [wandb_init.py:init():852] starting run threads in backend
+2024-09-10 01:20:36,716 INFO    MainThread:94888 [wandb_run.py:_console_start():2465] atexit reg
+2024-09-10 01:20:36,716 INFO    MainThread:94888 [wandb_run.py:_redirect():2311] redirect: wrap_raw
+2024-09-10 01:20:36,716 INFO    MainThread:94888 [wandb_run.py:_redirect():2376] Wrapping output streams.
+2024-09-10 01:20:36,716 INFO    MainThread:94888 [wandb_run.py:_redirect():2401] Redirects installed.
+2024-09-10 01:20:36,717 INFO    MainThread:94888 [wandb_init.py:init():895] run started, returning control to user process
+2024-09-10 01:20:36,775 INFO    MainThread:94888 [jupyter.py:save_ipynb():372] not saving jupyter notebook
+2024-09-10 01:20:36,775 INFO    MainThread:94888 [wandb_init.py:_pause_backend():435] pausing backend
+2024-09-10 01:21:18,882 INFO    MainThread:94888 [wandb_init.py:_resume_backend():440] resuming backend
+2024-09-10 01:21:19,549 INFO    MainThread:94888 [wandb_setup.py:_flush():77] Current SDK version is 0.17.9
+2024-09-10 01:21:19,550 INFO    MainThread:94888 [wandb_setup.py:_flush():77] Configure stats pid to 94888
+2024-09-10 01:21:19,550 INFO    MainThread:94888 [wandb_setup.py:_flush():77] Loading settings from /Users/syshin/.config/wandb/settings
+2024-09-10 01:21:19,550 INFO    MainThread:94888 [wandb_setup.py:_flush():77] Loading settings from /Users/syshin/Desktop/Syshin/Study/MLDL/help/monte_yolo/wandb/settings
+2024-09-10 01:21:19,550 INFO    MainThread:94888 [wandb_setup.py:_flush():77] Loading settings from environment variables: {}
+2024-09-10 01:21:19,550 INFO    MainThread:94888 [wandb_setup.py:_flush():77] Applying setup settings: {'_disable_service': False}
+2024-09-10 01:21:19,550 INFO    MainThread:94888 [wandb_setup.py:_flush():77] Inferring run settings from compute environment: {'program': '<python with no main file>'}
+2024-09-10 01:21:19,550 INFO    MainThread:94888 [wandb_setup.py:_flush():77] Applying login settings: {}
+2024-09-10 01:21:19,550 INFO    MainThread:94888 [wandb_setup.py:_flush():77] Applying login settings: {'api_key': '***REDACTED***'}
+2024-09-10 01:21:19,550 INFO    MainThread:94888 [wandb_init.py:_log_setup():524] Logging user logs to /Users/syshin/Desktop/Syshin/Study/MLDL/help/monte_yolo/wandb/run-20240910_012119-79m96ojv/logs/debug.log
+2024-09-10 01:21:19,550 INFO    MainThread:94888 [wandb_init.py:_log_setup():525] Logging internal logs to /Users/syshin/Desktop/Syshin/Study/MLDL/help/monte_yolo/wandb/run-20240910_012119-79m96ojv/logs/debug-internal.log
+2024-09-10 01:21:19,550 INFO    MainThread:94888 [wandb_init.py:init():608] calling init triggers
+2024-09-10 01:21:19,550 INFO    MainThread:94888 [wandb_init.py:init():615] wandb.init called with sweep_config: {}
+config: {}
+2024-09-10 01:21:19,550 INFO    MainThread:94888 [wandb_init.py:init():633] re-initializing run, found existing run on stack: twoja6kp
+2024-09-10 01:21:19,550 INFO    MainThread:94888 [wandb_run.py:_finish():2162] finishing run syshin0116/yolov8-character-detection/twoja6kp
+2024-09-10 01:21:19,551 ERROR   MainThread:94888 [jupyter.py:save_history():436] Run pip install nbformat to save notebook history
+2024-09-10 01:21:19,551 INFO    MainThread:94888 [jupyter.py:save_ipynb():372] not saving jupyter notebook
+2024-09-10 01:21:19,551 INFO    MainThread:94888 [wandb_init.py:_jupyter_teardown():452] cleaning up jupyter logic
+2024-09-10 01:21:19,551 INFO    MainThread:94888 [wandb_run.py:_atexit_cleanup():2426] got exitcode: 0
+2024-09-10 01:21:19,551 INFO    MainThread:94888 [wandb_run.py:_restore():2408] restore
+2024-09-10 01:21:19,551 INFO    MainThread:94888 [wandb_run.py:_restore():2414] restore done
+2024-09-10 01:21:19,551 INFO    MainThread:94888 [wandb_run.py:_on_finish():2679] communicating current version
+2024-09-10 01:21:19,581 INFO    MainThread:94888 [wandb_run.py:_on_finish():2688] got version response 
+2024-09-10 01:21:24,153 INFO    MainThread:94888 [wandb_run.py:_footer_history_summary_info():4088] rendering history
+2024-09-10 01:21:24,154 INFO    MainThread:94888 [wandb_run.py:_footer_history_summary_info():4120] rendering summary
+2024-09-10 01:21:24,162 INFO    MainThread:94888 [wandb_run.py:_footer_sync_info():4047] logging synced files
