@@ -1,0 +1,7 @@
+# ninja log v6
+1	44	1728114664749802644	CMakeFiles/P01_HelloWorld.dir/main.c.o	fcc90028cfed49e8
+44	68	1728114664792384613	P01_HelloWorld	8d5742d66a9765b8
+1	128	1728114780360767906	CMakeFiles/P01_HelloWorld.dir/01hello.c.o	d34d249adc72ed58
+1	123	1728114834817533546	CMakeFiles/P01_HelloWorld.dir/main.c.o	fcc90028cfed49e8
+2	125	1728114834818180963	CMakeFiles/P01_HelloWorld.dir/01hello.c.o	d34d249adc72ed58
+125	210	1728114834941690281	P01_HelloWorld	f0f1f138dfde9c86

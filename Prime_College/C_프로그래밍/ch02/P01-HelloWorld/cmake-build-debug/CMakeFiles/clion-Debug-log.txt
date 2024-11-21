@@ -1,0 +1,4 @@
+/Applications/CLion.app/Contents/bin/cmake/mac/aarch64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/aarch64/ninja -G Ninja -S /Users/syshin/Desktop/Syshin/Study/Prime_College/C_프로그래밍/ch02/P01-HelloWorld -B /Users/syshin/Desktop/Syshin/Study/Prime_College/C_프로그래밍/ch02/P01-HelloWorld/cmake-build-debug
+-- Configuring done (0.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /Users/syshin/Desktop/Syshin/Study/Prime_College/C_프로그래밍/ch02/P01-HelloWorld/cmake-build-debug

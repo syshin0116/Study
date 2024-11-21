@@ -1,0 +1,3 @@
+/Users/syshin/Desktop/Syshin/Study/Prime_College/C_프로그래밍/ch02/P01-HelloWorld/cmake-build-debug/CMakeFiles/P01_HelloWorld.dir
+/Users/syshin/Desktop/Syshin/Study/Prime_College/C_프로그래밍/ch02/P01-HelloWorld/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/syshin/Desktop/Syshin/Study/Prime_College/C_프로그래밍/ch02/P01-HelloWorld/cmake-build-debug/CMakeFiles/rebuild_cache.dir
