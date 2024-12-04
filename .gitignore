@@ -49,3 +49,5 @@ Temporary Items
 
 # End of https://www.toptal.com/developers/gitignore/api/macos
 *.mp4
+# Default ignored files
+/Prime_College/C_프로그래밍/.idea/workspace.xml
