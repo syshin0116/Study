@@ -9,24 +9,37 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
     } else if (msg == "/help") {
         reply = "[포들리봇 사용법]\n" +
             "1. $: OpenAI의 GPT-4o가 응답.\n" +
-            "2. $$: 정보 보호 챗봇이 응답.\n" +
-            "3. $$$: 청설모(주택 대출 상품 추천) 챗봇이 응답.\n" +
-            "4. 링크: 링크 요약.";
-    } else if (msg.startsWith("$$$")) {
-        let cmd = msg.substr(3);
-        let url = "https://podly.fun/api/chat";
-        reply = getResponseFromApi(cmd, url, room);
-    } else if (msg.startsWith("$$")) {
-        let cmd = msg.substr(2);
-        let url = "http://34.47.94.2:8000/api/chat";
-        reply = getResponseFromApi(cmd, url, room);
+            // "2. $$: 정보 보호 챗봇이 응답.\n" +
+            // "3. $$$: 청설모(주택 대출 상품 추천) 챗봇이 응답.\n" +
+            "2. 링크: 링크 요약.";
+        // } else if (msg.startsWith("$$$")) {
+        //     let cmd = msg.substr(3);
+        //     let url = "https://podly.fun/api/chat";
+        //     reply = getResponseFromApi(cmd, url);
+        // } else if (msg.startsWith("$$")) {
+        //     let cmd = msg.substr(2);
+        //     let url = "http://34.47.94.2:8000/api/chat";
+        reply = getResponseFromApi(cmd, url);
     } else if (msg.startsWith("$")) {
         let cmd = msg.substr(1);
         reply = getResponse(cmd, "openai");
     }
 
-    // 모든 응답에서 ** 제거
-    reply = reply.replace(/\*\*/g, "");
+    // 특정 조건에 따른 응답 처리
+    if ((sender === "승엽" || sender === "이현지") &&
+        (/^[ㅋ]+$/.test(msg) || (msg.match(/ㅋ/g) || []).length >= 5)) {
+        reply = "웃어?";
+    } else {
+        // 모든 응답에서 ** 제거
+        reply = reply.replace(/\*\*/g, "");
+
+        reply = "isGroupChat: " + isGroupChat + "\n" +
+            "room: " + room + "\n" +
+            "sender: " + sender + "\n" +
+            "msg: " + msg + "\n" +
+            "imageDB: " + imageDB + "\n" +
+            "packageName: " + packageName;
+    }
 
     replier.reply(reply);
 }
@@ -75,12 +88,12 @@ function summarizeUrl(url) {
 
 
 
-function getResponseFromApi(msg, url, room) {
+function getResponseFromApi(msg, url) {
     let result;
     let data = {
-        "room": room,
         "message": msg
-    }
+    };
+
     try {
         let response = org.jsoup.Jsoup.connect(url)
             .header("Content-Type", "application/json")
