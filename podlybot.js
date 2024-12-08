@@ -8,38 +8,19 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         reply = "[링크 요약]\n" + reply;
     } else if (msg == "/help") {
         reply = "[포들리봇 사용법]\n" +
-            "1. $: OpenAI의 GPT-4o가 응답.\n" +
-            // "2. $$: 정보 보호 챗봇이 응답.\n" +
-            // "3. $$$: 청설모(주택 대출 상품 추천) 챗봇이 응답.\n" +
-            "2. 링크: 링크 요약.";
-        // } else if (msg.startsWith("$$$")) {
-        //     let cmd = msg.substr(3);
-        //     let url = "https://podly.fun/api/chat";
-        //     reply = getResponseFromApi(cmd, url);
-        // } else if (msg.startsWith("$$")) {
-        //     let cmd = msg.substr(2);
-        //     let url = "http://34.47.94.2:8000/api/chat";
-        reply = getResponseFromApi(cmd, url);
+            "1. $+텍스트: Upstage의 Solar-pro 모델이 응답\n" +
+            "2. 링크: 링크 요약";
     } else if (msg.startsWith("$")) {
         let cmd = msg.substr(1);
-        reply = getResponse(cmd, "openai");
+        reply = getResponse(cmd, "upstage");
     }
 
-    // 특정 조건에 따른 응답 처리
-    if ((sender === "승엽" || sender === "이현지") &&
+    if ((sender === "이현지") &&
         (/^[ㅋ]+$/.test(msg) || (msg.match(/ㅋ/g) || []).length >= 5)) {
-        reply = "웃어?";
-    } else {
-        // 모든 응답에서 ** 제거
-        reply = reply.replace(/\*\*/g, "");
-
-        reply = "isGroupChat: " + isGroupChat + "\n" +
-            "room: " + room + "\n" +
-            "sender: " + sender + "\n" +
-            "msg: " + msg + "\n" +
-            "imageDB: " + imageDB + "\n" +
-            "packageName: " + packageName;
+        reply = "현지야, 웃어?";
     }
+    reply = reply.replace(/\*\*/g, "");
+
 
     replier.reply(reply);
 }
@@ -120,17 +101,39 @@ function getResponseFromApi(msg, url) {
 
 function getResponse(msg, type) {
     let result;
+
+    // 현재 날짜와 시간 가져오는 함수
+    function getCurrentDateTime() {
+        let now = new Date();
+        let year = now.getFullYear();
+        let month = String(now.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1
+        let date = String(now.getDate()).padStart(2, '0');
+        let hours = String(now.getHours()).padStart(2, '0');
+        let minutes = String(now.getMinutes()).padStart(2, '0');
+        let seconds = String(now.getSeconds()).padStart(2, '0');
+        return year + "-" + month + "-" + date + " " + hours + ":" + minutes;
+    }
+
+    // 현재 시간 포함
+    const currentTime = getCurrentDateTime();
+
     let data = {
         "messages": [
-            { "role": "system", "content": "You are 포들리봇, a helpful KakaoTalk assistant. Provide friendly and useful information to users. Always respond in Korean." },
-            { "role": "user", "content": msg }
+            {
+                "role": "system",
+                "content": "You are 포들리봇, a helpful KakaoTalk assistant created by 십대영님, a developer. You are based on Upstage's Solar-pro model. Provide friendly and useful information to users. Always respond in Korean. 현재 날짜와 시간:" + currentTime
+            },
+            {
+                "role": "user",
+                "content": msg
+            }
         ],
-        "temperature": 0,
+        "temperature": 0.7,
         "max_tokens": 1024,
         "top_p": 1,
         "frequency_penalty": 0.0,
         "presence_penalty": 0.0
-    }
+    };
 
     let url, key;
     if (type === "openai") {
@@ -151,9 +154,9 @@ function getResponse(msg, type) {
             .ignoreContentType(true)
             .ignoreHttpErrors(true)
             .timeout(200000)
-            .post()
+            .post();
         let responseText = response.text();
-        result1 = JSON.parse(responseText);
+        let result1 = JSON.parse(responseText);
         result = result1.choices[0].message.content;
 
     } catch (e) {
