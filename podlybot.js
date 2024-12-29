@@ -9,18 +9,26 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
     } else if (msg == "/help") {
         reply = "[포들리봇 사용법]\n" +
             "1. $+텍스트: Upstage의 Solar-pro 모델이 응답\n" +
-            "2. 링크: 링크 요약";
+            "2. $$+텍스트: 서버로 요청(Upstage, Openai중 설정된 모델이 응답)\n" +
+            "3. 링크: 링크 요약\n" +
+            "4. $recruit: 채용 정보";
+    } else if (msg == "$recruit" || msg == "평일 매일 올라오는 IT 정보들 확인 🤓") {
+        // 3개의 API 호출 및 결과 전송
+        callRecruitApis(room, sender, replier);
+        return; // 추가 메시지를 보내지 않음
+    } else if (msg.startsWith("$$")) {
+        let cmd = msg.substr(2); // $$ 이후 텍스트 추출
+        reply = getResponseFromApi("https://podly.fun/api/podlybot/chat", room, sender, cmd);
     } else if (msg.startsWith("$")) {
         let cmd = msg.substr(1);
         reply = getResponse(cmd, "upstage");
     }
 
     if ((sender === "이현지") &&
-        (/^[ㅋ]+$/.test(msg) || (msg.match(/ㅋ/g) || []).length >= 5)) {
+        (/^[ㅋㅎ]+$/.test(msg) || (msg.match(/[ㅋㅎ]/g) || []).length >= 5)) {
         reply = "현지야, 웃어?";
     }
     reply = reply.replace(/\*\*/g, "");
-
 
     replier.reply(reply);
 }
@@ -61,7 +69,7 @@ function summarizeUrl(url) {
             "5. Keep the summary concise and informative, using simple and clear language." +
             "6. Provide a brief intro about the what the page is about at the beginning";
 
-        return getResponse(prompt, "openai"); // Ensure getResponse is properly implemented
+        return getResponse(prompt, "openai");
     } catch (e) {
         return "웹페이지를 불러오거나 요약하는 중 오류가 발생했습니다: " + e.message;
     }
@@ -69,9 +77,11 @@ function summarizeUrl(url) {
 
 
 
-function getResponseFromApi(msg, url) {
+function getResponseFromApi(url, room, sender, msg) {
     let result;
     let data = {
+        "room": room,
+        "sender": sender,
         "message": msg
     };
 
@@ -97,6 +107,51 @@ function getResponseFromApi(msg, url) {
     }
 
     return result;
+}
+
+function callRecruitApis(room, sender, replier) {
+    // API endpoints
+    const apiBaseUrl = "https://podly.fun/api/recruit";
+    const apiEndpoints = [
+        { name: "OKKY IT Events", url: apiBaseUrl + "/crawl_okky_info" },
+        { name: "JobKorea Dev/Data Jobs", url: apiBaseUrl + "/crawl_dev_data" },
+        { name: "JobKorea IT Jobs", url: apiBaseUrl + "/crawl_it_jobs" },
+        { name: "ITWorld News", url: apiBaseUrl + "/crawl_itworld_news" }
+    ];
+
+    // Call each API and handle the results
+    apiEndpoints.forEach(endpoint => {
+        try {
+            // GET request
+            let response = org.jsoup.Jsoup.connect(endpoint.url)
+                .header("Content-Type", "application/json")
+                .ignoreContentType(true)
+                .ignoreHttpErrors(true)
+                .timeout(200000)
+                .get(); // Perform GET request
+
+            let responseText = response.text();
+            let jsonResponse;
+
+            // Check if response is valid JSON
+            try {
+                jsonResponse = JSON.parse(responseText);
+            } catch (e) {
+                replier.reply("[" + endpoint.name + "] Invalid JSON response: " + responseText);
+                return;
+            }
+
+            // Check if 'response' field exists
+            if (jsonResponse.response) {
+                replier.reply("[" + endpoint.name + "]\n" + jsonResponse.response);
+            } else {
+                replier.reply("[" + endpoint.name + "] 'response' field missing in the response.");
+            }
+        } catch (e) {
+            // Handle errors during API call
+            replier.reply("[" + endpoint.name + "] Error occurred: " + e.message);
+        }
+    });
 }
 
 function getResponse(msg, type) {
