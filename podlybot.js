@@ -1,5 +1,8 @@
 const scriptName = "포들리봇";
 
+
+let conversationHistory = {};
+
 function response(room, msg, sender, isGroupChat, replier, imageDB, packageName) {
     let reply = "";
 
@@ -13,7 +16,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             "3. 링크: 링크 요약\n" +
             "4. $recruit: 채용 정보";
     } else if (msg == "$recruit" || msg == "평일 매일 올라오는 IT 정보들 확인 🤓") {
-        // 3개의 API 호출 및 결과 전송
+
         callRecruitApis(room, sender, replier);
         return; // 추가 메시지를 보내지 않음
     } else if (msg.startsWith("$$")) {
@@ -21,7 +24,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         reply = getResponseFromApi("https://podly.fun/api/podlybot/chat", room, sender, cmd);
     } else if (msg.startsWith("$")) {
         let cmd = msg.substr(1);
-        reply = getResponse(cmd, "upstage");
+        reply = getResponse("upstage", room, sender, cmd);
     }
 
     if ((sender === "이현지") &&
@@ -122,18 +125,18 @@ function callRecruitApis(room, sender, replier) {
     // Call each API and handle the results
     apiEndpoints.forEach(endpoint => {
         try {
-            // GET request
+
             let response = org.jsoup.Jsoup.connect(endpoint.url)
                 .header("Content-Type", "application/json")
                 .ignoreContentType(true)
                 .ignoreHttpErrors(true)
                 .timeout(200000)
-                .get(); // Perform GET request
+                .get();
 
             let responseText = response.text();
             let jsonResponse;
 
-            // Check if response is valid JSON
+
             try {
                 jsonResponse = JSON.parse(responseText);
             } catch (e) {
@@ -143,25 +146,25 @@ function callRecruitApis(room, sender, replier) {
 
             // Check if 'response' field exists
             if (jsonResponse.response) {
-                replier.reply("[" + endpoint.name + "]\n" + jsonResponse.response);
+                replier.reply(jsonResponse.response);
             } else {
                 replier.reply("[" + endpoint.name + "] 'response' field missing in the response.");
             }
         } catch (e) {
-            // Handle errors during API call
+
             replier.reply("[" + endpoint.name + "] Error occurred: " + e.message);
         }
     });
 }
 
-function getResponse(msg, type) {
+function getResponse(type, room, sender, msg) {
     let result;
 
-    // 현재 날짜와 시간 가져오는 함수
+    // 현재 날짜와 시간
     function getCurrentDateTime() {
         let now = new Date();
         let year = now.getFullYear();
-        let month = String(now.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1
+        let month = String(now.getMonth() + 1).padStart(2, '0');
         let date = String(now.getDate()).padStart(2, '0');
         let hours = String(now.getHours()).padStart(2, '0');
         let minutes = String(now.getMinutes()).padStart(2, '0');
@@ -172,23 +175,45 @@ function getResponse(msg, type) {
     // 현재 시간 포함
     const currentTime = getCurrentDateTime();
 
+    // room별 히스토리 배열이 없으면 생성
+    if (!conversationHistory[room]) {
+        conversationHistory[room] = [];
+    }
+
+    // 이번 사용자 메시지를 히스토리에 추가
+    conversationHistory[room].push({
+        role: "user",
+        content: (sender ? ("sender: " + sender + "\n\n") : "") + msg
+    });
+
+    // 히스토리가 너무 길어지면 맨 앞(오래된) 메시지 제거 k=15
+    while (conversationHistory[room].length > 15) {
+        conversationHistory[room].shift();
+    }
+
+    // System message + 챗히스토리
+    let messages = [
+        {
+            "role": "system",
+            "content":
+                "You are 포들리봇, a helpful KakaoTalk assistant created by 김지현님, " +
+                "a developer. You are based on Upstage's Solar-pro model. Provide friendly and " +
+                "useful information to users. Always respond in Korean.\n\n" +
+                "현재 날짜와 시간: " + currentTime + "\n" +
+                "The sender is the person who sent the message to you."
+        }
+    ].concat(conversationHistory[room]);
+
     let data = {
-        "messages": [
-            {
-                "role": "system",
-                "content": "You are 포들리봇, a helpful KakaoTalk assistant created by 십대영님, a developer. You are based on Upstage's Solar-pro model. Provide friendly and useful information to users. Always respond in Korean. 현재 날짜와 시간:" + currentTime
-            },
-            {
-                "role": "user",
-                "content": msg
-            }
-        ],
+        "messages": messages,
         "temperature": 0.7,
         "max_tokens": 1024,
         "top_p": 1,
         "frequency_penalty": 0.0,
         "presence_penalty": 0.0
     };
+
+
 
     let url, key;
     if (type === "openai") {
@@ -213,6 +238,17 @@ function getResponse(msg, type) {
         let responseText = response.text();
         let result1 = JSON.parse(responseText);
         result = result1.choices[0].message.content;
+
+
+        conversationHistory[room].push({
+            role: "assistant",
+            content: result
+        });
+
+        while (conversationHistory[room].length > 15) {
+            conversationHistory[room].shift();
+        }
+
 
     } catch (e) {
         result = "오류가 발생했습니다: " + e.message + "\n응답: " + responseText;
