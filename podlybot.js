@@ -1,4 +1,4 @@
-const scriptName = "포들리봇";
+
 
 
 let conversationHistory = {};
@@ -7,7 +7,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
     let reply = "";
 
     if (isValidUrl(msg)) {
-        reply = summarizeUrl(msg);
+        reply = summarizeUrl(msg, room, sender);
         reply = "[링크 요약]\n" + reply;
     } else if (msg == "/help") {
         reply = "[포들리봇 사용법]\n" +
@@ -46,7 +46,7 @@ function isValidUrl(string) {
     return urlPattern.test(string);
 }
 
-function summarizeUrl(url) {
+function summarizeUrl(url, room, sender) {
     try {
         let response = org.jsoup.Jsoup.connect(url).get();
         let title = response.title();
@@ -72,13 +72,11 @@ function summarizeUrl(url) {
             "5. Keep the summary concise and informative, using simple and clear language." +
             "6. Provide a brief intro about the what the page is about at the beginning";
 
-        return getResponse(prompt, "openai");
+        return getResponse(type = "openai", room = room, sender = sender, msg = prompt);
     } catch (e) {
         return "웹페이지를 불러오거나 요약하는 중 오류가 발생했습니다: " + e.message;
     }
 }
-
-
 
 function getResponseFromApi(url, room, sender, msg) {
     let result;
@@ -183,11 +181,11 @@ function getResponse(type, room, sender, msg) {
     // 이번 사용자 메시지를 히스토리에 추가
     conversationHistory[room].push({
         role: "user",
-        content: (sender ? ("sender: " + sender + "\n\n") : "") + msg
+        content: "username: " + (sender || "Unknown") + "\nmessage: " + (msg || "") + "\ntime: " + currentTime
     });
 
     // 히스토리가 너무 길어지면 맨 앞(오래된) 메시지 제거 k=15
-    while (conversationHistory[room].length > 15) {
+    while (conversationHistory[room].length > 10) {
         conversationHistory[room].shift();
     }
 
@@ -196,11 +194,10 @@ function getResponse(type, room, sender, msg) {
         {
             "role": "system",
             "content":
-                "You are 포들리봇, a helpful KakaoTalk assistant created by 김지현님, " +
+                "You are 포들리봇, a helpful KakaoTalk assistant created by 십대영님, " +
                 "a developer. You are based on Upstage's Solar-pro model. Provide friendly and " +
                 "useful information to users. Always respond in Korean.\n\n" +
-                "현재 날짜와 시간: " + currentTime + "\n" +
-                "The sender is the person who sent the message to you."
+                "current date and time: " + currentTime + "\n"
         }
     ].concat(conversationHistory[room]);
 
@@ -245,7 +242,7 @@ function getResponse(type, room, sender, msg) {
             content: result
         });
 
-        while (conversationHistory[room].length > 15) {
+        while (conversationHistory[room].length > 10) {
             conversationHistory[room].shift();
         }
 
