@@ -3,8 +3,39 @@
 
 let conversationHistory = {};
 
+// 현재 날짜와 시간
+function getCurrentDateTime() {
+    let now = new Date();
+    let year = now.getFullYear();
+    let month = String(now.getMonth() + 1).padStart(2, '0');
+    let date = String(now.getDate()).padStart(2, '0');
+    let hours = String(now.getHours()).padStart(2, '0');
+    let minutes = String(now.getMinutes()).padStart(2, '0');
+    let seconds = String(now.getSeconds()).padStart(2, '0');
+    return year + "-" + month + "-" + date + " " + hours + ":" + minutes;
+}
+
 function response(room, msg, sender, isGroupChat, replier, imageDB, packageName) {
+
     let reply = "";
+    // 현재 시간 포함
+    const currentTime = getCurrentDateTime();
+
+    // room별 히스토리 배열이 없으면 생성
+    if (!conversationHistory[room]) {
+        conversationHistory[room] = [];
+    }
+
+    // 이번 사용자 메시지를 히스토리에 추가
+    conversationHistory[room].push({
+        role: "user",
+        content: "username: " + (sender || "Unknown") + "\nmessage: " + (msg || "") + "\ntime: " + currentTime
+    });
+
+    // 히스토리가 너무 길어지면 맨 앞(오래된) 메시지 제거 k=20
+    while (conversationHistory[room].length > 20) {
+        conversationHistory[room].shift();
+    }
 
     if (isValidUrl(msg)) {
         reply = summarizeUrl(msg, room, sender);
@@ -31,6 +62,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         (/^[ㅋㅎ]+$/.test(msg) || (msg.match(/[ㅋㅎ]/g) || []).length >= 5)) {
         reply = "현지야, 웃어?";
     }
+
     reply = reply.replace(/\*\*/g, "");
 
     replier.reply(reply);
@@ -157,47 +189,17 @@ function callRecruitApis(room, sender, replier) {
 
 function getResponse(type, room, sender, msg) {
     let result;
-
-    // 현재 날짜와 시간
-    function getCurrentDateTime() {
-        let now = new Date();
-        let year = now.getFullYear();
-        let month = String(now.getMonth() + 1).padStart(2, '0');
-        let date = String(now.getDate()).padStart(2, '0');
-        let hours = String(now.getHours()).padStart(2, '0');
-        let minutes = String(now.getMinutes()).padStart(2, '0');
-        let seconds = String(now.getSeconds()).padStart(2, '0');
-        return year + "-" + month + "-" + date + " " + hours + ":" + minutes;
-    }
-
-    // 현재 시간 포함
     const currentTime = getCurrentDateTime();
-
-    // room별 히스토리 배열이 없으면 생성
-    if (!conversationHistory[room]) {
-        conversationHistory[room] = [];
-    }
-
-    // 이번 사용자 메시지를 히스토리에 추가
-    conversationHistory[room].push({
-        role: "user",
-        content: "username: " + (sender || "Unknown") + "\nmessage: " + (msg || "") + "\ntime: " + currentTime
-    });
-
-    // 히스토리가 너무 길어지면 맨 앞(오래된) 메시지 제거 k=15
-    while (conversationHistory[room].length > 20) {
-        conversationHistory[room].shift();
-    }
-
     // System message + 챗히스토리
     let messages = [
         {
             "role": "system",
             "content":
-                "You are 포들리봇, a helpful KakaoTalk assistant created by 십대영님, " +
-                "an anonymous developer. You are based on Openai's gpt-4o-mini model. Provide friendly and " +
-                "useful information to users. Always respond in Korean. Be polite\n\n" +
-                "current date and time: " + currentTime + "\n"
+                "You are 포들리봇, a helpful KakaoTalk assistant created by 십대영님 using OpenAI's gpt-4o model. " +
+                "Your primary goal is to provide accurate, friendly, and useful responses in Korean. " +
+                "If the response is lengthy, use bullet points for better readability. " +
+                "Always maintain a polite tone.\n\n" +
+                "Current date and time: " + currentTime + "\n"
         }
     ].concat(conversationHistory[room]);
 
@@ -216,7 +218,7 @@ function getResponse(type, room, sender, msg) {
     if (type === "openai") {
         url = "https://api.openai.com/v1/chat/completions";
         key = openaiKey;
-        data.model = "gpt-4o-mini";
+        data.model = "gpt-4o";
     } else {
         url = "https://api.upstage.ai/v1/solar/chat/completions";
         key = upstageKey;
