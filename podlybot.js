@@ -24,7 +24,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         reply = getResponseFromApi("https://podly.fun/api/podlybot/chat", room, sender, cmd);
     } else if (msg.startsWith("$")) {
         let cmd = msg.substr(1);
-        reply = getResponse("upstage", room, sender, cmd);
+        reply = getResponse("openai", room, sender, cmd);
     }
 
     if ((sender === "이현지") &&
@@ -185,7 +185,7 @@ function getResponse(type, room, sender, msg) {
     });
 
     // 히스토리가 너무 길어지면 맨 앞(오래된) 메시지 제거 k=15
-    while (conversationHistory[room].length > 10) {
+    while (conversationHistory[room].length > 20) {
         conversationHistory[room].shift();
     }
 
@@ -195,8 +195,8 @@ function getResponse(type, room, sender, msg) {
             "role": "system",
             "content":
                 "You are 포들리봇, a helpful KakaoTalk assistant created by 십대영님, " +
-                "a developer. You are based on Upstage's Solar-pro model. Provide friendly and " +
-                "useful information to users. Always respond in Korean.\n\n" +
+                "an anonymous developer. You are based on Openai's gpt-4o-mini model. Provide friendly and " +
+                "useful information to users. Always respond in Korean. Be polite\n\n" +
                 "current date and time: " + currentTime + "\n"
         }
     ].concat(conversationHistory[room]);
@@ -216,7 +216,7 @@ function getResponse(type, room, sender, msg) {
     if (type === "openai") {
         url = "https://api.openai.com/v1/chat/completions";
         key = openaiKey;
-        data.model = "gpt-4o";
+        data.model = "gpt-4o-mini";
     } else {
         url = "https://api.upstage.ai/v1/solar/chat/completions";
         key = upstageKey;
@@ -242,7 +242,7 @@ function getResponse(type, room, sender, msg) {
             content: result
         });
 
-        while (conversationHistory[room].length > 10) {
+        while (conversationHistory[room].length > 20) {
             conversationHistory[room].shift();
         }
 
