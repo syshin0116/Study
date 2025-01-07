@@ -1,6 +1,4 @@
 
-
-
 let conversationHistory = {};
 
 // 현재 날짜와 시간
@@ -14,7 +12,6 @@ function getCurrentDateTime() {
     let seconds = String(now.getSeconds()).padStart(2, '0');
     return year + "-" + month + "-" + date + " " + hours + ":" + minutes;
 }
-
 function response(room, msg, sender, isGroupChat, replier, imageDB, packageName) {
 
     let reply = "";
@@ -38,27 +35,36 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
     }
 
     if (isValidUrl(msg)) {
-        reply = summarizeUrl(msg, room, sender);
+        reply = summarizeUrl(msg);
         reply = "[링크 요약]\n" + reply;
-    } else if (msg == "/help") {
+    } else if (msg == "&help") {
         reply = "[포들리봇 사용법]\n" +
-            "1. $+텍스트: Openai의 gpt-4o 모델이 응답\n" +
-            "2. $$+텍스트: 서버로 요청(Upstage, Openai중 설정된 모델이 응답)\n" +
+            "1. &+텍스트: Openai의 gpt-4o 모델이 응답\n" +
+            "2. &&+텍스트: 서버로 요청(Upstage, Openai중 설정된 모델이 응답)\n" +
             "3. 링크: 링크 요약\n" +
-            "4. $recruit: 채용 정보";
+            "4. &recruit: 채용 정보";
     } else if (msg == "$recruit" || msg == "평일 매일 올라오는 IT 정보들 확인 🤓") {
-
         callRecruitApis(room, sender, replier);
-        return; // 추가 메시지를 보내지 않음
-    } else if (msg.startsWith("$$")) {
-        let cmd = msg.substr(2); // $$ 이후 텍스트 추출
+        return;
+    } else if (msg.startsWith("&&")) {
+        let cmd = msg.substr(2);
         reply = getResponseFromApi("https://podly.fun/api/podlybot/chat", room, sender, cmd);
-    } else if (msg.startsWith("$")) {
+    } else if (msg.startsWith("&")) {
         let cmd = msg.substr(1);
-        reply = getResponse("openai", room, sender, cmd);
-    }
+        let messages = [
+            {
+                "role": "system",
+                "content":
+                    "You are 포들리봇, a helpful KakaoTalk assistant created by anonymous developers called 십대영님 and 해달님." +
+                    "You are based on OpenAI's gpt-4o model. " +
+                    "Your primary goal is to provide accurate, friendly, and useful responses in Korean. " +
+                    "If the response is lengthy, use bullet points for better readability. " +
+                    "Always maintain a polite tone."
+            }
+        ].concat(conversationHistory[room]);
 
-    if ((sender === "이현지") &&
+        reply = getResponse("openai", messages);
+    } else if ((sender === "이현지") &&
         (/^[ㅋㅎ]+$/.test(msg) || (msg.match(/[ㅋㅎ]/g) || []).length >= 5)) {
         reply = "현지야, 웃어?";
     }
@@ -67,7 +73,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 
     conversationHistory[room].push({
         role: "assistant",
-        content: "username: " + "포들리봇" + "\nmessage: " + (reply || "") + "\ntime: " + currentTime
+        content: reply
     });
 
     replier.reply(reply);
@@ -83,33 +89,49 @@ function isValidUrl(string) {
     return urlPattern.test(string);
 }
 
-function summarizeUrl(url, room, sender) {
+function summarizeUrl(url) {
     try {
         let response = org.jsoup.Jsoup.connect(url).get();
         let title = response.title();
         let body = response.body().text();
-        let maxLength = 1000;
+        let maxLength = 5000;
 
         if (body.length > maxLength) {
             body = body.substring(0, body.lastIndexOf(" ", maxLength)) + "..."; // Ensures truncation at word boundary
         }
+        let currentTime = getCurrentDateTime();
+        let messages = [
+            {
+                role: "system",
+                content:
+                    "You are 포들리봇, a helpful KakaoTalk assistant created by 십대영님 using OpenAI's gpt-4o model. " +
+                    "Your primary goal is to provide accurate, friendly, and useful responses in Korean. " +
+                    "If the response is lengthy, use bullet points for better readability. " +
+                    "Always maintain a polite tone.\n\n" +
+                    "Current date and time: " + currentTime + "\n"
+            },
+            {
+                role: "user",
+                content:
+                    "Summarize the following webpage content in Korean, focusing on the user's intended main points. " +
+                    "Avoid including irrelevant details such as platform policies, disclaimers, or general operational information (e.g., YouTube’s product sales policies or platform features). " +
+                    "For YouTube links, focus on the main topic or discussion points of the video. " +
+                    "For articles or blogs, summarize the key insights or instructions. " +
+                    "Use clear and concise bullet points with '-' to highlight the most important information. " +
+                    "Provide a concise and informative summary.\n\n" +
+                    "Title: " + title + "\n\n" +
+                    "Content: " + body + "\n\n" +
+                    "Instructions:\n" +
+                    "1. Summarize the key points in Korean\n" +
+                    "2. Use '-' for bullet points (not markdown)\n" +
+                    "3. Focus only on the relevant content related to the video, blog, or article\n" +
+                    "4. Ignore unrelated sections like platform policies or disclaimers\n" +
+                    "5. Keep the summary concise and informative, using simple, polite and clear language\n" +
+                    "6. Provide a brief intro about what the page is about at the beginning"
+            }
+        ];
 
-        let prompt = "Summarize the following webpage content in Korean, focusing on the user's intended main points. " +
-            "Avoid including irrelevant details such as platform policies, disclaimers, or general operational information " +
-            "(e.g., YouTube’s product sales policies or platform features). For YouTube links, focus on the main topic or discussion points of the video. " +
-            "For articles or blogs, summarize the key insights or instructions. Use clear and concise bullet points with '-' to highlight the most important information. " +
-            "Provide a concise and informative summary.\n\n" +
-            "Title: " + title + "\n\n" +
-            "Content: " + body + "\n\n" +
-            "Instructions:\n" +
-            "1. Summarize the key points in Korean.\n" +
-            "2. Use '-' for bullet points (not markdown).\n" +
-            "3. Focus only on the relevant content related to the video, blog, or article.\n" +
-            "4. Ignore unrelated sections like platform policies or disclaimers.\n" +
-            "5. Keep the summary concise and informative, using simple and clear language." +
-            "6. Provide a brief intro about the what the page is about at the beginning";
-
-        return getResponse(type = "openai", room = room, sender = sender, msg = prompt);
+        return getResponse("openai", messages);
     } catch (e) {
         return "웹페이지를 불러오거나 요약하는 중 오류가 발생했습니다: " + e.message;
     }
@@ -192,21 +214,8 @@ function callRecruitApis(room, sender, replier) {
     });
 }
 
-function getResponse(type, room, sender, msg) {
+function getResponse(type, messages) {
     let result;
-    const currentTime = getCurrentDateTime();
-    // System message + 챗히스토리
-    let messages = [
-        {
-            "role": "system",
-            "content":
-                "You are 포들리봇, a helpful KakaoTalk assistant created by 십대영님 using OpenAI's gpt-4o model. " +
-                "Your primary goal is to provide accurate, friendly, and useful responses in Korean. " +
-                "If the response is lengthy, use bullet points for better readability. " +
-                "Always maintain a polite tone.\n\n" +
-                "Current date and time: " + currentTime + "\n"
-        }
-    ].concat(conversationHistory[room]);
 
     let data = {
         "messages": messages,
@@ -216,8 +225,6 @@ function getResponse(type, room, sender, msg) {
         "frequency_penalty": 0.0,
         "presence_penalty": 0.0
     };
-
-
 
     let url, key;
     if (type === "openai") {
