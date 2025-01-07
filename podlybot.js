@@ -42,7 +42,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         reply = "[링크 요약]\n" + reply;
     } else if (msg == "/help") {
         reply = "[포들리봇 사용법]\n" +
-            "1. $+텍스트: Upstage의 Solar-pro 모델이 응답\n" +
+            "1. $+텍스트: Openai의 gpt-4o 모델이 응답\n" +
             "2. $$+텍스트: 서버로 요청(Upstage, Openai중 설정된 모델이 응답)\n" +
             "3. 링크: 링크 요약\n" +
             "4. $recruit: 채용 정보";
@@ -64,6 +64,11 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
     }
 
     reply = reply.replace(/\*\*/g, "");
+
+    conversationHistory[room].push({
+        role: "assistant",
+        content: "username: " + "포들리봇" + "\nmessage: " + (reply || "") + "\ntime: " + currentTime
+    });
 
     replier.reply(reply);
 }
@@ -237,17 +242,6 @@ function getResponse(type, room, sender, msg) {
         let responseText = response.text();
         let result1 = JSON.parse(responseText);
         result = result1.choices[0].message.content;
-
-
-        conversationHistory[room].push({
-            role: "assistant",
-            content: result
-        });
-
-        while (conversationHistory[room].length > 20) {
-            conversationHistory[room].shift();
-        }
-
 
     } catch (e) {
         result = "오류가 발생했습니다: " + e.message + "\n응답: " + responseText;
