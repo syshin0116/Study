@@ -25,7 +25,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         // 이번 사용자 메시지를 히스토리에 추가
         conversationHistory[room].push({
             role: "user",
-            content: `username: ${sender || "Unknown"}\nmessage: ${msg || ""}\ntime: ${currentTime}`
+            content: "username: " + (sender || "Unknown") + "\nmessage: " + (msg || "") + "\ntime: " + currentTime
         });
 
         // 히스토리가 너무 길어지면 맨 앞(오래된) 메시지 제거 k=20
