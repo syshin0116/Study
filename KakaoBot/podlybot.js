@@ -1,6 +1,4 @@
-
 let conversationHistory = {};
-
 // 현재 날짜와 시간
 function getCurrentDateTime() {
     let now = new Date();
@@ -35,7 +33,12 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 
         // 메시지 조건에 따른 처리
         if (isValidUrl(msg)) {
-            reply = "[링크 요약]\n" + summarizeUrl(msg);
+            summaryText = summarizeUrl(msg);
+            if (summaryText) {
+                addItemToNotion(msg, summaryText, room, sender);
+                reply = "[링크 요약]\n" + summaryText;
+            }
+
         } else if (msg === "&help") {
             reply = "[포들리봇 사용법]\n" +
                 "1. &+텍스트: Openai의 gpt-4o 모델이 응답\n" +
@@ -264,4 +267,123 @@ function getResponse(type, messages) {
         result = "오류가 발생했습니다: " + e.message + "\n응답: " + responseText;
     }
     return result;
+}
+
+function addItemToNotion(url, summary, room, user) {
+    try {
+        const notionUrl = "https://api.notion.com/v1/pages";
+
+        // 요청 데이터 (JSON 형식)
+        const payload = {
+            parent: { database_id: NOTION_DATABASE_ID },
+            properties: {
+                title: {
+                    title: [
+                        {
+                            text: {
+                                content: url
+                            }
+                        }
+                    ]
+                },
+                room: {
+                    rich_text: [
+                        {
+                            text: {
+                                content: room
+                            }
+                        }
+                    ]
+                },
+                user: {
+                    rich_text: [
+                        {
+                            text: {
+                                content: user
+                            }
+                        }
+                    ]
+                },
+                "created date": {
+                    date: {
+                        start: new Date().toISOString()
+                    }
+                }
+            },
+            children: [
+                {
+                    object: "block",
+                    heading_2: {
+                        rich_text: [
+                            {
+                                text: {
+                                    content: "요약"
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    object: "block",
+                    paragraph: {
+                        rich_text: [
+                            {
+                                text: {
+                                    content: "url:" + url,
+                                    link: {
+                                        url: url
+                                    }
+                                }
+                            }
+                        ],
+                        color: "default"
+                    }
+                },
+                {
+                    object: "block",
+                    paragraph: {
+                        rich_text: [
+                            {
+                                text: {
+                                    content: summary
+                                }
+                            }
+                        ],
+                        color: "default"
+                    }
+                }
+            ]
+        };
+
+        // Java 기반 HTTP 요청
+        const urlObj = new java.net.URL(notionUrl);
+        const connection = urlObj.openConnection();
+        connection.setRequestMethod("POST");
+        connection.setRequestProperty("Authorization", "Bearer " + NOTION_API_KEY);
+        connection.setRequestProperty("Content-Type", "application/json");
+        connection.setRequestProperty("Notion-Version", "2022-06-28");
+        connection.setDoOutput(true);
+
+        // 요청 데이터 전송
+        const writer = new java.io.OutputStreamWriter(connection.getOutputStream());
+        writer.write(JSON.stringify(payload));
+        writer.flush();
+        writer.close();
+
+        // 응답 받기
+        const reader = new java.io.BufferedReader(
+            new java.io.InputStreamReader(connection.getInputStream(), "UTF-8")
+        );
+        let response = "";
+        let line;
+        while ((line = reader.readLine()) !== null) {
+            response += line;
+        }
+        reader.close();
+
+        // 결과 반환
+        return "Notion 등록 완료: " + response;
+    } catch (e) {
+        return "Notion API 호출 중 오류 발생: " + e.message;
+    }
 }
