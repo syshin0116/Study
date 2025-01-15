@@ -22,7 +22,7 @@ function getCurrentDateTime() {
 }
 
 
-function addItemToNotion(url, summary, room, user) {
+function addItemToNotion(url, summary, room, user, title) {
     return new Promise((resolve, reject) => {
         const notionUrl = "https://api.notion.com/v1/pages";
 
@@ -34,19 +34,13 @@ function addItemToNotion(url, summary, room, user) {
                     title: [
                         {
                             text: {
-                                content: url // URL을 제목으로 저장
+                                content: title
                             }
                         }
                     ]
                 },
-                room: {
-                    rich_text: [
-                        {
-                            text: {
-                                content: room
-                            }
-                        }
-                    ]
+                url: {
+                    url: url
                 },
                 user: {
                     rich_text: [
@@ -59,7 +53,7 @@ function addItemToNotion(url, summary, room, user) {
                 },
                 "created date": {
                     date: {
-                        start: getCurrentDateTime()
+                        start: new Date().toISOString()
                     }
                 }
             },
@@ -70,7 +64,7 @@ function addItemToNotion(url, summary, room, user) {
                         rich_text: [
                             {
                                 text: {
-                                    content: "요약"
+                                    content: title + "요약"
                                 }
                             }
                         ]
@@ -82,12 +76,11 @@ function addItemToNotion(url, summary, room, user) {
                         rich_text: [
                             {
                                 text: {
-                                    content: "url:" + url,
+                                    content: url,
                                     link: {
                                         url: url
                                     }
-                                },
-                                href: url
+                                }
                             }
                         ],
                         color: "default"
@@ -99,9 +92,8 @@ function addItemToNotion(url, summary, room, user) {
                         rich_text: [
                             {
                                 text: {
-                                    content: summary,
-
-                                },
+                                    content: summary
+                                }
                             }
                         ],
                         color: "default"
@@ -151,17 +143,6 @@ function addItemToNotion(url, summary, room, user) {
 }
 
 // 테스트 호출
-// addItemToNotion("https://news.hada.io/topic?id=18698", "이 기사는 마크 저커버그가 2025년까지 AI가 중급 코딩 엔지니어 수준에 도달할 것이라는 예측을 다루고 있습니다. 주요 내용은 다음과 같습니다:\n- AI는 2025년까지 중간 수준의 엔지니어와 동등한 코딩 능력을 가질 것으로 예상됩니다.\n- 메타의 Llama 시리즈는 오픈소스로 개발되어 누구나 활용할 수 있습니다. \n- AI는 엔지니어의 생산성을 30 % 향상시키고 있으며, 여러 기업들이 AI를 통해 업무 효율성을 극대화하고 있습니다. \n- 세일즈포스와 클라르나 같은 기업들은 AI 덕분에 엔지니어 채용을 줄이는 추세입니다. \n- AI의 발전은 기술 산업 전반에 근본적인 변화를 가져올 잠재력을 지니고 있습니다.", "단톡", "유저1")
-//     .then(console.log)
-//     .catch(console.error);
-
-
-function url(url) {
-    let response = org.jsoup.Jsoup.connect(url).get();
-    let title = response.title();
-    console.log(response);
-    console.log(title);
-
-}
-
-url("https://news.hada.io/topic?id=18698");
+addItemToNotion("https://news.hada.io/topic?id=18698", "이 기사는 마크 저커버그가 2025년까지 AI가 중급 코딩 엔지니어 수준에 도달할 것이라는 예측을 다루고 있습니다. 주요 내용은 다음과 같습니다:\n- AI는 2025년까지 중간 수준의 엔지니어와 동등한 코딩 능력을 가질 것으로 예상됩니다.\n- 메타의 Llama 시리즈는 오픈소스로 개발되어 누구나 활용할 수 있습니다. \n- AI는 엔지니어의 생산성을 30 % 향상시키고 있으며, 여러 기업들이 AI를 통해 업무 효율성을 극대화하고 있습니다. \n- 세일즈포스와 클라르나 같은 기업들은 AI 덕분에 엔지니어 채용을 줄이는 추세입니다. \n- AI의 발전은 기술 산업 전반에 근본적인 변화를 가져올 잠재력을 지니고 있습니다.", "단톡", "유저1", "title")
+    .then(console.log)
+    .catch(console.error);
