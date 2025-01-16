@@ -1,7 +1,7 @@
 require('dotenv').config();
 
-// const NOTION_DATABASE_ID = process.env.NOTION_DATABASE_ID;
-// const NOTION_API_KEY = process.env.NOTION_API_KEY;
+const NOTION_DATABASE_ID = process.env.NOTION_DATABASE_ID;
+const NOTION_API_KEY = process.env.NOTION_API_KEY;
 
 /**
  * Notion API를 사용하여 데이터를 추가하는 함수
@@ -41,6 +41,11 @@ function addItemToNotion(url, summary, room, user, title) {
                 },
                 url: {
                     url: url
+                },
+                room: {
+                    title: [{
+                        text: { "content": "위캔코딩 스터디방🤗" }
+                    }]
                 },
                 user: {
                     rich_text: [

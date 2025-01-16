@@ -1,4 +1,5 @@
 let conversationHistory = {};
+const wecoRooms = new Set(["위캔코딩 스터디방🤗", "SQLD & ADsP 스터디방"]);
 
 function getCurrentDateTime() {
     let now = new Date();
@@ -41,7 +42,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 
                 // 요약문에서 ** 제거
                 summary = summary.replace(/\*\*/g, "");
-                if (room === "위캔코딩 스터디방🤗") {
+                if (wecoRooms.has(room)) {
                     addItemToNotion(msg, summary, room, sender, title);
                 }
                 reply = "[링크 요약]\n제목:" + title + "\n" + summary;
@@ -52,7 +53,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
                 "2. &&+텍스트: 서버로 요청(Upstage, Openai중 설정된 모델이 응답)\n" +
                 "3. 링크: 링크 요약\n" +
                 "4. &recruit: 채용 정보";
-            if (room === "위캔코딩 스터디방🤗") {
+            if (wecoRooms.has(room)) {
                 reply += "\n\n[위캔코딩 스터디방 url 정리 페이지]\n" +
                     "📌 https://tinyurl.com/c4ywwb2v";
             }
@@ -278,7 +279,7 @@ function callRecruitApis(room, sender, replier) {
                 jsonResponse = JSON.parse(responseText);
             } catch (e) {
                 replier.reply("[" + endpoint.name + "] Invalid JSON response: " + responseText);
-                return;
+                return null;
             }
 
             // Check if 'response' field exists
@@ -356,15 +357,6 @@ function addItemToNotion(url, summary, room, user, title) {
                 url: {
                     url: url
                 },
-                room: {
-                    rich_text: [
-                        {
-                            text: {
-                                content: room
-                            }
-                        }
-                    ]
-                },
                 user: {
                     rich_text: [
                         {
@@ -373,6 +365,11 @@ function addItemToNotion(url, summary, room, user, title) {
                             }
                         }
                     ]
+                },
+                room: {
+                    title: [{
+                        name: room
+                    }]
                 },
                 "created date": {
                     date: {
@@ -387,7 +384,7 @@ function addItemToNotion(url, summary, room, user, title) {
                         rich_text: [
                             {
                                 text: {
-                                    content: "요약"
+                                    content: title + "요약"
                                 }
                             }
                         ]

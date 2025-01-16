@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "pdf-loader"
+version = "0.1.0"
+description = ""
+authors = ["syshin0116 <syshin0116@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.11,<3.13"
+pypdf = "^5.1.0"
+pdfplumber = "^0.11.5"
+llama-parse = "^0.5.19"
+markitdown = "^0.0.1a3"
+ipykernel = "^6.29.5"
+langchain = "^0.3.14"
+langchain-core = "^0.3.29"
+langchain-community = "^0.3.14"
+langchain-docling = "^0.2.0"
+llama-index-readers-file = "^0.4.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
