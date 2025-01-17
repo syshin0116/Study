@@ -367,9 +367,9 @@ function addItemToNotion(url, summary, room, user, title) {
                     ]
                 },
                 room: {
-                    title: [{
+                    select: {
                         name: room
-                    }]
+                    }
                 },
                 "created date": {
                     date: {
