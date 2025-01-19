@@ -1,0 +1,22 @@
+services:
+  neo4j:
+    container_name: neo4j-boot
+    image: neo4j:5.22.0
+    ports:
+      - 7474:7474	# for browser console
+      - 7687:7687	# for db
+    volumes:
+      - ./neo4j/logs:/logs
+      - ./neo4j/config:/config
+      - ./neo4j/data:/data
+      - ./neo4j/plugins:/plugins # These files specify the volumes to maintain the basic Neo4j configuration and data.
+      # We will convert and save the OpenAlex data into JSON format within {your volume path}/json_data,
+      # and then load the data into our Neo4j database through the /import folder, which is mounted with this path.
+      - ./neo4j/import:/import 
+    environment:
+      - NEO4J_dbms_security_procedures_unrestricted=apoc.*
+      - NEO4J_apoc_import_file_enabled=true
+      - NEO4J_apoc_export_file_enabled=true
+      - NEO4J_apoc_import_file_use__neo4j__config=true
+      - NEO4J_AUTH=neo4j/teddynote
+      - NEO4J_PLUGINS=["apoc"]
