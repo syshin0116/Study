@@ -17,6 +17,11 @@ langchain-core = "^0.3.29"
 langchain-community = "^0.3.14"
 langchain-docling = "^0.2.0"
 llama-index-readers-file = "^0.4.3"
+pymupdf = "^1.25.2"
+langchain-openai = "^0.3.1"
+langgraph = "^0.2.64"
+rank-bm25 = "^0.2.2"
+chromadb = "^0.6.3"
 
 
 [build-system]
