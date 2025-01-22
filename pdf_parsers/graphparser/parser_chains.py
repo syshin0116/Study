@@ -169,3 +169,23 @@ Output must be written in Korean.
         image_paths, system_prompts, user_prompts, display_image=False
     )
     return answer
+
+
+@chain
+def extract_metadata_from_research_paper(data_batches):
+    # 객체 생성
+    llm = ChatOpenAI(
+        temperature=0,  # 창의성 (0.0 ~ 2.0)
+        model_name="gpt-4o-mini",  # 모델명
+    )
+
+    system_prompt = """You are an expert in extracting metadata from a research paper. Given first page of a research paper, your task is to extract the following metadata:
+- Korean Title
+- English Title
+- Korean Authors
+- English Authors
+- Korean Abstract
+- English Abstract
+- Korean Keywords
+- English Keywords
+"""

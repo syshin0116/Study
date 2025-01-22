@@ -14,6 +14,7 @@ from .parser_chains import (
     extract_image_summary,
     extract_table_summary,
     table_markdown_extractor,
+    extract_metadata_from_research_paper,
 )
 
 
@@ -547,3 +548,16 @@ class TableMarkdownExtractorNode(BaseNode):
 
         # 새로운 GraphState 객체 반환, table_markdown 키에 결과 저장
         return GraphState(table_markdown=table_markdown_output)
+
+
+class MetaDataExtractorNode(BaseNode):
+    """
+    논문 메타데이터 추출 노드
+    """
+
+    def __init__(self, verbose=False, **kwargs):
+        super().__init__(verbose, **kwargs)
+        self.name = "MetaDataExtractorNode"
+
+    def execute(self, state):
+        return super().execute(state)
