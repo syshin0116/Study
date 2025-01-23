@@ -23,6 +23,8 @@ langgraph = "^0.2.64"
 rank-bm25 = "^0.2.2"
 chromadb = "^0.6.3"
 crawl4ai = "^0.4.247"
+crawlee = {extras = ["all"], version = "^0.5.2"}
+firecrawl-py = "^1.10.2"
 
 
 [build-system]
