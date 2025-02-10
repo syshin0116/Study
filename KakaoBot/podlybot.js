@@ -1,5 +1,5 @@
 let conversationHistory = {};
-const wecoRooms = new Set(["위캔코딩 스터디방🤗", "SQLD & ADsP 스터디방"]);
+const wecoRooms = new Set(["위캔코딩 스터디방🤗", "SQLD & ADsP 스터디방", "제1회 정보처리기사 스터디"]);
 
 function getCurrentDateTime() {
     let now = new Date();
@@ -74,8 +74,48 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
                 "Current date and time:" + currentTime + "\n";
 
             let roomSpecificPrompts = {
-                "SQLD & ADsP 스터디방":
-                    "You are assisting a group of developers preparing and discussing two certification exams called ADsP and SQLD. " +
+                "제1회 정보처리기사 스터디":
+                    "정보처리기사 시험 준비 스터디에 오신 것을 환영합니다\n" +
+                    "\n" +
+                    "아래는 2025년도 정보처리기사 시험 일정 및 참고사항입니다\n" +
+                    "\n" +
+                    "<시험일정>\n" +
+                    "• 필기원서접수 (인터넷, 휴일제외)\n" +
+                    "  - 정기 기사 1회: 2025.01.13 ~ 2025.01.16 [빈자리접수: 2025.02.01 ~ 2025.02.02]\n" +
+                    "  - 정기 기사 2회: 2025.04.14 ~ 2025.04.17\n" +
+                    "  - 정기 기사 3회: 2025.07.21 ~ 2025.07.24\n" +
+                    "\n" +
+                    "• 필기시험\n" +
+                    "  - 정기 기사 1회: 2025.02.07 ~ 2025.03.04\n" +
+                    "  - 정기 기사 2회: 2025.05.10 ~ 2025.05.30\n" +
+                    "  - 정기 기사 3회: 2025.08.09 ~ 2025.09.01\n" +
+                    "\n" +
+                    "• 필기합격(예정자) 발표\n" +
+                    "  - 정기 기사 1회: 2025.03.12\n" +
+                    "  - 정기 기사 2회: 2025.06.11\n" +
+                    "  - 정기 기사 3회: 2025.09.10\n" +
+                    "\n" +
+                    "• 실기원서접수 (휴일제외)\n" +
+                    "  - 정기 기사 1회: 2025.03.24 ~ 2025.03.27\n" +
+                    "  - 정기 기사 2회: 2025.06.23 ~ 2025.06.26\n" +
+                    "  - 정기 기사 3회: 2025.09.22 ~ 2025.09.25\n" +
+                    "\n" +
+                    "• 실기시험\n" +
+                    "  - 정기 기사 1회: 2025.04.19 ~ 2025.05.09\n" +
+                    "  - 정기 기사 2회: 2025.07.19 ~ 2025.08.06\n" +
+                    "  - 정기 기사 3회: 2025.11.01 ~ 2025.11.21\n" +
+                    "\n" +
+                    "• 최종합격자 발표일\n" +
+                    "  - 정기 기사 1회: 2025.06.13\n" +
+                    "  - 정기 기사 2회: 2025.09.12\n" +
+                    "  - 정기 기사 3회: 2025.12.24\n" +
+                    "</시험일정>\n" +
+                    "\n" +
+                    "원서접수시간: 원서접수 첫날 10:00부터 마지막 날 18:00까지임\n" +
+                    "필기시험 합격예정자 및 최종합격자 발표시간: 해당 발표일 09:00임\n" +
+                    "\n" +
+                    "SQLD & ADsP 스터디방":
+                "You are assisting a group of developers preparing and discussing two certification exams called ADsP and SQLD. " +
                     "Here is some information on the exams: " +
                     "<ADsP> " +
                     "데이터분석 준전문가(ADsP: Advanced Data Analytics Semi-Professional)는 데이터 이해에 대한 기본 지식을 바탕으로 " +
