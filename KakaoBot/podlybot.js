@@ -43,7 +43,10 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
                 // 요약문에서 ** 제거
                 summary = summary.replace(/\*\*/g, "");
                 if (wecoRooms.has(room)) {
-                    addItemToNotion(msg, summary, room, sender, title);
+                    addItemToNotion(WECO_NOTION_DATABASE_ID, msg, summary, room, sender, title);
+                }
+                else if (room === "승엽") {
+                    addItemToNotion(PERSONAL_NOTION_DATABASE_ID, msg, summary, room, sender, title);
                 }
                 reply = "[링크 요약]\n제목:" + title + "\n" + summary;
             }
@@ -376,7 +379,7 @@ function getResponse(type, messages) {
     return result;
 }
 
-function addItemToNotion(url, summary, room, user, title) {
+function addItemToNotion(NOTION_DATABASE_ID, url, summary, room, user, title) {
     try {
         const notionUrl = "https://api.notion.com/v1/pages";
 
