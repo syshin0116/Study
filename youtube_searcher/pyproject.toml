@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "youtube-searcher"
+version = "0.1.0"
+description = ""
+authors = ["syshin0116 <syshin0116@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.11,<3.14"
+ipykernel = "^6.29.5"
+youtube-transcript-api = "^0.6.3"
+langchain = "^0.3.19"
+langchain-openai = "^0.3.6"
+langchain-core = "^0.3.37"
+langgraph = "^0.2.74"
+python-dotenv = "^1.0.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
