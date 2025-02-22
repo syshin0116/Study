@@ -15,7 +15,7 @@ class LayoutAnalyzer:
         """
         self.api_key = api_key
 
-    def _upstage_layout_analysis(self, input_file):
+    def _layout_analysis(self, input_file):
         """
         Upstage의 레이아웃 분석 API를 호출하여 문서 분석을 수행합니다.
 
@@ -60,7 +60,7 @@ class LayoutAnalyzer:
         :param input_file: 분석할 PDF 파일의 경로
         :return: 분석 결과가 저장된 JSON 파일의 경로
         """
-        return self._upstage_layout_analysis(input_file)
+        return self._layout_analysis(input_file)
 
 
 class ImageCropper:
