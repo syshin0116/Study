@@ -480,12 +480,14 @@ class CreateTableSummaryNode(BaseNode):
                 # 테이블 ID를 정수로 변환
                 image_id = int(image_element["id"])
                 table_markdown = image_element["content"]["markdown"]
+                table_html = image_element["content"]["html"]
 
                 # 데이터 배치에 테이블 정보, 관련 텍스트, 페이지 번호, ID를 추가
                 data_batches.append(
                     {
                         "table": state["tables"][image_id],  # 테이블 데이터
                         "table_markdown": table_markdown,  # 테이블 마크다운
+                        "table_html": table_html,  # 테이블 HTML
                         "text": text,  # 관련 텍스트 요약
                         "page": page_num,  # 페이지 번호
                         "id": image_id,  # 테이블 ID

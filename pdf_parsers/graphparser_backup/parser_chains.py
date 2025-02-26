@@ -2,6 +2,7 @@ from langchain_openai import ChatOpenAI
 from langchain_core.runnables import chain
 from .models import MultiModal
 from .state import GraphState
+from typing import List
 
 
 @chain
@@ -83,9 +84,10 @@ Also, provide five hypothetical questions based on the image that users can ask.
     for data_batch in data_batches:
         context = data_batch["text"]
         table_markdown = data_batch["table_markdown"]
+        table_html = data_batch["table_html"]
         image_path = data_batch["table"]
         language = data_batch["language"]
-        user_prompt_template = f"""Here is the markdown format of the table. {table_markdown}
+        user_prompt_template = f"""Here is the markdown format of the table. <markdown>{table_markdown}</markdown> <html>{table_html}</html>
         
 Here is the context related to the image of table: {context}
         
@@ -149,9 +151,7 @@ def table_markdown_extractor(data_batches):
 Here is the markdown format of the table: 
 {table_markdown}
 
-###
-
-Output Format:
+### Output Format:
 
 <table_markdown>
 
@@ -172,7 +172,72 @@ Output must be written in Korean.
 
 
 @chain
+def table_json_extractor(data_batches):
+    # 객체 생성
+    llm = ChatOpenAI(
+        temperature=0,  # 창의성 (0.0 ~ 2.0)
+        model_name="gpt-4o-mini",  # 모델명
+    )
+
+    system_prompt = "Given an image of a table and its corresponding Markdown table and HtML table, your task is to combine all sources to accurately extract all information and ensure the table is represented in a structured JSON format. Do not narrate; only respond with the JSON output."
+
+    image_paths = []
+    system_prompts = []
+    user_prompts = []
+
+    for data_batch in data_batches:
+        table_markdown = data_batch["table_markdown"]
+        table_html = data_batch["table_html"]
+        image_path = data_batch["table"]
+        user_prompt_template = f"""DO NOT wrap your answer in ```json``` or any XML tags.
+
+Here is the markdown format of the table: 
+{table_markdown}
+
+Here is the HTML format of the table:
+{table_html}
+
+###
+
+Output Format (JSON):
+
+{{
+  "columns": ["column_1", "column_2", "column_3", ...],
+  "rows": [
+    {{"column_1": "value_1", "column_2": "value_2", "column_3": "value_3", ...}},
+    {{"column_1": "value_4", "column_2": "value_5", "column_3": "value_6", ...}},
+    ...
+  ]
+}}
+
+Output must be written in Korean.
+"""
+        image_paths.append(image_path)
+        system_prompts.append(system_prompt)
+        user_prompts.append(user_prompt_template)
+
+    # 멀티모달 객체 생성
+    multimodal_llm = MultiModal(llm)
+
+    # 이미지 파일로 부터 질의
+    answer = multimodal_llm.batch(
+        image_paths, system_prompts, user_prompts, display_image=False
+    )
+    return answer
+
+
+@chain
 def extract_metadata_from_research_paper(data_batches):
+    class ResearchPaperMetadata:
+        korean_title: str = None
+        english_title: str = None
+        korean_authors: List[str] = None
+        english_authors: str = None
+        korean_abstract: str = None
+        english_abstract: str = None
+        korean_keywords: List[str] = None
+        english_keywords: List[str] = None
+
     # 객체 생성
     llm = ChatOpenAI(
         temperature=0,  # 창의성 (0.0 ~ 2.0)
@@ -189,3 +254,9 @@ def extract_metadata_from_research_paper(data_batches):
 - Korean Keywords
 - English Keywords
 """
+    user_prompt_template = (
+        f"""Here is the first page of a research paper. {data_batches["text"]}"""
+    )
+    llm.with_structured_output(ResearchPaperMetadata).invoke(
+        data_batches["image"], system_prompt, user_prompt_template, display_image=False
+    )

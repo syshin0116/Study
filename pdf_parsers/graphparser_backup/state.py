@@ -17,9 +17,9 @@ class GraphState(TypedDict):
     tables: list[str]  # table
     table_summary: dict[int, str]  # table summary
     table_markdown: dict[int, str]  # table markdown
+    table_html: dict[int, str]  # table
+    table_json: dict[int, str]  # table json
     texts: list[str]  # text
     text_summary: dict[int, str]  # text summary
     table_summary_data_batches: list[dict]  # table summary data batches
     language: str  # language
-
-
