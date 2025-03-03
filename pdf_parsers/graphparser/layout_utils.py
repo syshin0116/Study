@@ -2,9 +2,7 @@ import os
 import json
 import pickle
 import requests
-
-# import pymupdf
-import pdfplumber
+import pymupdf
 from PIL import Image
 
 
@@ -66,34 +64,19 @@ class LayoutAnalyzer:
 
 
 class ImageCropper:
-    # @staticmethod
-    # def pdf_to_image(pdf_file, page_num, dpi=300):
-    #     """
-    #     PDF 파일의 특정 페이지를 이미지로 변환하는 메서드
-
-    #     :param page_num: 변환할 페이지 번호 (1부터 시작)
-    #     :param dpi: 이미지 해상도 (기본값: 300)
-    #     :return: 변환된 이미지 객체
-    #     """
-    #     with pymupdf.open(pdf_file) as doc:
-    #         page = doc[page_num].get_pixmap(dpi=dpi)
-    #         target_page_size = [page.width, page.height]
-    #         page_img = Image.frombytes("RGB", target_page_size, page.samples)
-    #     return page_img
     @staticmethod
     def pdf_to_image(pdf_file, page_num, dpi=300):
         """
         PDF 파일의 특정 페이지를 이미지로 변환하는 메서드
 
-        :param pdf_file: PDF 파일 경로 또는 파일 객체
-        :param page_num: 변환할 페이지 번호 (0부터 시작)
+        :param page_num: 변환할 페이지 번호 (1부터 시작)
         :param dpi: 이미지 해상도 (기본값: 300)
-        :return: 변환된 PIL 이미지 객체
+        :return: 변환된 이미지 객체
         """
-        with pdfplumber.open(pdf_file) as doc:
-            page = doc.pages[page_num]  # page_num should be 0-based
-            page_img = page.to_image(resolution=dpi).original  # Get PIL Image
-
+        with pymupdf.open(pdf_file) as doc:
+            page = doc[page_num].get_pixmap(dpi=dpi)
+            target_page_size = [page.width, page.height]
+            page_img = Image.frombytes("RGB", target_page_size, page.samples)
         return page_img
 
     @staticmethod

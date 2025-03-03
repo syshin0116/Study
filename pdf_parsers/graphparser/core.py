@@ -554,12 +554,55 @@ class TableMarkdownExtractorNode(BaseNode):
 
 class MetaDataExtractorNode(BaseNode):
     """
-    논문 메타데이터 추출 노드
+    논문의 첫 페이지에서 메타데이터를 추출하는 노드입니다.
+    MultilingualText와 MultilingualList 형식으로 메타데이터를 추출합니다.
     """
 
-    def __init__(self, verbose=False, **kwargs):
-        super().__init__(verbose, **kwargs)
+    def __init__(self, api_key, **kwargs):
+        super().__init__(**kwargs)
         self.name = "MetaDataExtractorNode"
+        self.api_key = api_key
 
-    def execute(self, state):
-        return super().execute(state)
+    def create_metadata_extraction_data(self, state: GraphState):
+        """
+        첫 페이지의 텍스트와 요소들을 추출하여 메타데이터 추출을 위한 데이터를 생성합니다.
+        """
+        # 첫 페이지 번호 (일반적으로 1 또는 정렬된 페이지 번호 중 첫 번째)
+        first_page = min(state["page_numbers"])
+
+        # 첫 페이지의 텍스트 요소들을 마크다운 형식으로 결합
+        text_elements = [
+            element["content"]["markdown"]
+            for element in state["page_elements"][first_page]["text_elements"]
+        ]
+
+        # 첫 페이지의 전체 텍스트
+        full_text = state["texts"][first_page]
+
+        # 첫 페이지 요약 (있는 경우)
+        page_summary = (
+            state["text_summary"][first_page] if "text_summary" in state else ""
+        )
+
+        # 문서의 언어 (기본값: ["ko", "en"])
+        language = state.get("language", ["ko", "en"])
+
+        return {
+            "text_elements": "\n".join(text_elements),
+            "full_text": full_text,
+            "page_summary": page_summary,
+            "language": language,
+        }
+
+    def execute(self, state: GraphState) -> GraphState:
+        """
+        논문의 메타데이터를 추출하고 MultilingualText/MultilingualList 형식으로 반환합니다.
+        """
+        # 메타데이터 추출을 위한 데이터 준비
+        extraction_data = self.create_metadata_extraction_data(state)
+
+        # extract_metadata_from_research_paper 함수를 사용하여 메타데이터 추출
+        metadata = extract_metadata_from_research_paper.invoke(extraction_data)
+
+        # 추출된 메타데이터를 포함한 새로운 GraphState 객체 반환
+        return GraphState(metadata=metadata)
