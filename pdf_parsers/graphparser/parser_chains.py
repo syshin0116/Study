@@ -246,6 +246,7 @@ def extract_metadata_from_research_paper(data_batches):
     prompt = f"""You are an expert in extracting metadata from a research paper. Given the first page of a research paper, your task is to extract metadata in both Korean and English when available.
 
 For each field, provide both Korean and English versions if they exist. Structure the output as follows:
+- Paper ID: The unique ID of the research paper. 
 - Title: Both Korean and English titles
 - Authors: List of authors in both Korean and English
 - Abstract: Both Korean and English abstracts

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antarctic Explorer</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #2c3e50;
+            font-family: 'Press Start 2P', monospace;
+        }
+
+        #gameContainer {
+            position: relative;
+        }
+
+        canvas {
+            border: 2px solid white;
+            image-rendering: pixelated;
+        }
+
+        #gameInfo {
+            color: white;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        @font-face {
+            font-family: 'Press Start 2P';
+            src: url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        }
+    </style>
+</head>
+
+<body>
+    <div id="gameContainer">
+        <canvas id="gameCanvas"></canvas>
+    </div>
+    <div id="gameInfo">
+        <p>Controls: Arrow Keys to move, Space to jump</p>
+    </div>
+    <audio id="jumpSound" src="data:audio/wav;base64,..." preload="auto"></audio>
+    <audio id="hitSound" src="data:audio/wav;base64,..." preload="auto"></audio>
+    <script src="main.js"></script>
+</body>
+
+</html>

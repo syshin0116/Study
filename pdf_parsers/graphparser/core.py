@@ -604,5 +604,8 @@ class MetaDataExtractorNode(BaseNode):
         # extract_metadata_from_research_paper 함수를 사용하여 메타데이터 추출
         metadata = extract_metadata_from_research_paper.invoke(extraction_data)
 
-        # 추출된 메타데이터를 포함한 새로운 GraphState 객체 반환
-        return GraphState(metadata=metadata)
+        # 기존 state를 복사하고 metadata만 업데이트
+        new_state = state.copy()
+        new_state["metadata"] = metadata
+
+        return new_state
