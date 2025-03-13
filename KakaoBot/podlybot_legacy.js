@@ -320,7 +320,7 @@ function searchAPI(searchQuery) {
     try {
         // 웹 검색 구현 (SearchAPI 사용)
         const searchUrl = "https://www.searchapi.io/api/v1/search";
-        const searchApiUrlWithParams = searchUrl + "?api_key=" + SEARCH_API_KEY + "&engine=duckduckgo&q=" + searchQuery;
+        const searchApiUrlWithParams = searchUrl + "?api_key=" + SEARCH_API_KEY + "&engine=google&q=" + searchQuery;
 
         // API 요청
         const response = org.jsoup.Jsoup.connect(searchApiUrlWithParams).ignoreContentType(true).get();
@@ -589,12 +589,14 @@ function getGeminiResponse(messages) {
 
 function getResponseFromApi(url, room, sender, msg) {
     try {
+        const currentTime = getCurrentDateTime();
         // 1. 먼저 GPT-4o-mini를 사용하여 최적화된 검색 쿼리 생성
         const queryGenerationMessages = [
             {
                 role: "system",
                 content: "You are a search query optimizer. Your task is to convert user questions into effective search queries. " +
                     "Keep the query concise, focused on the key information needs, and optimized for search engines. " +
+                    "Today's date: " + currentTime + "\n\n" +
                     "Return ONLY the optimized search query without any explanation or additional text."
             },
             {
@@ -641,17 +643,14 @@ function getResponseFromApi(url, room, sender, msg) {
         const searchResults = searchAPI(optimizedQuery);
         const searchData = searchResults.text();
 
-        // 3. 현재 시간 가져오기
-        const currentTime = getCurrentDateTime();
-
-        // 4. OpenAI에 검색 결과와 함께 질문을 전송
+        // 3. OpenAI에 검색 결과와 함께 질문을 전송
         const messages = [
             {
                 role: "system",
                 content: "You are 포들리봇, a helpful KakaoTalk assistant created by anonymous developers called 십대영님 and 해달님. " +
                     "Your primary goal is to provide accurate, friendly, and useful responses in Korean. " +
                     "If the response is lengthy, use bullet points for better readability. " +
-                    "Always maintain a polite tone and do not use markdown. Use '-' for bullet points.\n" +
+                    "Always maintain a polite tone and do not use markdown. This includes for url too. Use '-' for bullet points. \n" +
                     "IMPORTANT: Never format your responses with 'username:', 'message:', or 'time:' prefixes. " +
                     "Just provide the direct answer without mimicking the input format.\n" +
                     "Today's date: " + currentTime + "\n\n" +
@@ -659,7 +658,7 @@ function getResponseFromApi(url, room, sender, msg) {
                     "1. When citing information, include a number in square brackets at the end of the relevant sentence or paragraph. Example: '이천수는 1981년 7월 9일에 태어났습니다. [1]'\n" +
                     "2. For direct quotes, use quotation marks and include a number in brackets. Example: '이천수는 한국 축구의 전설적인 인물이다. [2]'\n" +
                     "3. If multiple sources provide the same information, use a single number in brackets. Example: '[1][2]'\n" +
-                    "4. At the end of your response, include a '출처' section listing all the sources you used with links to the source, numbered accordingly."
+                    "4. At the end of your response, include a '출처:' section listing all the sources you used with links to the source, numbered accordingly."
             },
             {
                 role: "user",
