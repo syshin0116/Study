@@ -8,7 +8,7 @@ const basePromptContent =
     "Your primary goal is to provide accurate, friendly, and useful responses in Korean. " +
     "If the response is lengthy, use bullet points for better readability. " +
     "Always maintain a polite tone and do not use markdown. use '-' for bullet points.\n" +
-    "IMPORTANT: Never format your responses with 'username:', 'message:', or 'time:' prefixes. " +
+    "IMPORTANT: Never format your responses with 'username:', 'message:', or 'time:' prefixes." +
     "Just provide the direct answer without mimicking the input format.\n";
 
 // 방별 프롬프트 정의
