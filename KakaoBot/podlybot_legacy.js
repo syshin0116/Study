@@ -672,7 +672,7 @@ function getResponseFromApi(url, room, sender, msg) {
         ];
 
         // 5. getResponse 함수를 통해 OpenAI API 호출
-        return getResponse("openai", messages);
+        return getResponse("openai", messages) + "\n검색 쿼리: " + optimizedQuery;
 
     } catch (e) {
         return "웹 검색 중 오류가 발생했습니다: " + e.message;
