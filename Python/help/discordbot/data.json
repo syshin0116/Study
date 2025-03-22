@@ -1,0 +1,337 @@
+{
+    "monsters": [
+        {
+            "도비": {
+                "health": 100,
+                "attack": 10,
+                "defense": 5,
+                "type": "집요정",
+                "abilities": [
+                    "양말 공격",
+                    "집요정 마법"
+                ]
+            }
+        },
+        {
+            "드래곤": {
+                "health": 400,
+                "attack": 35,
+                "defense": 25,
+                "type": "마법생물",
+                "abilities": [
+                    "화염 브레스",
+                    "꼬리 휘두르기"
+                ]
+            }
+        },
+        {
+            "디멘터": {
+                "health": 250,
+                "attack": 30,
+                "defense": 15,
+                "type": "어둠생물",
+                "abilities": [
+                    "영혼 흡수",
+                    "절망 유발"
+                ]
+            }
+        },
+        {
+            "트롤": {
+                "health": 300,
+                "attack": 25,
+                "defense": 18,
+                "type": "마법생물",
+                "abilities": [
+                    "곤봉 내려치기",
+                    "포효"
+                ]
+            }
+        },
+        {
+            "바실리스크": {
+                "health": 350,
+                "attack": 40,
+                "defense": 20,
+                "type": "마법생물",
+                "abilities": [
+                    "죽음의 시선",
+                    "독 물기"
+                ]
+            }
+        },
+        {
+            "데스이터": {
+                "health": 220,
+                "attack": 25,
+                "defense": 15,
+                "type": "어둠마법사",
+                "abilities": [
+                    "어둠의 저주",
+                    "언포기버블"
+                ]
+            }
+        }
+    ],
+    "summonable_creatures": [
+        {
+            "패트로누스": {
+                "health": 200,
+                "attack": 20,
+                "defense": 15,
+                "type": "수호령",
+                "abilities": [
+                    "영혼 보호",
+                    "빛의 공격"
+                ]
+            }
+        },
+        {
+            "히포그리프": {
+                "health": 250,
+                "attack": 25,
+                "defense": 18,
+                "type": "마법생물",
+                "abilities": [
+                    "날카로운 발톱",
+                    "비행 공격"
+                ]
+            }
+        },
+        {
+            "유니콘": {
+                "health": 180,
+                "attack": 15,
+                "defense": 12,
+                "type": "마법생물",
+                "abilities": [
+                    "치유의 뿔",
+                    "달빛 보호"
+                ]
+            }
+        },
+        {
+            "피닉스": {
+                "health": 220,
+                "attack": 22,
+                "defense": 16,
+                "type": "마법생물",
+                "abilities": [
+                    "화염 공격",
+                    "재생"
+                ]
+            }
+        }
+    ],
+    "spells": [
+        {
+            "익스펠리아르무스": {
+                "type": "공격",
+                "power": 25,
+                "cooldown": 1,
+                "description": "상대의 마법지팡이를 무력화시키는 주문"
+            }
+        },
+        {
+            "스투페파이": {
+                "type": "공격",
+                "power": 30,
+                "cooldown": 2,
+                "description": "적을 기절시키는 주문"
+            }
+        },
+        {
+            "페트리피쿠스 토탈루스": {
+                "type": "방어",
+                "power": 0,
+                "cooldown": 3,
+                "effect": "속박",
+                "duration": 2,
+                "description": "상대를 일시적으로 속박하는 주문"
+            }
+        },
+        {
+            "에피스키": {
+                "type": "치유",
+                "power": 40,
+                "cooldown": 3,
+                "description": "체력을 회복하는 치유 주문"
+            }
+        },
+        {
+            "루모스": {
+                "type": "유틸리티",
+                "power": 0,
+                "cooldown": 1,
+                "description": "빛을 밝히는 주문, 어둠 속성 적에게 효과적"
+            }
+        },
+        {
+            "익스펙토 패트로눔": {
+                "type": "소환",
+                "power": 0,
+                "cooldown": 4,
+                "summon": "패트로누스",
+                "description": "행복한 기억으로 수호 패트로누스를 소환하는 주문"
+            }
+        },
+        {
+            "아바다 케다브라": {
+                "type": "금지주문",
+                "power": 100,
+                "cooldown": 5,
+                "description": "죽음의 저주 (사용시 아즈카반 행)"
+            }
+        },
+        {
+            "윙가르디움 레비오사": {
+                "type": "유틸리티",
+                "power": 15,
+                "cooldown": 2,
+                "description": "물체를 공중에 띄우는 주문, 전투 시 낙하 대미지"
+            }
+        },
+        {
+            "프로테고": {
+                "type": "방어",
+                "power": 0,
+                "effect": "보호막",
+                "value": 30,
+                "cooldown": 3,
+                "description": "마법 공격을 막는 보호막 주문"
+            }
+        },
+        {
+            "인센디오": {
+                "type": "공격",
+                "power": 35,
+                "cooldown": 2,
+                "description": "화염 공격 주문"
+            }
+        },
+        {
+            "아쿠아 에럭토": {
+                "type": "공격",
+                "power": 25,
+                "cooldown": 2,
+                "description": "물을 분출하는 주문, 화염 속성에 효과적"
+            }
+        }
+    ],
+    "houses": {
+        "그리핀도르": {
+            "bonuses": {
+                "attack": 5,
+                "bravery": 10
+            }
+        },
+        "슬리데린": {
+            "bonuses": {
+                "defense": 5,
+                "cunning": 10
+            }
+        },
+        "래번클로": {
+            "bonuses": {
+                "spell_power": 5,
+                "wisdom": 10
+            }
+        },
+        "후플푸프": {
+            "bonuses": {
+                "health": 20,
+                "loyalty": 10
+            }
+        }
+    },
+    "players": [
+        {
+            "해리": {
+                "health": 150,
+                "attack": 15,
+                "defense": 10,
+                "house": "그리핀도르",
+                "inventory": [
+                    "체력 물약",
+                    "마법사 로브"
+                ],
+                "gold": 100,
+                "location": "호그와트",
+                "experience": 0,
+                "level": 1,
+                "summoned": null
+            }
+        },
+        {
+            "헤르미온느": {
+                "health": 120,
+                "attack": 10,
+                "defense": 8,
+                "house": "그리핀도르",
+                "inventory": [
+                    "체력 물약",
+                    "마법책"
+                ],
+                "gold": 150,
+                "location": "호그와트",
+                "experience": 50,
+                "level": 1,
+                "summoned": null
+            }
+        },
+        {
+            "말포이": {
+                "health": 130,
+                "attack": 12,
+                "defense": 15,
+                "house": "슬리데린",
+                "inventory": [],
+                "gold": 200,
+                "location": "호그와트",
+                "experience": 0,
+                "level": 1,
+                "summoned": null
+            }
+        },
+        {
+            "십대영": {
+                "health": 100,
+                "mana": 100,
+                "attack": 10,
+                "defense": 10,
+                "house": "그리핀도르",
+                "summoned": null
+            }
+        },
+        {
+            "사하": {
+                "health": 75,
+                "mana": 100,
+                "attack": 10,
+                "defense": 10,
+                "house": "래번클로",
+                "summoned": null
+            }
+        },
+        {
+            ".syshin0116": {
+                "health": 75,
+                "mana": 100,
+                "attack": 10,
+                "defense": 10,
+                "house": "래번클로",
+                "summoned": null
+            }
+        },
+        {
+            "saha04013": {
+                "health": 100,
+                "mana": 100,
+                "attack": 10,
+                "defense": 10,
+                "house": "슬리데린",
+                "summoned": null
+            }
+        }
+    ]
+}
