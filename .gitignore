@@ -51,3 +51,7 @@ Temporary Items
 *.mp4
 # Default ignored files
 /Prime_College/C_프로그래밍/.idea/workspace.xml
+
+**/data/**
+
+**/parse_research_paper/**
