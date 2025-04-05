@@ -1,4 +1,3 @@
-
 let conversationHistory = {};
 const wecoRooms = new Set(["위캔코딩 스터디방🤗", "SQLD & ADsP 스터디방", "제1회 정보처리기사 스터디"]);
 
@@ -118,14 +117,10 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             conversationHistory[room] = [];
         }
 
-        // 이번 사용자 메시지를 히스토리에 추가 - 메타데이터를 별도 필드로 저장
+        // 이번 사용자 메시지를 히스토리에 추가 - 사용자 정보를 메시지 내용에 직접 포함
         conversationHistory[room].push({
             role: "user",
-            content: msg || "",
-            metadata: {
-                username: sender || "Unknown",
-                time: currentTime
-            }
+            content: "[" + (sender || "Unknown") + " at " + currentTime + "] " + (msg || "")
         });
 
         // 히스토리가 너무 길어지면 맨 앞(오래된) 메시지 제거 k=10
@@ -230,7 +225,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 
         // assistant 응답을 히스토리에 추가
         if (reply !== null) {
-            // '**' 제거
+            // ** 제거
             reply = reply.replace(/\*\*/g, "");
 
             // 앞뒤 공백 제거
@@ -238,10 +233,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 
             conversationHistory[room].push({
                 role: "assistant",
-                content: reply,
-                metadata: {
-                    time: getCurrentDateTime()
-                }
+                content: "[포들리봇 at " + getCurrentDateTime() + "] " + reply
             });
 
             // 응답 전송
