@@ -7,8 +7,12 @@ const basePromptContent =
     "Your primary goal is to provide accurate, friendly, and useful responses in Korean. " +
     "If the response is lengthy, use bullet points for better readability. " +
     "Always maintain a polite tone and do not use markdown. use '-' for bullet points.\n" +
-    "IMPORTANT: Never format your responses with 'username:', 'message:', or 'time:' prefixes." +
-    "Just provide the direct answer without mimicking the input format.\n";
+    "IMPORTANT: Each user message will be prefixed with [username at timestamp]. " +
+    "You should understand that the username between [ and at ] is the name of the person you're talking to. " +
+    "However, never format your own responses with timestamps or usernames. " +
+    "Just provide direct answers without any metadata formatting.\n" +
+    "For example, if you see a message '[승엽 at 2024-03-21 15:30] 내가 누구야', " +
+    "you should understand that you are talking to 승엽, but your response should be a normal message without the [username at timestamp] format.\n";
 
 // 방별 프롬프트 정의
 const roomSpecificPrompts = {
@@ -122,6 +126,11 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             role: "user",
             content: "[" + (sender || "Unknown") + " at " + currentTime + "] " + (msg || "")
         });
+
+        if (room === "승엽") {
+            replier.reply("[" + (sender || "Unknown") + " at " + currentTime + "] " + (msg || ""));
+        }
+
 
         // 히스토리가 너무 길어지면 맨 앞(오래된) 메시지 제거 k=10
         while (conversationHistory[room].length > 10) {
