@@ -1,0 +1,375 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}시선 추적 - {{ session.name }}{% endblock %}
+
+{% block extra_css %}
+<style>
+    #video-container {
+        position: relative;
+        width: 640px;
+        height: 480px;
+        margin: 0 auto;
+        border: 2px solid #333;
+        overflow: hidden;
+    }
+
+    #video {
+        width: 100%;
+        height: 100%;
+        background-color: #000;
+    }
+
+    #overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+    }
+
+    .gaze-point {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background-color: red;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0.7;
+    }
+
+    .tracking-controls {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .status-indicator {
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        margin-right: 5px;
+        vertical-align: middle;
+    }
+
+    .status-active {
+        background-color: green;
+    }
+
+    .status-inactive {
+        background-color: red;
+    }
+
+    .status-waiting {
+        background-color: orange;
+    }
+
+    #tracking-status {
+        margin-top: 10px;
+        font-weight: bold;
+    }
+
+    .calibration-point {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background-color: blue;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="row mb-3">
+    <div class="col-md-12">
+        <a href="{% url 'session_detail' session.pk %}" class="btn btn-secondary btn-sm">← 세션으로 돌아가기</a>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-12 text-center">
+        <h2>시선 추적 - {{ session.name }}</h2>
+        <p>카메라 액세스를 허용한 후 "추적 시작" 버튼을 클릭하세요.</p>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-body">
+                <div id="video-container">
+                    <video id="video" autoplay muted></video>
+                    <div id="overlay"></div>
+                </div>
+
+                <div class="tracking-controls">
+                    <button id="startTracking" class="btn btn-success">추적 시작</button>
+                    <button id="stopTracking" class="btn btn-danger" disabled>추적 중지</button>
+                    <button id="calibrate" class="btn btn-primary">눈 보정</button>
+                </div>
+
+                <div id="tracking-status" class="text-center">
+                    <span class="status-indicator status-inactive"></span>
+                    <span>추적 상태: 비활성</span>
+                </div>
+
+                <div id="tracking-data" class="mt-3">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>X 좌표: <span id="x-coord">0</span></label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Y 좌표: <span id="y-coord">0</span></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>동공 크기: <span id="pupil-size">0</span></label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>응시 시간: <span id="gaze-duration">0</span>ms</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const video = document.getElementById('video');
+        const overlay = document.getElementById('overlay');
+        const startBtn = document.getElementById('startTracking');
+        const stopBtn = document.getElementById('stopTracking');
+        const calibrateBtn = document.getElementById('calibrate');
+        const statusIndicator = document.querySelector('.status-indicator');
+        const statusText = document.querySelector('#tracking-status span:last-child');
+        const xCoord = document.getElementById('x-coord');
+        const yCoord = document.getElementById('y-coord');
+        const pupilSize = document.getElementById('pupil-size');
+        const gazeDuration = document.getElementById('gaze-duration');
+
+        let stream = null;
+        let tracking = false;
+        let trackingInterval = null;
+        let lastGazePosition = null;
+        let gazeStartTime = null;
+        let currentGazeDuration = 0;
+
+        // Mock eye tracking using mouse position (for development)
+        // In a real app, replace with actual eye tracking algorithms 
+        // using computer vision and machine learning
+        function mockEyeTracking(event) {
+            if (!tracking) return;
+
+            const rect = video.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+
+            // Update coordinates display
+            xCoord.textContent = Math.round(x);
+            yCoord.textContent = Math.round(y);
+
+            // Mock pupil size (random for demonstration)
+            pupilSize.textContent = (3 + Math.random() * 2).toFixed(2);
+
+            // Calculate gaze duration at current position
+            if (lastGazePosition) {
+                const dx = Math.abs(lastGazePosition.x - x);
+                const dy = Math.abs(lastGazePosition.y - y);
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance < 30) { // If still looking at roughly the same area
+                    currentGazeDuration = Date.now() - gazeStartTime;
+                } else {
+                    // Reset for new position
+                    gazeStartTime = Date.now();
+                    currentGazeDuration = 0;
+                }
+            } else {
+                gazeStartTime = Date.now();
+            }
+
+            gazeDuration.textContent = currentGazeDuration;
+            lastGazePosition = { x, y };
+
+            // Display gaze point
+            showGazePoint(x, y);
+
+            // Save data point every 100ms
+            if (currentGazeDuration % 100 === 0) {
+                saveDataPoint(x, y, parseFloat(pupilSize.textContent), currentGazeDuration);
+            }
+        }
+
+        function showGazePoint(x, y) {
+            // Remove old points (keeping only recent ones)
+            const oldPoints = overlay.querySelectorAll('.gaze-point');
+            if (oldPoints.length > 5) {
+                oldPoints[0].remove();
+            }
+
+            // Create new gaze point
+            const point = document.createElement('div');
+            point.className = 'gaze-point';
+            point.style.left = `${x}px`;
+            point.style.top = `${y}px`;
+            overlay.appendChild(point);
+
+            // Fade out
+            setTimeout(() => {
+                point.style.opacity = '0';
+                setTimeout(() => point.remove(), 500);
+            }, 1000);
+        }
+
+        function saveDataPoint(x, y, pupilSize, duration) {
+            fetch(`{% url 'save_eye_data' session.pk %}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+                body: JSON.stringify({
+                    x: x,
+                    y: y,
+                    pupil_size: pupilSize,
+                    duration: duration
+                })
+            })
+                .catch(error => console.error('Error saving data:', error));
+        }
+
+        function startTracking() {
+            tracking = true;
+            startBtn.disabled = true;
+            stopBtn.disabled = false;
+            calibrateBtn.disabled = true;
+
+            statusIndicator.className = 'status-indicator status-active';
+            statusText.textContent = '추적 상태: 활성';
+
+            // In a real eye tracking app, you would start the eye tracking algorithm here
+            // For this demo, we'll use mouse movement to simulate eye tracking
+            document.addEventListener('mousemove', mockEyeTracking);
+        }
+
+        function stopTracking() {
+            tracking = false;
+            startBtn.disabled = false;
+            stopBtn.disabled = true;
+            calibrateBtn.disabled = false;
+
+            statusIndicator.className = 'status-indicator status-inactive';
+            statusText.textContent = '추적 상태: 비활성';
+
+            // Clear overlay
+            overlay.innerHTML = '';
+
+            // Remove mouse event listener
+            document.removeEventListener('mousemove', mockEyeTracking);
+        }
+
+        function calibrate() {
+            statusIndicator.className = 'status-indicator status-waiting';
+            statusText.textContent = '추적 상태: 보정 중';
+
+            startBtn.disabled = true;
+            stopBtn.disabled = true;
+            calibrateBtn.disabled = true;
+
+            // Clear overlay
+            overlay.innerHTML = '';
+
+            // Show calibration points
+            const points = [
+                { x: 50, y: 50 },
+                { x: 50, y: 240 },
+                { x: 50, y: 430 },
+                { x: 320, y: 50 },
+                { x: 320, y: 240 },
+                { x: 320, y: 430 },
+                { x: 590, y: 50 },
+                { x: 590, y: 240 },
+                { x: 590, y: 430 }
+            ];
+
+            let currentPoint = 0;
+
+            function showCalibrationPoint() {
+                if (currentPoint >= points.length) {
+                    // Calibration complete
+                    overlay.innerHTML = '';
+                    statusIndicator.className = 'status-indicator status-inactive';
+                    statusText.textContent = '추적 상태: 비활성 (보정 완료)';
+                    startBtn.disabled = false;
+                    calibrateBtn.disabled = false;
+                    return;
+                }
+
+                overlay.innerHTML = '';
+                const point = document.createElement('div');
+                point.className = 'calibration-point';
+                point.style.left = `${points[currentPoint].x}px`;
+                point.style.top = `${points[currentPoint].y}px`;
+                overlay.appendChild(point);
+
+                setTimeout(() => {
+                    currentPoint++;
+                    showCalibrationPoint();
+                }, 2000);
+            }
+
+            showCalibrationPoint();
+        }
+
+        // Start camera
+        async function startCamera() {
+            try {
+                stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                video.srcObject = stream;
+            } catch (err) {
+                console.error('Error accessing camera:', err);
+                alert('카메라 접근에 실패했습니다. 카메라 권한을 확인해주세요.');
+            }
+        }
+
+        // Event listeners
+        startBtn.addEventListener('click', startTracking);
+        stopBtn.addEventListener('click', stopTracking);
+        calibrateBtn.addEventListener('click', calibrate);
+
+        // Initialize camera
+        startCamera();
+
+        // Helper function to get CSRF token from cookies
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+{% if form.instance.pk %}
+세션 수정 - {{ form.instance.name }}
+{% else %}
+새 세션 생성
+{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-header">
+                {% if form.instance.pk %}
+                <h2>세션 수정</h2>
+                {% else %}
+                <h2>새 세션 생성</h2>
+                {% endif %}
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+                        <label for="{{ form.name.id_for_label }}" class="form-label">세션 이름</label>
+                        {{ form.name.errors }}
+                        <input type="text" name="{{ form.name.name }}" class="form-control"
+                            id="{{ form.name.id_for_label }}" value="{{ form.name.value|default:'' }}"
+                            placeholder="세션 이름을 입력하세요">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="{{ form.description.id_for_label }}" class="form-label">설명</label>
+                        {{ form.description.errors }}
+                        <textarea name="{{ form.description.name }}" class="form-control"
+                            id="{{ form.description.id_for_label }}" rows="4"
+                            placeholder="세션에 대한 설명을 입력하세요">{{ form.description.value|default:'' }}</textarea>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-primary" type="submit">
+                            {% if form.instance.pk %}
+                            저장
+                            {% else %}
+                            생성
+                            {% endif %}
+                        </button>
+                        <a href="{% url 'home' %}" class="btn btn-secondary">취소</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

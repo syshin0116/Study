@@ -127,10 +127,6 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             content: "[" + (sender || "Unknown") + " at " + currentTime + "] " + (msg || "")
         });
 
-        if (room === "승엽") {
-            replier.reply("[" + (sender || "Unknown") + " at " + currentTime + "] " + (msg || ""));
-        }
-
 
         // 히스토리가 너무 길어지면 맨 앞(오래된) 메시지 제거 k=10
         while (conversationHistory[room].length > 10) {

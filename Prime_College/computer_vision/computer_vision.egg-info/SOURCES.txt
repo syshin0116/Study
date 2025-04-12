@@ -1,0 +1,7 @@
+README.md
+pyproject.toml
+computer_vision.egg-info/PKG-INFO
+computer_vision.egg-info/SOURCES.txt
+computer_vision.egg-info/dependency_links.txt
+computer_vision.egg-info/requires.txt
+computer_vision.egg-info/top_level.txt

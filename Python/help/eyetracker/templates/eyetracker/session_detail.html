@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}세션 상세 - {{ session.name }}{% endblock %}
+
+{% block content %}
+<div class="row mb-3">
+    <div class="col-md-12">
+        <a href="{% url 'home' %}" class="btn btn-secondary btn-sm">← 돌아가기</a>
+    </div>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h1 class="card-title">{{ session.name }}</h1>
+                <div>
+                    <a href="{% url 'session_update' session.pk %}" class="btn btn-primary btn-sm">수정</a>
+                    <a href="{% url 'session_delete' session.pk %}" class="btn btn-danger btn-sm">삭제</a>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="mb-4">
+                    <h5>설명</h5>
+                    <p>{{ session.description|default:"설명 없음" }}</p>
+                </div>
+
+                <div class="mb-4">
+                    <h5>세션 정보</h5>
+                    <p><strong>생성일:</strong> {{ session.created_at|date:"Y-m-d H:i" }}</p>
+                    <p><strong>사용자:</strong> {{ session.user.username }}</p>
+                </div>
+
+                <div class="mb-4 text-center">
+                    <a href="{% url 'eye_tracking' session.pk %}" class="btn btn-success">시선 추적 시작</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h2>데이터 분석</h2>
+            </div>
+            <div class="card-body">
+                <div class="mb-4 text-center">
+                    <button id="generateHeatmap" class="btn btn-primary">히트맵 생성</button>
+                </div>
+
+                <div id="heatmapContainer" class="text-center d-none mb-4">
+                    <h3>히트맵</h3>
+                    <img id="heatmapImage" src="" alt="히트맵" class="img-fluid">
+                </div>
+
+                <div class="mb-4">
+                    <h3>데이터 포인트</h3>
+                    {% if session.data_points.all %}
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>시간</th>
+                                    <th>X 좌표</th>
+                                    <th>Y 좌표</th>
+                                    <th>동공 크기</th>
+                                    <th>응시 시간</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for point in session.data_points.all|slice:":100" %}
+                                <tr>
+                                    <td>{{ point.timestamp|date:"Y-m-d H:i:s" }}</td>
+                                    <td>{{ point.x_position }}</td>
+                                    <td>{{ point.y_position }}</td>
+                                    <td>{{ point.pupil_size|default:"-" }}</td>
+                                    <td>{{ point.gaze_duration|default:"-" }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        {% if session.data_points.all.count > 100 %}
+                        <div class="alert alert-info">더 많은 데이터 포인트가 있습니다. 처음 100개만 표시됩니다.</div>
+                        {% endif %}
+                    </div>
+                    {% else %}
+                    <div class="alert alert-info">아직 수집된 데이터가 없습니다.</div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const generateHeatmapBtn = document.getElementById('generateHeatmap');
+        const heatmapContainer = document.getElementById('heatmapContainer');
+        const heatmapImage = document.getElementById('heatmapImage');
+
+        generateHeatmapBtn.addEventListener('click', function () {
+            generateHeatmapBtn.disabled = true;
+            generateHeatmapBtn.textContent = '생성 중...';
+
+            fetch('{% url "generate_heatmap" session.pk %}')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        heatmapImage.src = data.url;
+                        heatmapContainer.classList.remove('d-none');
+                    } else {
+                        alert('히트맵 생성 중 오류 발생: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('히트맵 생성 중 오류 발생');
+                })
+                .finally(() => {
+                    generateHeatmapBtn.disabled = false;
+                    generateHeatmapBtn.textContent = '히트맵 생성';
+                });
+        });
+    });
+</script>
+{% endblock %}

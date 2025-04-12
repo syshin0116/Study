@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}로그아웃 - Eye Tracker{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <div class="card">
+            <div class="card-header">
+                <h2>로그아웃</h2>
+            </div>
+            <div class="card-body text-center">
+                <p class="lead">성공적으로 로그아웃되었습니다.</p>
+                <div class="d-grid gap-2 col-md-6 mx-auto">
+                    <a href="{% url 'login' %}" class="btn btn-primary">다시 로그인</a>
+                    <a href="{% url 'home' %}" class="btn btn-secondary">홈으로</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
