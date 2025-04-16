@@ -152,7 +152,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             }
         } else if (msg === "/help") {
             reply = "[포들리봇 사용법]\n" +
-                "1. &+텍스트: AI 모델이 응답 (기본: OpenAI gpt-4o)\n" +
+                "1. &+텍스트: AI 모델이 응답 (기본: OpenAI gpt-4.1)\n" +
                 "2. &gemini+텍스트: Google Gemini 모델이 응답\n" +
                 "3. &&+텍스트: 웹 검색 결과 제공\n" +
                 "4. 링크: 링크 요약\n";
@@ -167,7 +167,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             let cmd = msg.substr(7).trim();
             if (cmd) {
                 let promptContent = basePromptContent +
-                    "You are based on OpenAI's gpt-4o model. " +
+                    "You are based on OpenAI's gpt-4.1 model. " +
                     "Current date and time:" + currentTime + "\n";
 
                 let combinedPrompt = roomSpecificPrompts[room]
@@ -207,7 +207,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
 
             // 기본 프롬프트 구성 (OpenAI 사용)
             let promptContent = basePromptContent +
-                "You are based on OpenAI's gpt-4o model. " +
+                "You are based on OpenAI's gpt-4.1 model. " +
                 "Current date and time:" + currentTime + "\n";
 
             let combinedPrompt = roomSpecificPrompts[room]
@@ -275,7 +275,7 @@ function summarizeUrl(url) {
             {
                 role: "system",
                 content:
-                    "You are 포들리봇, a helpful KakaoTalk assistant created by 십대영님 using OpenAI's gpt-4o model. " +
+                    "You are 포들리봇, a helpful KakaoTalk assistant created by 십대영님 using OpenAI's gpt-4.1 model. " +
                     "Your primary goal is to provide accurate, friendly, and useful responses in Korean. " +
                     "If the response is lengthy, use bullet points for better readability. " +
                     "Always maintain a polite tone. Do not use markdown. use '-' for bullet points.\n\n\n" +
@@ -343,7 +343,7 @@ function getResponse(type, messages) {
     if (type === "openai") {
         url = "https://api.openai.com/v1/chat/completions";
         key = OPENAI_API_KEY;
-        data.model = "gpt-4o";
+        data.model = "gpt-4.1";
     } else if (type === "upstage") {
         url = "https://api.upstage.ai/v1/chat/completions";
         key = upstageKey;
@@ -354,7 +354,7 @@ function getResponse(type, messages) {
         // 기본값은 OpenAI
         url = "https://api.openai.com/v1/chat/completions";
         key = OPENAI_API_KEY;
-        data.model = "gpt-4o";
+        data.model = "gpt-4.1";
     }
 
     try {
@@ -587,7 +587,7 @@ function getGeminiResponse(messages) {
 function getResponseFromApi(url, room, sender, msg) {
     try {
         const currentTime = getCurrentDateTime();
-        // 1. 먼저 GPT-4o-mini를 사용하여 최적화된 검색 쿼리 생성
+        // 1. 먼저 gpt-4.1-mini를 사용하여 최적화된 검색 쿼리 생성
         const queryGenerationMessages = [
             {
                 role: "system",
@@ -610,7 +610,7 @@ function getResponseFromApi(url, room, sender, msg) {
             "top_p": 1,
             "frequency_penalty": 0.0,
             "presence_penalty": 0.0,
-            "model": "gpt-4o-mini"
+            "model": "gpt-4.1-mini"
         };
 
         // 쿼리 생성 API 호출
