@@ -118,11 +118,11 @@
 
       <!-- IN-BODY Image Stabilizer - Full width -->
       <a href="#page1" class="block bg-gray-800 p-6 rounded-lg hover:bg-gray-700 transition-all">
-        <div class="flex items-center justify-between">
+        <div class="flex items-center justify-center space-x-8">
           <div class="text-left">
-            <img src="./인프/5축 손떨림보정.jpg" alt="IN-BODY IMAGE STABILIZER" class="h-12 object-contain">
+            <img src="./인프/5축 손떨림보정.jpg" alt="IN-BODY IMAGE STABILIZER" class="h-16 object-contain">
           </div>
-          <div class="text-right">
+          <div class="text-center">
             <h3 class="text-3xl font-bold text-white" style="font-family: 'Noto Sans KR', sans-serif;">5축 손떨림 보정</h3>
           </div>
         </div>
@@ -133,43 +133,50 @@
 
         <!-- CMOS Image Sensor -->
         <a href="#page2" class="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 transition-all">
-          <div class="text-center">
-            <div class="w-24 h-16 mx-auto mb-4">
-              <img src="./인프/이미지센서.jpg" alt="CMOS Image Sensor" class="w-full h-full object-contain">
+          <div class="text-center flex flex-col justify-between h-full min-h-[140px]">
+            <div class="flex-1 flex items-center justify-center">
+              <div class="w-44 h-24 mx-auto">
+                <img src="./인프/이미지센서.jpg" alt="CMOS Image Sensor" class="w-full h-full object-contain">
+              </div>
             </div>
-            <h3 class="text-lg font-bold text-white">이미지 센서</h3>
+            <h3 class="text-xl font-bold text-white mt-4">이미지 센서</h3>
           </div>
         </a>
 
         <!-- High-Speed Continuous Shooting -->
         <a href="#page3" class="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 transition-all">
-          <div class="text-center">
-            <div class="border-2 border-white rounded p-3 mb-4 inline-block">
-              <div class="text-6xl font-bold text-white">20</div>
-              <div class="text-sm text-gray-400">Up to</div>
+          <div class="text-center flex flex-col justify-between h-full min-h-[140px]">
+            <div class="flex-1 flex items-center justify-center">
+              <div class="border-2 border-white rounded p-5 inline-block">
+                <div class="text-6xl font-bold text-white">20</div>
+                <div class="text-base text-gray-400">Up to</div>
+              </div>
             </div>
-            <h3 class="text-lg font-bold text-white">고속 연속 촬영</h3>
+            <h3 class="text-xl font-bold text-white mt-4">고속 연속 촬영</h3>
           </div>
         </a>
 
         <!-- Tracking Algorithm -->
         <a href="#page4" class="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 transition-all">
-          <div class="text-center">
-            <!-- Tracking icon -->
-            <div class="w-16 h-16 mx-auto mb-4">
-              <img src="./인프/움직임pg.jpg" alt="Tracking Algorithm" class="w-full h-full object-contain">
+          <div class="text-center flex flex-col justify-between h-full min-h-[140px]">
+            <div class="flex-1 flex items-center justify-center">
+              <div class="w-24 h-24 mx-auto">
+                <img src="./인프/움직임pg.jpg" alt="Tracking Algorithm" class="w-full h-full object-contain">
+              </div>
             </div>
-            <h3 class="text-lg font-bold text-white">추적 알고리즘</h3>
+            <h3 class="text-xl font-bold text-white mt-4">추적 알고리즘</h3>
           </div>
         </a>
 
         <!-- Network Features -->
         <a href="#page5" class="bg-gray-800 p-6 rounded-lg hover:bg-gray-700 transition-all">
-          <div class="text-center">
-            <div class="w-20 h-12 mx-auto mb-4">
-              <img src="./인프/네트워크 기능.jpg" alt="Network Features" class="w-full h-full object-contain">
+          <div class="text-center flex flex-col justify-between h-full min-h-[140px]">
+            <div class="flex-1 flex items-center justify-center">
+              <div class="w-28 h-20 mx-auto">
+                <img src="./인프/네트워크 기능.jpg" alt="Network Features" class="w-full h-full object-contain">
+              </div>
             </div>
-            <h3 class="text-lg font-bold text-white">네트워크 기능</h3>
+            <h3 class="text-xl font-bold text-white mt-4">네트워크 기능</h3>
           </div>
         </a>
 
@@ -178,329 +185,70 @@
   </section>
 
   <!-- Page 1: 5축 손떨림 보정 -->
-  <section id="page1" class="min-h-screen px-6 py-8 bg-gray-900 text-white">
+  <section id="page1" class="min-h-screen px-6 py-8 bg-black text-white">
     <!-- Title -->
-    <h3 class="text-3xl font-bold text-center mb-8">5축 손떨림 보정</h3>
+    <h3 class="text-4xl font-bold text-center mb-8">5축 손떨림 보정</h3>
 
-    <!-- Subtitle -->
-    <p class="text-center text-lg mb-6 text-blue-400">5축 In-body Image Stabilizer</p>
-
-    <!-- Main explanation image -->
-    <div class="flex justify-center mb-6">
-      <img src="./인프/회전축.jpg" alt="5-axis stabilization diagram" class="w-60 h-60 rounded-lg shadow-lg" />
+    <!-- Main stabilizer diagram with title -->
+    <div class="bg-gray-800 rounded-lg p-8 max-w-5xl mx-auto mb-8">
+      <div class="flex items-center justify-center space-x-12">
+        <div class="flex-1 flex justify-center items-center">
+          <div class="text-center">
+            <h4 class="text-4xl font-bold text-white mb-4">5축 In-body</h4>
+            <p class="text-2xl text-gray-300">Image Stabilizer</p>
+          </div>
+        </div>
+        <div class="flex-1 flex justify-center items-center">
+          <img src="./인프/회전축.jpg" alt="5-axis stabilization diagram" class="w-80 h-60 object-contain" />
+        </div>
+      </div>
     </div>
 
     <!-- Description -->
-    <p class="text-center mb-8 text-lg font-medium text-gray-300">정지 사진 촬영 시의 손떨림 보정 효과</p>
+    <h4 class="text-2xl font-bold text-center mb-8 text-white">정지 사진 촬영 시의 손떨림 보정 효과</h4>
 
     <!-- Comparison images in 2x2 grid -->
-    <div class="grid grid-cols-2 gap-4 max-w-2xl mx-auto">
-      <div class="text-center">
-        <img src="./인프/폭포.jpg" alt="Sample 1" class="w-full h-48 object-cover rounded-lg mb-2" />
-        <p class="text-sm text-gray-400">보정 적용</p>
+    <div class="grid grid-cols-2 gap-4 max-w-4xl mx-auto">
+      <div>
+        <img src="./인프/화면 캡처 2025-06-01 225908.jpg" alt="수영 샘플" class="w-full h-60 object-cover rounded-lg" />
       </div>
-      <div class="text-center">
-        <img src="./인프/화면 캡처 2025-06-01 225519.jpg" alt="Sample 2" class="w-full h-48 object-cover rounded-lg mb-2" />
-        <p class="text-sm text-gray-400">보정 미적용</p>
+      <div>
+        <img src="./인프/화면 캡처 2025-06-01 225938.jpg" alt="멀리뛰기 샘플" class="w-full h-60 object-cover rounded-lg" />
       </div>
-      <div class="text-center">
-        <img src="./인프/화면 캡처 2025-06-01 225412.jpg" alt="Sample 3" class="w-full h-48 object-cover rounded-lg mb-2" />
-        <p class="text-sm text-gray-400">흔들림 보정</p>
+      <div>
+        <img src="./인프/화면 캡처 2025-06-01 230006.jpg" alt="달리기 샘플" class="w-full h-60 object-cover rounded-lg" />
       </div>
-      <div class="text-center">
-        <img src="./인프/화면 캡처 2025-06-01 225453.jpg" alt="Sample 4" class="w-full h-48 object-cover rounded-lg mb-2" />
-        <p class="text-sm text-gray-400">일반 촬영</p>
-      </div>
-    </div>
-
-    <!-- Technical info -->
-    <div class="mt-8 bg-gray-800 rounded-lg p-6 max-w-2xl mx-auto">
-      <h4 class="text-xl font-bold mb-4 text-center">5축 보정 기술</h4>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-        <div class="text-center p-3 bg-gray-700 rounded">
-          <div class="font-bold text-blue-400">회전축</div>
-          <div class="text-gray-300">Roll</div>
-        </div>
-        <div class="text-center p-3 bg-gray-700 rounded">
-          <div class="font-bold text-blue-400">수평 회전축</div>
-          <div class="text-gray-300">Yaw</div>
-        </div>
-        <div class="text-center p-3 bg-gray-700 rounded">
-          <div class="font-bold text-blue-400">좌우</div>
-          <div class="text-gray-300">X축</div>
-        </div>
-        <div class="text-center p-3 bg-gray-700 rounded">
-          <div class="font-bold text-blue-400">상하</div>
-          <div class="text-gray-300">Y축</div>
-        </div>
+      <div>
+        <img src="./인프/화면 캡처 2025-06-01 230042.jpg" alt="단거리 달리기 샘플" class="w-full h-60 object-cover rounded-lg" />
       </div>
     </div>
   </section>
 
   <!-- Page 2: CMOS 이미지 센서 -->
-  <section id="page2" class="min-h-screen px-6 py-8 bg-gray-800">
-    <h3 class="text-3xl font-bold mb-6 text-center">CMOS 이미지 센서</h3>
-    <p class="text-center text-lg mb-8 text-blue-400">고해상도와 고속의 양립, EOS R을 위한 새로운 이미지 센서</p>
-
-    <!-- Main sensor image -->
-    <div class="flex justify-center mb-8">
-      <img src="./인프/이미지센서.jpg" alt="CMOS 센서" class="w-80 h-60 object-cover rounded-lg shadow-lg" />
-    </div>
-
-    <!-- Specifications grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-      <!-- Pixel count -->
-      <div class="bg-gray-700 p-6 rounded-lg">
-        <h4 class="text-xl font-bold mb-4 text-yellow-400">화소</h4>
-        <div class="text-center">
-          <div class="text-4xl font-bold text-white mb-2">45.0</div>
-          <div class="text-sm text-gray-300">MEGA PIXELS</div>
-          <div class="text-sm text-gray-400 mt-2">약 4,500만 화소 35mm 풀프레임 사이즈</div>
-        </div>
-      </div>
-
-      <!-- Movie sensitivity -->
-      <div class="bg-gray-700 p-6 rounded-lg">
-        <h4 class="text-xl font-bold mb-4 text-yellow-400">동영상 감도 성능</h4>
-        <div class="text-sm text-gray-300">
-          <p class="mb-2">상용 감도 ISO 25600</p>
-          <p class="text-gray-400">(ISO 51200 상당으로 확장 가능)</p>
-        </div>
-      </div>
-
-      <!-- Movie frame rate -->
-      <div class="bg-gray-700 p-6 rounded-lg">
-        <h4 class="text-xl font-bold mb-4 text-yellow-400">동영상 프레임</h4>
-        <div class="text-sm text-gray-300 space-y-1">
-          <p>8K 동영상: 29.97/25.00fps (NTSC/PAL)</p>
-          <p>4K 동영상: 59.94/50.00fps (NTSC/PAL)</p>
-          <p>4K 동영상: 119.88/100.00fps (NTSC/PAL)</p>
-          <p class="text-gray-400">(고속 프레임 속도 시)</p>
-        </div>
-      </div>
-
-      <!-- Still image sensitivity -->
-      <div class="bg-gray-700 p-6 rounded-lg">
-        <h4 class="text-xl font-bold mb-4 text-yellow-400">정지 이미지 감도 성능</h4>
-        <div class="text-sm text-gray-300">
-          <p class="mb-2">상용 감도 ISO 52100</p>
-          <p class="text-gray-400">(ISO 102400 상당으로 확장 가능)</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Dual Pixel CMOS AF -->
-    <div class="mt-8 bg-blue-900 bg-opacity-50 rounded-lg p-6 max-w-2xl mx-auto text-center">
-      <h4 class="text-2xl font-bold mb-2 text-blue-300">듀얼픽셀 CMOS AF</h4>
-      <p class="text-gray-300">빠르고 정확한 오토포커스 시스템</p>
+  <section id="page2" class="min-h-screen px-6 py-8 bg-black flex items-center justify-center">
+    <div class="w-full max-w-4xl">
+      <img src="./인프/스크린샷 2025-06-08 114230.png" alt="CMOS 이미지 센서" class="w-full h-auto object-contain" />
     </div>
   </section>
 
   <!-- Page 3: 고속 연속 촬영 -->
-  <section id="page3" class="min-h-screen px-6 py-8 bg-gray-900">
-    <h3 class="text-3xl font-bold mb-6 text-center">고속 연속 촬영</h3>
-    <p class="text-center text-lg mb-8 text-blue-400">결정적인 순간을 놓치지 않는 최대 약 20fps의 고속 연속 촬영</p>
-
-    <!-- Speed comparison -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-      <!-- Electronic shutter -->
-      <div class="bg-gray-800 p-6 rounded-lg text-center">
-        <div class="text-6xl font-bold text-green-400 mb-2">20</div>
-        <div class="text-lg font-bold mb-2">전자식 셔터</div>
-        <div class="text-sm text-gray-300 mb-2">fps</div>
-        <div class="text-sm text-gray-400">AF / AE 추적</div>
-      </div>
-
-      <!-- Mechanical shutter -->
-      <div class="bg-gray-800 p-6 rounded-lg text-center">
-        <div class="text-6xl font-bold text-yellow-400 mb-2">12</div>
-        <div class="text-lg font-bold mb-2">기계식 셔터</div>
-        <div class="text-sm text-gray-300 mb-2">fps</div>
-        <div class="text-sm text-gray-400">전자식 선막 동조</div>
-        <div class="text-sm text-gray-400">AF / AE 추적</div>
-      </div>
-    </div>
-
-    <!-- Action sample image -->
-    <div class="mt-8 flex justify-center">
-      <img src="./인프/연속촬영.jpg" alt="연속 촬영 예시" class="w-full max-w-3xl h-64 object-cover rounded-lg shadow-lg" />
-    </div>
-
-    <!-- Feature highlights -->
-    <div class="mt-8 bg-gray-800 rounded-lg p-6 max-w-2xl mx-auto">
-      <h4 class="text-xl font-bold mb-4 text-center">핵심 기능</h4>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-        <div class="flex items-center space-x-2">
-          <div class="w-2 h-2 bg-green-400 rounded-full"></div>
-          <span>무음 전자 셔터</span>
-        </div>
-        <div class="flex items-center space-x-2">
-          <div class="w-2 h-2 bg-green-400 rounded-full"></div>
-          <span>연속 AF/AE 추적</span>
-        </div>
-        <div class="flex items-center space-x-2">
-          <div class="w-2 h-2 bg-green-400 rounded-full"></div>
-          <span>대용량 메모리 지원</span>
-        </div>
-        <div class="flex items-center space-x-2">
-          <div class="w-2 h-2 bg-green-400 rounded-full"></div>
-          <span>고속 데이터 처리</span>
-        </div>
-      </div>
+  <section id="page3" class="min-h-screen px-6 py-8 bg-black flex items-center justify-center">
+    <div class="w-full max-w-4xl">
+      <img src="./인프/스크린샷 2025-06-08 114239.png" alt="고속 연속 촬영" class="w-full h-auto object-contain" />
     </div>
   </section>
 
   <!-- Page 4: 추적 알고리즘 -->
-  <section id="page4" class="min-h-screen px-6 py-8 bg-gray-800">
-    <h3 class="text-3xl font-bold mb-6 text-center">추적 알고리즘</h3>
-    <p class="text-center text-lg mb-8 text-blue-400">EOS iTR AF X EOS-1D X Mark III 탑재한 AF 추적 알고리즘을 적용</p>
-
-    <!-- Situation examples grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-8">
-      <!-- Situation 1 -->
-      <div class="bg-gray-700 rounded-lg p-4">
-        <img src="./인프/움직임pg.jpg" alt="갑작스런 피사체" class="w-full h-48 object-cover rounded-lg mb-4" />
-        <h4 class="font-bold mb-2 text-yellow-400">갑자기 나타난 피사체</h4>
-        <p class="text-sm text-gray-300">빠르게 초점을 맞추려는 경우</p>
-      </div>
-
-      <!-- Situation 2 -->
-      <div class="bg-gray-700 rounded-lg p-4">
-        <img src="./인프/움직임pg.jpg" alt="속도 변화" class="w-full h-48 object-cover rounded-lg mb-4" />
-        <h4 class="font-bold mb-2 text-yellow-400">속도 변화 대응</h4>
-        <p class="text-sm text-gray-300">목표 피사체의 속도가 갑자기 가속/감속 하는 경우</p>
-      </div>
-
-      <!-- Situation 3 -->
-      <div class="bg-gray-700 rounded-lg p-4">
-        <img src="./인프/움직임pg.jpg" alt="장애물" class="w-full h-48 object-cover rounded-lg mb-4" />
-        <h4 class="font-bold mb-2 text-yellow-400">장애물 대응</h4>
-        <p class="text-sm text-gray-300">목표 피사체와 카메라 사이에 장애물이 들어오거나 피사체가 AF 영역에서 벗어나는 경우</p>
-      </div>
-
-      <!-- Situation 4 -->
-      <div class="bg-gray-700 rounded-lg p-4">
-        <img src="./인프/움직임pg.jpg" alt="기본 설정" class="w-full h-48 object-cover rounded-lg mb-4" />
-        <h4 class="font-bold mb-2 text-yellow-400">다양한 상황 적용</h4>
-        <p class="text-sm text-gray-300">다양한 상황에 적용이 가능한 기본 설정</p>
-      </div>
-    </div>
-
-    <!-- Technical specifications -->
-    <div class="bg-blue-900 bg-opacity-50 rounded-lg p-6 max-w-2xl mx-auto">
-      <h4 class="text-xl font-bold mb-4 text-center text-blue-300">EOS iTR AF X 기술</h4>
-      <div class="text-sm text-gray-300 space-y-2">
-        <p>• EOS-1D X Mark III의 검증된 추적 알고리즘</p>
-        <p>• 딥러닝 기반 피사체 인식</p>
-        <p>• 실시간 예측 추적</p>
-        <p>• 다양한 촬영 상황에 최적화</p>
-      </div>
+  <section id="page4" class="min-h-screen px-6 py-8 bg-black flex items-center justify-center">
+    <div class="w-full max-w-4xl">
+      <img src="./인프/스크린샷 2025-06-08 114247.png" alt="추적 알고리즘" class="w-full h-auto object-contain" />
     </div>
   </section>
 
   <!-- Page 5: 네트워크 기능 -->
-  <section id="page5" class="min-h-screen px-6 py-8 bg-gray-900">
-    <h3 class="text-3xl font-bold mb-6 text-center">네트워크 기능</h3>
-    <p class="text-center text-lg mb-8 text-blue-400">리모트 촬영을 위한 5GHz의 내장 Wi-Fi와 네트워크 기능</p>
-
-    <!-- Wi-Fi info -->
-    <div class="bg-gray-800 rounded-lg p-6 mb-8 max-w-2xl mx-auto text-center">
-      <div class="flex justify-center items-center space-x-4 mb-4">
-        <div class="w-8 h-8 bg-white rounded-full flex items-center justify-center">
-          <div class="w-4 h-4 bg-gray-900 rounded-full"></div>
-        </div>
-        <h4 class="text-2xl font-bold">내장 Wi-Fi</h4>
-      </div>
-      <p class="text-lg text-blue-400 mb-2">5 / 2.4 GHz</p>
-      <p class="text-sm text-gray-400">Bluetooth Low Energy technology</p>
-    </div>
-
-    <!-- Main communication features -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto mb-8">
-      <!-- FTP/FTPS/SFTP -->
-      <div class="bg-red-700 rounded-lg p-4 text-center">
-        <h4 class="font-bold text-lg mb-2">FTP / FTPS / SFTP*</h4>
-        <p class="text-sm text-gray-200">기반 데이터 전송</p>
-        <p class="text-xs text-gray-300 mt-2">*WFT과 연결 시에는 SFTP만 지원</p>
-      </div>
-
-      <!-- Remote Control -->
-      <div class="bg-blue-700 rounded-lg p-4 text-center">
-        <h4 class="font-bold text-lg mb-2">리모트 컨트롤</h4>
-        <p class="text-sm text-gray-200">원격 카메라 제어</p>
-      </div>
-
-      <!-- Location Info -->
-      <div class="bg-blue-700 rounded-lg p-4 text-center">
-        <h4 class="font-bold text-lg mb-2">위치 정보</h4>
-        <p class="text-sm text-gray-200">GPS 데이터 연동</p>
-      </div>
-
-      <!-- EOS Utility -->
-      <div class="bg-red-700 rounded-lg p-4 text-center">
-        <h4 class="font-bold text-lg mb-2">EOS Utility</h4>
-        <p class="text-sm text-gray-200">PC 연결 소프트웨어</p>
-      </div>
-
-      <!-- Camera Connect -->
-      <div class="bg-red-700 rounded-lg p-4 text-center">
-        <h4 class="font-bold text-lg mb-2">Camera Connect</h4>
-        <p class="text-sm text-gray-200">스마트폰 앱 연동</p>
-      </div>
-
-      <!-- EOS Utility (USB) -->
-      <div class="bg-blue-700 rounded-lg p-4 text-center">
-        <h4 class="font-bold text-lg mb-2">EOS Utility</h4>
-        <p class="text-sm text-gray-200">USB 연결</p>
-      </div>
-    </div>
-
-    <!-- Service descriptions -->
-    <div class="space-y-6 max-w-4xl mx-auto">
-      <!-- Built-in Wi-Fi -->
-      <div class="bg-gray-800 rounded-lg p-6">
-        <div class="flex items-center space-x-4 mb-4">
-          <div class="bg-gray-600 p-3 rounded">
-            <span class="text-lg font-bold">내장 Wi-Fi</span>
-          </div>
-          <div>
-            <h4 class="font-bold text-lg">내장 Wi-Fi 기능</h4>
-            <p class="text-sm text-gray-400">내장 Wi-Fi 기능으로 이미지 데이터를 손쉽게 카메라에서 스마트 기기, FTP 서버, PC로 전송할 수 있다.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Image.canon -->
-      <div class="bg-gray-800 rounded-lg p-6">
-        <div class="flex items-center space-x-4 mb-4">
-          <div class="bg-gray-600 p-3 rounded">
-            <span class="text-lg font-bold">Image.canon</span>
-          </div>
-          <div>
-            <h4 class="font-bold text-lg">image.canon</h4>
-            <p class="text-sm text-gray-400">캐논의 image.canon 서비스를 이미지 데이터 관리용 도구를 사용 후 원본 사진 파일을 자동으로 PC나 클라우드 서버에 전송할 수
-              있다.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- WFT -->
-      <div class="bg-gray-800 rounded-lg p-6">
-        <div class="flex items-center space-x-4 mb-4">
-          <div class="bg-gray-600 p-3 rounded">
-            <span class="text-lg font-bold">WFT</span>
-          </div>
-          <div>
-            <h4 class="font-bold text-lg">무선 파일 전송</h4>
-            <p class="text-sm text-gray-400">EOS R5와 함께 사용하면 무선이나 유선 LAN 네트워크를 통한 고속 데이터 전송으로 전문적인 제작 과정을 지원한다.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Compatibility note -->
-    <div class="mt-8 text-center">
-      <p class="text-xs text-gray-500">*일부 스마트 기기는 지원되지 않을 수 있습니다.</p>
+  <section id="page5" class="min-h-screen px-6 py-8 bg-black flex items-center justify-center">
+    <div class="w-full max-w-4xl">
+      <img src="./인프/스크린샷 2025-06-08 114810.png" alt="네트워크 기능" class="w-full h-auto object-contain" />
     </div>
   </section>
 
