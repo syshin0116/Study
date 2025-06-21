@@ -4,11 +4,13 @@ import {
   MessageActions,
   MessageContent,
 } from "@/components/prompt-kit/message"
+import { useUserPreferences } from "@/lib/user-preference-store/provider"
 import { cn } from "@/lib/utils"
 import type { Message as MessageAISDK } from "@ai-sdk/react"
 import { ArrowClockwise, Check, Copy } from "@phosphor-icons/react"
 import { getSources } from "./get-sources"
 import { Reasoning } from "./reasoning"
+import { SearchImages } from "./search-images"
 import { SourcesList } from "./sources-list"
 import { ToolInvocation } from "./tool-invocation"
 
@@ -21,6 +23,7 @@ type MessageAssistantProps = {
   onReload?: () => void
   parts?: MessageAISDK["parts"]
   status?: "streaming" | "ready" | "submitted" | "error"
+  className?: string
 }
 
 export function MessageAssistant({
@@ -32,32 +35,58 @@ export function MessageAssistant({
   onReload,
   parts,
   status,
+  className,
 }: MessageAssistantProps) {
+  const { preferences } = useUserPreferences()
   const sources = getSources(parts)
-
   const toolInvocationParts = parts?.filter(
     (part) => part.type === "tool-invocation"
   )
   const reasoningParts = parts?.find((part) => part.type === "reasoning")
-
   const contentNullOrEmpty = children === null || children === ""
-
   const isLastStreaming = status === "streaming" && isLast
+  const searchImageResults =
+    parts
+      ?.filter(
+        (part) =>
+          part.type === "tool-invocation" &&
+          part.toolInvocation?.state === "result" &&
+          part.toolInvocation?.toolName === "imageSearch" &&
+          part.toolInvocation?.result?.content?.[0]?.type === "images"
+      )
+      .flatMap((part) =>
+        part.type === "tool-invocation" &&
+        part.toolInvocation?.state === "result" &&
+        part.toolInvocation?.toolName === "imageSearch" &&
+        part.toolInvocation?.result?.content?.[0]?.type === "images"
+          ? (part.toolInvocation?.result?.content?.[0]?.results ?? [])
+          : []
+      ) ?? []
 
   return (
     <Message
       className={cn(
         "group flex w-full max-w-3xl flex-1 items-start gap-4 px-6 pb-2",
-        hasScrollAnchor && "min-h-scroll-anchor"
+        hasScrollAnchor && "min-h-scroll-anchor",
+        className
       )}
     >
       <div className={cn("flex min-w-full flex-col gap-2", isLast && "pb-8")}>
         {reasoningParts && reasoningParts.reasoning && (
-          <Reasoning reasoning={reasoningParts.reasoning} />
+          <Reasoning
+            reasoning={reasoningParts.reasoning}
+            isStreaming={status === "streaming"}
+          />
         )}
 
-        {toolInvocationParts && toolInvocationParts.length > 0 && (
-          <ToolInvocation toolInvocations={toolInvocationParts} />
+        {toolInvocationParts &&
+          toolInvocationParts.length > 0 &&
+          preferences.showToolInvocations && (
+            <ToolInvocation toolInvocations={toolInvocationParts} />
+          )}
+
+        {searchImageResults.length > 0 && (
+          <SearchImages results={searchImageResults} />
         )}
 
         {contentNullOrEmpty ? null : (
@@ -97,16 +126,22 @@ export function MessageAssistant({
                 )}
               </button>
             </MessageAction>
-            <MessageAction tooltip="Regenerate" side="bottom" delayDuration={0}>
-              <button
-                className="hover:bg-accent/60 text-muted-foreground hover:text-foreground flex size-7.5 items-center justify-center rounded-full bg-transparent transition"
-                aria-label="Regenerate"
-                onClick={onReload}
-                type="button"
+            {isLast ? (
+              <MessageAction
+                tooltip="Regenerate"
+                side="bottom"
+                delayDuration={0}
               >
-                <ArrowClockwise className="size-4" />
-              </button>
-            </MessageAction>
+                <button
+                  className="hover:bg-accent/60 text-muted-foreground hover:text-foreground flex size-7.5 items-center justify-center rounded-full bg-transparent transition"
+                  aria-label="Regenerate"
+                  onClick={onReload}
+                  type="button"
+                >
+                  <ArrowClockwise className="size-4" />
+                </button>
+              </MessageAction>
+            ) : null}
           </MessageActions>
         )}
       </div>

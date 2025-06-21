@@ -1,5 +1,6 @@
 "use client"
 
+import { useKeyShortcut } from "@/app/hooks/use-key-shortcut"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
@@ -11,6 +12,13 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import {
   Tooltip,
@@ -19,10 +27,14 @@ import {
 } from "@/components/ui/tooltip"
 import { useChatSession } from "@/lib/chat-store/session/provider"
 import type { Chats } from "@/lib/chat-store/types"
+import { useChatPreview } from "@/lib/hooks/use-chat-preview"
+import { useUserPreferences } from "@/lib/user-preference-store/provider"
 import { cn } from "@/lib/utils"
 import { Check, PencilSimple, TrashSimple, X } from "@phosphor-icons/react"
 import { useRouter } from "next/navigation"
-import { useCallback, useEffect, useMemo, useState } from "react"
+import { useCallback, useMemo, useRef, useState } from "react"
+import { ChatPreviewPanel } from "./chat-preview-panel"
+import { CommandFooter } from "./command-footer"
 import { formatDate, groupChatsByDate } from "./utils"
 
 type CommandHistoryProps = {
@@ -32,6 +44,7 @@ type CommandHistoryProps = {
   trigger: React.ReactNode
   isOpen: boolean
   setIsOpen: (open: boolean) => void
+  onOpenChange?: (open: boolean) => void
   hasPopover?: boolean
 }
 
@@ -206,64 +219,86 @@ function CommandItemRow({
         {isCurrentChat && <Badge variant="outline">current</Badge>}
       </div>
 
-      {/* Date and actions container */}
-      <div className="relative flex min-w-[120px] flex-shrink-0 justify-end">
-        {/* Date that shows by default but hides on selection */}
-        <span
-          className={cn(
-            "text-muted-foreground text-sm font-normal opacity-100 transition-opacity duration-0",
-            "group-data-[selected=true]:opacity-100",
-            Boolean(editingId || deletingId) &&
-              "group-data-[selected=true]:opacity-0"
-          )}
-        >
-          {formatDate(chat?.created_at)}
-        </span>
+      <div className="relative flex min-w-[140px] flex-shrink-0 items-center justify-end">
+        <div className="text-muted-foreground mr-2 text-xs transition-opacity duration-200 group-hover:opacity-0">
+          {formatDate(chat.created_at)}
+        </div>
 
-        {/* Action buttons that appear on selection, positioned over the date */}
-        <div
-          className={cn(
-            "absolute inset-0 flex items-center justify-end gap-1 opacity-0 transition-opacity duration-0",
-            "group-data-[selected=true]:opacity-100",
-            Boolean(editingId || deletingId) &&
-              "group-data-[selected=true]:opacity-0"
-          )}
-        >
+        <div className="absolute right-0 flex translate-x-1 gap-1 opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100">
           <Tooltip>
-            <Button
-              size="icon"
-              variant="ghost"
-              className="group/edit hover:bg-primary/10 size-8 transition-colors duration-150"
-              onClick={(e) => {
-                e.stopPropagation()
-                if (chat) onEdit(chat)
-              }}
-              type="button"
-              aria-label="Edit"
-            >
-              <PencilSimple className="text-muted-foreground group-hover/edit:text-primary size-4 transition-colors duration-150" />
-            </Button>
+            <TooltipTrigger asChild>
+              <Button
+                size="icon"
+                variant="ghost"
+                className="group/edit text-muted-foreground hover:bg-primary/10 size-8 transition-colors duration-150"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  onEdit(chat)
+                }}
+                disabled={!!editingId || !!deletingId}
+                aria-label="Edit"
+              >
+                <PencilSimple className="group-hover/edit:text-primary size-4 transition-colors duration-150" />
+              </Button>
+            </TooltipTrigger>
             <TooltipContent>Edit</TooltipContent>
           </Tooltip>
+
           <Tooltip>
-            <Button
-              size="icon"
-              variant="ghost"
-              className="group/delete text-muted-foreground hover:text-destructive hover:bg-destructive-foreground/10 size-8 transition-colors duration-150"
-              onClick={(e) => {
-                e.stopPropagation()
-                if (chat?.id) onDelete(chat.id)
-              }}
-              type="button"
-              aria-label="Delete"
-            >
-              <TrashSimple className="text-muted-foreground group-hover/delete:text-destructive size-4 transition-colors duration-150" />
-            </Button>
+            <TooltipTrigger asChild>
+              <Button
+                size="icon"
+                variant="ghost"
+                className="group/delete text-muted-foreground hover:text-destructive-foreground hover:bg-primary/10 size-8 transition-colors duration-150"
+                onClick={(e) => {
+                  e.stopPropagation()
+                  onDelete(chat.id)
+                }}
+                disabled={!!editingId || !!deletingId}
+                aria-label="Delete"
+              >
+                <TrashSimple className="group-hover/delete:text-primary size-4 transition-colors duration-150" />
+              </Button>
+            </TooltipTrigger>
             <TooltipContent>Delete</TooltipContent>
           </Tooltip>
         </div>
       </div>
     </>
+  )
+}
+
+type CustomCommandDialogProps = React.ComponentProps<typeof Dialog> & {
+  title?: string
+  description?: string
+  className?: string
+  onOpenChange?: (open: boolean) => void
+}
+
+// Custom CommandDialog with className support
+function CustomCommandDialog({
+  title = "Command Palette",
+  description = "Search for a command to run...",
+  children,
+  className,
+  onOpenChange,
+  open,
+  ...props
+}: CustomCommandDialogProps) {
+  return (
+    <Dialog {...props} onOpenChange={onOpenChange} open={open}>
+      <DialogHeader className="sr-only">
+        <DialogTitle>{title}</DialogTitle>
+        <DialogDescription>{description}</DialogDescription>
+      </DialogHeader>
+      <DialogContent
+        className={cn("overflow-hidden border-none p-0", className)}
+      >
+        <Command className="[&_[cmdk-group-heading]]:text-muted-foreground border-none **:data-[slot=command-input-wrapper]:h-12 [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group]]:px-2 [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5 [&_[cmdk-item]_svg]:border-none">
+          {children}
+        </Command>
+      </DialogContent>
+    </Dialog>
   )
 }
 
@@ -274,24 +309,82 @@ export function CommandHistory({
   trigger,
   isOpen,
   setIsOpen,
+  onOpenChange,
   hasPopover = true,
 }: CommandHistoryProps) {
   const { chatId } = useChatSession()
   const router = useRouter()
+  const { preferences } = useUserPreferences()
+  const hasPrefetchedRef = useRef(false)
+
   const [searchQuery, setSearchQuery] = useState("")
   const [editingId, setEditingId] = useState<string | null>(null)
   const [editTitle, setEditTitle] = useState("")
   const [deletingId, setDeletingId] = useState<string | null>(null)
+  const [selectedChatId, setSelectedChatId] = useState<string | null>(null)
+  const [hoveredChatId, setHoveredChatId] = useState<string | null>(null)
+  const [isPreviewPanelHovered, setIsPreviewPanelHovered] = useState(false)
+  const { messages, isLoading, error, fetchPreview, clearPreview } =
+    useChatPreview()
+
+  if (isOpen && !hasPrefetchedRef.current) {
+    const recentChats = chatHistory.slice(0, 10)
+    recentChats.forEach((chat) => {
+      router.prefetch(`/c/${chat.id}`)
+    })
+    hasPrefetchedRef.current = true
+  }
 
   const handleOpenChange = (open: boolean) => {
     setIsOpen(open)
+    onOpenChange?.(open)
+
     if (!open) {
       setSearchQuery("")
       setEditingId(null)
       setEditTitle("")
       setDeletingId(null)
+      setSelectedChatId(null)
+      setHoveredChatId(null)
+      setIsPreviewPanelHovered(false)
+      clearPreview()
+      hasPrefetchedRef.current = false
     }
   }
+
+  useKeyShortcut(
+    (e: KeyboardEvent) => e.key === "k" && (e.metaKey || e.ctrlKey),
+    () => handleOpenChange(!isOpen)
+  )
+
+  const handleChatHover = useCallback(
+    (chatId: string | null) => {
+      if (!preferences.showConversationPreviews) return
+
+      setHoveredChatId(chatId)
+
+      // Fetch preview when hovering over a chat
+      if (chatId) {
+        fetchPreview(chatId)
+      }
+    },
+    [preferences.showConversationPreviews, fetchPreview]
+  )
+
+  const handlePreviewHover = useCallback(
+    (isHovering: boolean) => {
+      if (!preferences.showConversationPreviews) return
+
+      setIsPreviewPanelHovered(isHovering)
+
+      // Only clear the hovered chat if we're not hovering the preview panel
+      // and there are already loaded messages
+      if (!isHovering && !hoveredChatId) {
+        setHoveredChatId(null)
+      }
+    },
+    [preferences.showConversationPreviews, hoveredChatId]
+  )
 
   const handleEdit = useCallback((chat: Chats) => {
     setEditingId(chat.id)
@@ -336,11 +429,13 @@ export function CommandHistory({
       : chatHistory
   }, [chatHistory, searchQuery])
 
-  // Group chats by time periods
   const groupedChats = useMemo(
     () => groupChatsByDate(chatHistory, searchQuery),
     [chatHistory, searchQuery]
   )
+
+  const activePreviewChatId =
+    hoveredChatId || (isPreviewPanelHovered ? hoveredChatId : null)
 
   const renderChatItem = useCallback(
     (chat: Chats) => {
@@ -348,11 +443,16 @@ export function CommandHistory({
       const isCurrentChatEditOrDelete =
         chat.id === editingId || chat.id === deletingId
       const isEditOrDeleteMode = editingId || deletingId
+      const isSelected = chat.id === selectedChatId
 
       return (
         <CommandItem
           key={chat.id}
           onSelect={() => {
+            if (preferences.showConversationPreviews) {
+              setSelectedChatId(chat.id)
+            }
+
             if (isCurrentChatSession) {
               setIsOpen(false)
               return
@@ -368,10 +468,13 @@ export function CommandHistory({
               "bg-accent data-[selected=true]:bg-accent",
             !isCurrentChatEditOrDelete &&
               isEditOrDeleteMode &&
-              "data-[selected=true]:bg-transparent"
+              "data-[selected=true]:bg-transparent",
+            isSelected && preferences.showConversationPreviews && "bg-accent/50"
           )}
           value={chat.id}
-          data-value-id={chat.id}
+          onMouseEnter={() => {
+            handleChatHover(chat.id)
+          }}
         >
           {editingId === chat.id ? (
             <CommandItemEdit
@@ -406,37 +509,18 @@ export function CommandHistory({
       editingId,
       deletingId,
       editTitle,
+      selectedChatId,
+      preferences.showConversationPreviews,
+      isPreviewPanelHovered,
       handleSaveEdit,
       handleCancelEdit,
       handleConfirmDelete,
       handleCancelDelete,
       handleEdit,
       handleDelete,
+      handleChatHover,
     ]
   )
-
-  // Prefetch chat pages, later we will do pagination + infinite scroll
-  useEffect(() => {
-    if (!isOpen) return
-
-    // Simply prefetch all the chat routes when dialog opens
-    chatHistory.forEach((chat) => {
-      router.prefetch(`/c/${chat.id}`)
-    })
-  }, [isOpen, chatHistory, router])
-
-  // Add keyboard shortcut to open dialog with Command+K
-  useEffect(() => {
-    const down = (e: KeyboardEvent) => {
-      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
-        e.preventDefault()
-        setIsOpen(!isOpen)
-      }
-    }
-
-    document.addEventListener("keydown", down)
-    return () => document.removeEventListener("keydown", down)
-  }, [isOpen, setIsOpen])
 
   return (
     <>
@@ -448,87 +532,70 @@ export function CommandHistory({
       ) : (
         trigger
       )}
-      <CommandDialog
-        open={isOpen}
+
+      <CustomCommandDialog
         onOpenChange={handleOpenChange}
+        open={isOpen}
         title="Chat History"
         description="Search through your past conversations"
+        className={cn(
+          preferences.showConversationPreviews
+            ? "sm:max-w-[900px]"
+            : "sm:max-w-3xl"
+        )}
       >
-        <Command shouldFilter={false} className="border-none">
-          <CommandInput
-            placeholder="Search history..."
-            value={searchQuery}
-            onValueChange={(value) => setSearchQuery(value)}
-          />
-          <CommandList className="max-h-[480px] min-h-[480px] flex-1 [&>[cmdk-list-sizer]]:space-y-6 [&>[cmdk-list-sizer]]:py-2">
-            {filteredChat.length === 0 && (
-              <CommandEmpty>No chat history found.</CommandEmpty>
-            )}
+        <CommandInput
+          placeholder="Search history..."
+          value={searchQuery}
+          onValueChange={(value) => setSearchQuery(value)}
+        />
 
-            {searchQuery ? (
-              // When searching, display a flat list without grouping
-              <CommandGroup className="p-1.5">
-                {filteredChat.map((chat) => renderChatItem(chat))}
-              </CommandGroup>
-            ) : (
-              // When not searching, display grouped by date
-              groupedChats?.map((group) => (
-                <CommandGroup
-                  key={group.name}
-                  heading={group.name}
-                  className="space-y-0 px-1.5"
-                >
-                  {group.chats.map((chat) => renderChatItem(chat))}
+        <div className="grid grid-cols-5">
+          <div
+            className={cn(
+              preferences.showConversationPreviews ? "col-span-2" : "col-span-5"
+            )}
+          >
+            <CommandList
+              className={cn(
+                "max-h-[480px] min-h-[480px] flex-1 [&>[cmdk-list-sizer]]:space-y-6 [&>[cmdk-list-sizer]]:py-2"
+              )}
+            >
+              {filteredChat.length === 0 && (
+                <CommandEmpty>No chat history found.</CommandEmpty>
+              )}
+
+              {searchQuery ? (
+                <CommandGroup className="p-1.5">
+                  {filteredChat.map((chat) => renderChatItem(chat))}
                 </CommandGroup>
-              ))
-            )}
-          </CommandList>
-
-          {/* indicator command bar */}
-          <div className="bg-card border-input right-0 bottom-0 left-0 flex items-center justify-between border-t px-4 py-3">
-            <div className="text-muted-foreground flex w-full items-center gap-2 text-xs">
-              <div className="flex w-full flex-row items-center justify-between gap-1">
-                <div className="flex w-full flex-1 flex-row items-center gap-4">
-                  <div className="flex flex-row items-center gap-1.5">
-                    <div className="flex flex-row items-center gap-0.5">
-                      <span className="border-border bg-muted inline-flex size-5 items-center justify-center rounded-sm border">
-                        ↑
-                      </span>
-                      <span className="border-border bg-muted inline-flex size-5 items-center justify-center rounded-sm border">
-                        ↓
-                      </span>
-                    </div>
-                    <span>Navigate</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <span className="border-border bg-muted inline-flex size-5 items-center justify-center rounded-sm border">
-                      ⏎
-                    </span>
-                    <span>Go to chat</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <div className="flex flex-row items-center gap-0.5">
-                      <span className="border-border bg-muted inline-flex size-5 items-center justify-center rounded-sm border">
-                        ⌘
-                      </span>
-                      <span className="border-border bg-muted inline-flex size-5 items-center justify-center rounded-sm border">
-                        K
-                      </span>
-                    </div>
-                    <span>Toggle</span>
-                  </div>
-                </div>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <span className="border-border bg-muted inline-flex h-5 items-center justify-center rounded-sm border px-1">
-                  Esc
-                </span>
-                <span>Close</span>
-              </div>
-            </div>
+              ) : (
+                groupedChats?.map((group) => (
+                  <CommandGroup
+                    key={group.name}
+                    heading={group.name}
+                    className="space-y-0 px-1.5"
+                  >
+                    {group.chats.map((chat) => renderChatItem(chat))}
+                  </CommandGroup>
+                ))
+              )}
+            </CommandList>
           </div>
-        </Command>
-      </CommandDialog>
+
+          {preferences.showConversationPreviews && (
+            <ChatPreviewPanel
+              chatId={activePreviewChatId}
+              onHover={handlePreviewHover}
+              messages={messages}
+              isLoading={isLoading}
+              error={error}
+              onFetchPreview={fetchPreview}
+            />
+          )}
+        </div>
+        <CommandFooter />
+      </CustomCommandDialog>
     </>
   )
 }

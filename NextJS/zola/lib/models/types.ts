@@ -6,6 +6,7 @@ type ModelConfig = {
   provider: string // "OpenAI", "Mistral", etc.
   providerId: string // "openai", "mistral", etc.
   modelFamily?: string // "GPT-4", "Claude 3", etc.
+  baseProviderId: string // "gemini" // same from AI SDKs
 
   description?: string // Short 1–2 line summary
   tags?: string[] // ["fast", "cheap", "vision", "OSS"]
@@ -19,6 +20,7 @@ type ModelConfig = {
   tools?: boolean
   audio?: boolean
   reasoning?: boolean
+  webSearch?: boolean
   openSource?: boolean
 
   speed?: "Fast" | "Medium" | "Slow"
@@ -29,8 +31,15 @@ type ModelConfig = {
   modelPage?: string // official product page (e.g. https://x.ai/news/grok-2)
   releasedAt?: string // "2024-12-01" (optional, for tracking changes)
 
+  icon?: string // e.g. "gpt-4", "claude", "mistral", or custom string
+
   // apiSdk?: () => LanguageModelV1 // "openai("gpt-4.1-nano")"
-  apiSdk?: () => LanguageModelV1
+  apiSdk?: (
+    apiKey?: string,
+    opts?: { enableSearch?: boolean }
+  ) => LanguageModelV1
+
+  accessible?: boolean // true if the model is accessible to the user
 }
 
 export type { ModelConfig }

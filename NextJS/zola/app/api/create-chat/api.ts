@@ -6,12 +6,15 @@ type CreateChatInput = {
   title?: string
   model: string
   isAuthenticated: boolean
+  projectId?: string
 }
+
 export async function createChatInDb({
   userId,
   title,
   model,
   isAuthenticated,
+  projectId,
 }: CreateChatInput) {
   const supabase = await validateUserIdentity(userId, isAuthenticated)
   if (!supabase) {
@@ -22,19 +25,29 @@ export async function createChatInDb({
       model,
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
-      agent_id: null,
     }
   }
 
   await checkUsageByModel(supabase, userId, model, isAuthenticated)
 
+  const insertData: {
+    user_id: string
+    title: string
+    model: string
+    project_id?: string
+  } = {
+    user_id: userId,
+    title: title || "New Chat",
+    model,
+  }
+
+  if (projectId) {
+    insertData.project_id = projectId
+  }
+
   const { data, error } = await supabase
     .from("chats")
-    .insert({
-      user_id: userId,
-      title: title || "New Chat",
-      model,
-    })
+    .insert(insertData)
     .select("*")
     .single()
 
