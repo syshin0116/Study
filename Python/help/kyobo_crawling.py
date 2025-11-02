@@ -1,4 +1,3 @@
-
 import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -8,7 +7,7 @@ options.add_argument('--headless')
 options.add_argument('--no-sandbox')
 
 driver = webdriver.Chrome(options=options)
-url = 'https://store.kyobobook.co.kr/bestseller/total?page=1&ymw=2024&per=50'
+url = "https://store.kyobobook.co.kr/bestseller/total/annual?page=1&per=50"
 driver.get(url)
 time.sleep(1)
 response = driver.page_source
