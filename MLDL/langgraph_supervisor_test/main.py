@@ -93,7 +93,6 @@ def main():
         tools=[add, multiply, divide],
         name="math_expert",
         prompt="You are a math expert. Always use one tool at a time. Provide clear explanations of your calculations.",
-        version="v1",  # Explicitly use v1 for parallel tool execution
     )
 
     research_agent = create_react_agent(
@@ -101,7 +100,6 @@ def main():
         tools=[web_search],
         name="research_expert",
         prompt="You are a world class researcher with access to web search. Do not do any math calculations.",
-        version="v1",  # Explicitly use v1 for parallel tool execution
     )
 
     joke_agent = create_react_agent(
@@ -109,7 +107,6 @@ def main():
         tools=[create_joke],
         name="joke_expert",
         prompt="You are a comedy expert who creates jokes. Use the create_joke tool to generate appropriate jokes.",
-        version="v1",  # Explicitly use v1 for parallel tool execution
     )
 
     # Create supervisor workflow with parallel execution enabled
