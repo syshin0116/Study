@@ -9,3 +9,8 @@ dependencies = [
     "requests>=2.32.5",
     "selenium>=4.38.0",
 ]
+
+[tool.uv.workspace]
+members = [
+    "Prime_College/ai_bigdata",
+]
