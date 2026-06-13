@@ -57,3 +57,13 @@ Temporary Items
 **/parse_research_paper/**
 
 *.pt
+
+# Office 임시/잠금 파일
+~$*
+
+# Windows 썸네일 캐시
+Thumbs.db
+ehthumbs.db
+
+# Claude Code 로컬 설정
+**/.claude/settings.local.json
